@@ -7,18 +7,17 @@ var path = require("path");
 //app.use('/static', express.static(__dirname + '/public'));
 
 
-// var bodyParser = require('body-parser');
+ var bodyParser = require('body-parser');
 
 
 
 //parse text using body parser
-// app.use(bodyParser.json());
+ app.use(bodyParser.json());
 
+ app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname + '/index.html'))
+})
 
-
-// app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname + '/index.html'))
-// });
 
 app.get('/', function (req, res) {
   res.send('world!');
