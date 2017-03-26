@@ -2,7 +2,7 @@
   "name": "msgbot",
   "version": "0.0.0",
   "scripts": {
-    "start": "node app.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -12,7 +12,16 @@
     "node": "*"
   },
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "author": "Vajrang",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Billakurthi/fbtwit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Billakurthi/fbtwit/issues"
+  },
+  "homepage": "https://github.com/Billakurthi/fbtwit#readme"
 }
