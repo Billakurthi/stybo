@@ -290,6 +290,6 @@ app.post('/webhook/', function (req, res) {
 //
 //this is just a port on which our app runs on ..
 
-var port = 8080;
+var port = process.env.PORT||2000; //which you can run both on Azure or local
+
 app.listen(port);
-console.log('Express server started on port %s', port);
