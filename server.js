@@ -18,7 +18,7 @@ var bodyParser = require('body-parser');
 
 //starting a webhook code
 
-app.get('/webhook', function(req, res) {
+app.get('/webhook/', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === 'my-secrete') {
     console.log("Validating webhook");
@@ -33,7 +33,7 @@ app.get('/webhook', function(req, res) {
 var fbToken = "EAADq5dD7AbMBAPzeZAIRI7yAjZCVyvJMP3MT3NdlPkuyPessuJQLJ9zPwHTuSwQW5BIdUDfwTu9SGbAQBtT5oR33qHg855Q3MkE6tWsgMRKi5uqW7e85Ot4y1H9eLZAkqE2HioNfonvTxOc83T6IITWwjDQKhPmsIRaHqjjVQZDZD";
 
 
-app.post('/webhook', function (req, res) {
+app.post('/webhook/', function (req, res) {
   var data = req.body;
 
   // Make sure this is a page subscription
