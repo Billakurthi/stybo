@@ -2,7 +2,7 @@
 
 var express = require("express");
 var app = express();
-var request = require(request);
+var request = require("request");
 
 var path = require("path");
 var bodyParser = require('body-parser');
