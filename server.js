@@ -7,6 +7,10 @@ var request = require("request");
 var path = require("path");
 var bodyParser = require('body-parser');
 
+//facebook page access token
+var PAGE_ACCESS_TOKEN = "EAADq5dD7AbMBAPzeZAIRI7yAjZCVyvJMP3MT3NdlPkuyPessuJQLJ9zPwHTuSwQW5BIdUDfwTu9SGbAQBtT5oR33qHg855Q3MkE6tWsgMRKi5uqW7e85Ot4y1H9eLZAkqE2HioNfonvTxOc83T6IITWwjDQKhPmsIRaHqjjVQZDZD";
+
+
 
 
 //parse text using body parser
@@ -30,7 +34,6 @@ app.get('/webhook/', function(req, res) {
 });
 
 
-var PAGE_ACCESS_TOKEN = "EAADq5dD7AbMBAPzeZAIRI7yAjZCVyvJMP3MT3NdlPkuyPessuJQLJ9zPwHTuSwQW5BIdUDfwTu9SGbAQBtT5oR33qHg855Q3MkE6tWsgMRKi5uqW7e85Ot4y1H9eLZAkqE2HioNfonvTxOc83T6IITWwjDQKhPmsIRaHqjjVQZDZD";
 
 
 app.post('/webhook/', function (req, res) {
