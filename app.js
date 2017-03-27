@@ -258,12 +258,6 @@ app.post('/webhook/', function (req, res) {
         sendGenericMessage(sender);
         continue;
       }
-      //       else if (text === 'cat') {
-      //   //search youtube videos if two types of if statements failed
-      //   // ytubeSearchResults = 
-      //   runGetYoutubeQuery(text);
-      //   //post results to sender
-      // } else
       else if (text === 'hi') {
         console.log('Message from if Loop');
         sendTextMessage(sender, 'Hi Welcome to the awesome chatbot, what would you like to get me from youtube');
