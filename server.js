@@ -14,14 +14,17 @@ var bodyParser = require('body-parser');
 })
 
 //starting a webhook code
-app.get('/webhook', function (req, res) {
-  if (req.query['hub.verify_token'] === 'my-secrete') {
-    res.send(req.query['hub.challenge']);
-  }
-  // res.send('Error, wrong validation token');
-  res.sendFile(path.join(__dirname + '/webhook.html'))
 
-})
+app.get('/webhook', function(req, res) {
+  if (req.query['hub.mode'] === 'subscribe' &&
+      req.query['hub.verify_token'] === 'my-secrete') {
+    console.log("Validating webhook");
+    res.status(200).send(req.query['hub.challenge']);
+  } else {
+    console.error("Failed validation. Make sure the validation tokens match.");
+    res.sendStatus(403);          
+  }  
+});
 
 var port = process.env.PORT||2000; //which you can run both on Azure or local
 
