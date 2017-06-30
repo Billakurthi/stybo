@@ -8,7 +8,7 @@ var path = require("path");
 var bodyParser = require('body-parser');
 
 //facebook page access token
-var PAGE_ACCESS_TOKEN = "EAADq5dD7AbMBAPzeZAIRI7yAjZCVyvJMP3MT3NdlPkuyPessuJQLJ9zPwHTuSwQW5BIdUDfwTu9SGbAQBtT5oR33qHg855Q3MkE6tWsgMRKi5uqW7e85Ot4y1H9eLZAkqE2HioNfonvTxOc83T6IITWwjDQKhPmsIRaHqjjVQZDZD";
+var PAGE_ACCESS_TOKEN = "EAABg6YxyoqMBANCBee7ABhVarQZAQhiH2D5jZAeN6ZBOYuvqNZBfKLZCoS4TKx6bzEG7bVqtr6rJWOTIZBmeXoXay2DW55ZBl7EnvW7I2yDfrHZBhFGXZC6AI4vzC4kWedtxgYjuLcZA5PUmqhzx1xQWIX0sanHjxIqSzsbZCVDxgdYJIfSqS3Nrr09";
 
 
 
