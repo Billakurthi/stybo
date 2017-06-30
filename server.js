@@ -93,9 +93,20 @@ function receivedMessage(event) {
       case 'generic':
         sendGenericMessage(senderID);
         break;
-
+      case 'Hi':
+        sendTextMessage(senderID,'Hi Bangaram, em cehstunnav');
+        break;
+      case 'hi':
+        sendTextMessage(senderID,'Hi Bangaram, miss you ra');
+        break;
+      case 'Bye':
+        sendTextMessage(senderID,'Bye Pandu, miss you soo much');
+        break;
+      case 'bye':
+        sendTextMessage(senderID,'Bye Pandu, miss you soo much, jaldi msg chey wait cehsta');
+        break;
       default:
-      sendTextMessage(senderID, 'I love you'); 
+      sendTextMessage(senderID, 'koncham busy kanna Love you tarvatha matladatha'); 
       
       
     }
