@@ -51,6 +51,7 @@ app.post('/webhook/', function (req, res) {
       entry.messaging.forEach(function(event) {
         if (event.message) {
           receivedMessage(event);
+         console.log(event);
         } else {
           console.log("Webhook received unknown event: ", event);
         }
@@ -93,12 +94,8 @@ function receivedMessage(event) {
         sendGenericMessage(senderID);
         break;
 
-      default:(function (){
-          for(var i = 0; i< 5 ; i++)
-              {
-                sendTextMessage(senderID, messageText);
-               }
-          })();
+      default:
+       sendTextMessage(senderID, messageText);        
         
     }
   } else if (messageAttachments) {
