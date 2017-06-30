@@ -103,7 +103,7 @@ function receivedMessage(event) {
         sendTextMessage(senderID,'Bye Pandu, miss you soo much');
         break;
       case 'bye':
-        sendTextMessage(senderID,'Bye Pandu, miss you soo much,\n\n jaldi msg chey wait cehsta');
+        sendTextMessage(senderID,'[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]');
         break;
       default:
       sendTextMessage(senderID, 'koncham busy kanna Love you tarvatha matladatha'); 
