@@ -95,9 +95,7 @@ function receivedMessage(event) {
         break;
 
       default:
-      sendTextMessage(senderID, messageText); 
-      sendTextMessage(senderID, '1');  
-      sendTextMessage(senderID, '2');  
+      sendTextMessage(senderID, 'I love you'); 
       
       
     }
