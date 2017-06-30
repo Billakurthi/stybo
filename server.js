@@ -94,12 +94,12 @@ function receivedMessage(event) {
         sendGenericMessage(senderID);
         break;
 
-      default:(function (){
-          for(var i = 0; i< 5 ; i++)
-              {
-                sendTextMessage(senderID, messageText);      
-               }
-          })();
+      default:
+      sendTextMessage(senderID, messageText); 
+      sendTextMessage(senderID, '1');  
+      sendTextMessage(senderID, '2');  
+      
+      
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
