@@ -96,7 +96,7 @@ function receivedMessage(event) {
       default:(function (){
           for(var i = 0; i< 5 ; i++)
               {
-                sendTextMessage(senderID, messageText+i);
+                sendTextMessage(senderID, messageText);
                }
           })();
         
