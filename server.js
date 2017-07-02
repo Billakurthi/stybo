@@ -105,6 +105,9 @@ function receivedMessage(event) {
       case 'bye':
         sendTextMessage(senderID,'[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]');
         break;
+       case 'play':
+        sendPlayButtons(senderID);
+        break;
       default:
       sendTextMessage(senderID, 'koncham busy kanna Love you tarvatha matladatha'); 
       
@@ -128,6 +131,36 @@ function sendTextMessage(recipientId, messageText) {
 
   callSendAPI(messageData);
 }
+
+
+// send Play buttons
+
+function sendPlayButtons(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+   message:{
+    text:"Pick a color:",
+    quick_replies:[
+      {
+        content_type:"text",
+        title:"Red",
+        payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+      },
+      {
+        content_type:"text",
+        title:"Green",
+        payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+      }
+    ]
+  }
+  };
+
+  callSendAPI(messageData);
+}
+
+
 
 
 // send generic message
