@@ -136,22 +136,57 @@ function sendTextMessage(recipientId, messageText) {
 // send Play buttons
 
 function sendPlayButtons(recipientId) {
-  var messageData = {
+   var messageData = {
     recipient: {
       id: recipientId
     },
    message:{
-    text:"Pick a color:",
+    text:"location",
     quick_replies:[
       {
         content_type:"text",
-        title:"Red",
-        payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+        title:"1",
+        payload:"1"
       },
       {
         content_type:"text",
-        title:"Green",
-        payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        title:"2",
+        payload:"2"
+      },
+      {
+        content_type:"text",
+        title:"3",
+        payload:"4"
+      },
+      {
+        content_type:"text",
+        title:"4",
+        payload:"8"
+      },
+      {
+        content_type:"text",
+        title:"5",
+        payload:"16"
+      },
+      {
+        content_type:"text",
+        title:"6",
+        payload:"32"
+      },
+      {
+        content_type:"text",
+        title:"7",
+        payload:"64"
+      },
+      {
+        content_type:"text",
+        title:"8",
+        payload:"128"
+      },
+      {
+        content_type:"text",
+        title:"9",
+        payload:"256"
       }
     ]
   }
