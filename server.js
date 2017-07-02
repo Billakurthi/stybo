@@ -141,7 +141,7 @@ function sendPlayButtons(recipientId) {
       id: recipientId
     },
    message:{
-    text:"location",
+    text:"Select Cell\n\n[1][2][3]\n[4][5][6]\n[7][8][9]",
     quick_replies:[
       {
         content_type:"text",
