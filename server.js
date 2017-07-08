@@ -14,23 +14,23 @@ var PAGE_ACCESS_TOKEN = "EAABg6YxyoqMBANCBee7ABhVarQZAQhiH2D5jZAeN6ZBOYuvqNZBfKL
 
 
 //parse text using body parser
- app.use(bodyParser.json());
+app.use(bodyParser.json());
 
- app.get('/', function (req, res) {
+app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/index.html'))
 })
 
 //starting a webhook code
 
-app.get('/webhook/', function(req, res) {
+app.get('/webhook/', function (req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
-      req.query['hub.verify_token'] === 'my-secrete') {
+    req.query['hub.verify_token'] === 'my-secrete') {
     console.log("Validating webhook");
     res.status(200).send(req.query['hub.challenge']);
   } else {
     console.error("Failed validation. Make sure the validation tokens match.");
-    res.sendStatus(403);          
-  }  
+    res.sendStatus(403);
+  }
 });
 
 
@@ -43,15 +43,15 @@ app.post('/webhook/', function (req, res) {
   if (data.object === 'page') {
 
     // Iterate over each entry - there may be multiple if batched
-    data.entry.forEach(function(entry) {
+    data.entry.forEach(function (entry) {
       var pageID = entry.id;
       var timeOfEvent = entry.time;
 
       // Iterate over each messaging event
-      entry.messaging.forEach(function(event) {
+      entry.messaging.forEach(function (event) {
         if (event.message) {
           receivedMessage(event);
-         console.log(event);
+          console.log(event);
         } else {
           console.log("Webhook received unknown event: ", event);
         }
@@ -69,14 +69,14 @@ app.post('/webhook/', function (req, res) {
 
 
 //recieved msg event function
-  
+
 function receivedMessage(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
 
-  console.log("Received message for user %d and page %d at %d with message:", 
+  console.log("Received message for user %d and page %d at %d with message:",
     senderID, recipientID, timeOfMessage);
   console.log(JSON.stringify(message));
 
@@ -94,24 +94,24 @@ function receivedMessage(event) {
         sendGenericMessage(senderID);
         break;
       case 'Hi':
-        sendTextMessage(senderID,'Hi Bangaram, em cehstunnav');
+        sendTextMessage(senderID, 'Hi Bangaram, em cehstunnav');
         break;
       case 'hi':
-        sendTextMessage(senderID,'Hi Bangaram, miss you ra');
+        sendTextMessage(senderID, 'Hi Bangaram, miss you ra');
         break;
       case 'Bye':
-        sendTextMessage(senderID,'Bye Pandu, miss you soo much');
+        sendTextMessage(senderID, 'Bye Pandu, miss you soo much');
         break;
       case 'bye':
-        sendTextMessage(senderID,'[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]');
+        sendTextMessage(senderID, '[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]');
         break;
-       case 'play':
+      case 'play':
         sendPlayButtons(senderID);
         break;
       default:
-      sendTextMessage(senderID, 'koncham busy kanna Love you tarvatha matladatha'); 
-      
-      
+        sendTextMessage(senderID, 'koncham busy kanna Love you tarvatha matladatha');
+
+
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
@@ -136,62 +136,62 @@ function sendTextMessage(recipientId, messageText) {
 // send Play buttons
 
 function sendPlayButtons(recipientId) {
-   var messageData = {
+  var messageData = {
     recipient: {
       id: recipientId
     },
-   message:{
-    text:"Select Cell\n\n[1][2][3]\n[4][5][6]\n[7][8][9]",
-    quick_replies:[
-      {
-        content_type:"text",
-        title:"1",
-        payload:"1"
-      },
-      {
-        content_type:"text",
-        title:"2",
-        payload:"2"
-      },
-      {
-        content_type:"text",
-        title:"3",
-        payload:"4"
-      },
-      {
-        content_type:"text",
-        title:"4",
-        payload:"8"
-      },
-      {
-        content_type:"text",
-        title:"5",
-        payload:"16"
-      },
-      {
-        content_type:"text",
-        title:"6",
-        payload:"32"
-      },
-      {
-        content_type:"text",
-        title:"7",
-        payload:"64"
-      },
-      {
-        content_type:"text",
-        title:"8",
-        payload:"128"
-      },
-      {
-        content_type:"text",
-        title:"9",
-        payload:"256"
-      }
-    ]
-  }
+    message: {
+      text: "[1][2][3]\n[4][5][6]\n[7][8][9]",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "1",
+          payload: "1"
+        },
+        {
+          content_type: "text",
+          title: "2",
+          payload: "2"
+        },
+        {
+          content_type: "text",
+          title: "3",
+          payload: "4"
+        },
+        {
+          content_type: "text",
+          title: "4",
+          payload: "8"
+        },
+        {
+          content_type: "text",
+          title: "5",
+          payload: "16"
+        },
+        {
+          content_type: "text",
+          title: "6",
+          payload: "32"
+        },
+        {
+          content_type: "text",
+          title: "7",
+          payload: "64"
+        },
+        {
+          content_type: "text",
+          title: "8",
+          payload: "128"
+        },
+        {
+          content_type: "text",
+          title: "9",
+          payload: "256"
+        }
+      ]
+    }
   };
-
+  sendTextMessage(recipientId,"Select Cell")
   callSendAPI(messageData);
 }
 
@@ -213,7 +213,7 @@ function sendGenericMessage(recipientId) {
           elements: [{
             title: "rift",
             subtitle: "Next-generation virtual reality",
-            item_url: "https://www.oculus.com/en-us/rift/",               
+            item_url: "https://www.oculus.com/en-us/rift/",
             image_url: "http://messengerdemo.parseapp.com/img/rift.png",
             buttons: [{
               type: "web_url",
@@ -227,7 +227,7 @@ function sendGenericMessage(recipientId) {
           }, {
             title: "touch",
             subtitle: "Your Hands, Now in VR",
-            item_url: "https://www.oculus.com/en-us/touch/",               
+            item_url: "https://www.oculus.com/en-us/touch/",
             image_url: "http://messengerdemo.parseapp.com/img/touch.png",
             buttons: [{
               type: "web_url",
@@ -242,7 +242,7 @@ function sendGenericMessage(recipientId) {
         }
       }
     }
-  };  
+  };
 
   callSendAPI(messageData);
 }
@@ -261,19 +261,19 @@ function callSendAPI(messageData) {
       var recipientId = body.recipient_id;
       var messageId = body.message_id;
 
-      console.log("Successfully sent generic message with id %s to recipient %s", 
+      console.log("Successfully sent generic message with id %s to recipient %s",
         messageId, recipientId);
     } else {
       console.error("Unable to send message.");
       console.error(response);
       console.error(error);
     }
-  });  
+  });
 }
 
 
 
-var port = process.env.PORT||2000; //which you can run both on Azure or local
+var port = process.env.PORT || 2000; //which you can run both on Azure or local
 
 app.listen(port);
 
