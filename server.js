@@ -190,8 +190,7 @@ function sendPlayButtons(recipientId) {
         }
       ]
     }
-  };
-  sendTextMessage(recipientId,"Select Cell")
+  };  
   callSendAPI(messageData);
 }
 
