@@ -16,7 +16,7 @@ exports.callApiai = function (inputString, callback, senderID) {
     request.on('response', function (response) {
         console.log("Build Reply Message: " + response);
         var reply = response.result.fulfillment.speech;
-        callback(senderID, "Reply");
+        callback(senderID, reply);
     });
 
     request.on('error', function (error) {
