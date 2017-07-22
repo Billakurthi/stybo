@@ -123,6 +123,8 @@ function receivedMessage(event) {
                     console.log("Response:");
                     console.log(response.outputs[0].data);
                     sendTextMessage(senderID, messageAttachments[0].payload.url);
+                    console.log("Response Name:");
+                    console.log(response.outputs[0].data.concepts[0].name);
                     sendTextMessage(senderID, response.outputs[0].data.concepts[0].name);
                     sendTextMessage(senderID, response.outputs[0].data.concepts[0].value);
                 },
@@ -282,7 +284,7 @@ function callSendAPI(messageData) {
                 messageId, recipientId);
         } else {
             console.error("Unable to send message.");
-            console.error(response);
+            // console.error(response);
             console.error(error);
         }
     });
