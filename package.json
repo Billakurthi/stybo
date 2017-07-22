@@ -16,7 +16,9 @@
   "main": "server.js",
   "author": "Vajrang",
   "license": "ISC",
-  "devDependencies": {},
+  "devDependencies": {
+    "clarifai": "^2.2.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Billakurthi/fbtwit.git"
