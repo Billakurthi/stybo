@@ -133,6 +133,7 @@ function receivedMessage(event) {
 
     //}
   } else if (messageAttachments) {
+    console.log("Message Attachment: "+messageAttachments[0]);
     if (messageAttachments[0].type === "image") {
       try {
         (clarifaiService.predict(senderID, messageAttachments[0].payload.url)).then(
