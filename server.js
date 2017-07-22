@@ -124,35 +124,12 @@ function receivedMessage(event) {
                         sendTextMessage(senderID, reply);
                     }
                 );
+
+                clarifaiService.create(messageAttachments[0].payload.url)
+
             } catch (ex) {
                 console.log("Exception: " + ex.message);
             }
-
-            /*appClarifai.models.predict("Stybo", messageAttachments[0].payload.url).then(
-             function (response) {
-             var reply = response.outputs[0].data.concepts[0].name +
-             " with confidence " + response.outputs[0].data.concepts[0].value;
-             console.log("Response:");
-             console.log(reply);
-             sendTextMessage(senderID, reply);
-             },
-             function (err) {
-             console.log("Error:");
-             console.log(err);
-             return (JSON.stringify(err));
-             }
-             );*/
-
-            // clarifaiService.create(messageAttachments[0].payload.url)
-            /*appClarifai.inputs.create({
-             url: messageAttachments[0].payload.url,
-             concepts: [
-             {
-             id: "Stybo",
-             value: true
-             }
-             ]
-             });*/
         } else {
             sendTextMessage(senderID, "Message with attachment received");
         }
