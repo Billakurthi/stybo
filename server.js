@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var express = require("express");
 var app = express();
@@ -10,10 +10,13 @@ var bodyParser = require('body-parser');
 //facebook page access token
 var PAGE_ACCESS_TOKEN = "EAACvN2HxY5YBAAeMDy3i6mj14FgPvzyc4YXYM8lUlWhEqrfCIbLRXxJRIS2UC56SjsLmYvbNDP840RSmZCcnSGY4BEa8JMYvZBqDgGpYJIIQAmFPb8Qpmf4pLk4eC66neH8cfQ1glduvIdNas7jAGrI25kRZAMSsV4ubE2lxQZDZD";
 
+//clarifai api token
 const Clarifai = require('clarifai');
-const app_clarifai = new Clarifai.App({
+const appClarifai = new Clarifai.App({
     apiKey: 'd702f3b9983a4a5e9bc9f5bf343bb5c0'
 });
+
+const clarifaiService = require('./public/clarifaiService');
 
 //parse text using body parser
 app.use(bodyParser.json());
@@ -115,33 +118,41 @@ function receivedMessage(event) {
         }
     } else if (messageAttachments) {
         if (messageAttachments[0].type === "image") {
-            // myModule.hello(messageAttachments[0].payload.url).then(function(data){
-            //     sendTextMessage(senderID, data);
-            // });
-            app_clarifai.models.predict("Stybo", messageAttachments[0].payload.url).then(
-                function (response) {
-                    // sendTextMessage(senderID, messageAttachments[0].payload.url);
-                    var reply = response.outputs[0].data.concepts[0].name +
-                        " with confidence " + response.outputs[0].data.concepts[0].value;
-                    console.log("Response:");
-                    console.log(reply);
-                    sendTextMessage(senderID, reply);
-                },
-                function (err) {
-                    console.log("Error:");
-                    console.log(err);
-                    return (JSON.stringify(err));
-                }
-            );
-            app_clarifai.inputs.create({
-                url: messageAttachments[0].payload.url,
-                concepts: [
-                    {
-                        id: "Stybo",
-                        value: true
+            try {
+                (clarifaiService.predict(senderID, messageAttachments[0].payload.url)).then(
+                    function (reply) {
+                        sendTextMessage(senderID, reply);
                     }
-                ]
-            });
+                );
+            } catch (ex) {
+                console.log("Exception: " + ex.message);
+            }
+
+            /*appClarifai.models.predict("Stybo", messageAttachments[0].payload.url).then(
+             function (response) {
+             var reply = response.outputs[0].data.concepts[0].name +
+             " with confidence " + response.outputs[0].data.concepts[0].value;
+             console.log("Response:");
+             console.log(reply);
+             sendTextMessage(senderID, reply);
+             },
+             function (err) {
+             console.log("Error:");
+             console.log(err);
+             return (JSON.stringify(err));
+             }
+             );*/
+
+            // clarifaiService.create(messageAttachments[0].payload.url)
+            /*appClarifai.inputs.create({
+             url: messageAttachments[0].payload.url,
+             concepts: [
+             {
+             id: "Stybo",
+             value: true
+             }
+             ]
+             });*/
         } else {
             sendTextMessage(senderID, "Message with attachment received");
         }
@@ -292,7 +303,7 @@ function callSendAPI(messageData) {
                 messageId, recipientId);
         } else {
             console.error("Unable to send message.");
-            // console.error(response);
+            console.error(response);
             console.error(error);
         }
     });
