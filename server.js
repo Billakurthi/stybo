@@ -115,7 +115,6 @@ function receivedMessage(event) {
         }
     } else if (messageAttachments) {
         if (messageAttachments[0].type === "image") {
-            sendTextMessage(senderID, messageAttachments[0].payload.url);
             // myModule.hello(messageAttachments[0].payload.url).then(function(data){
             //     sendTextMessage(senderID, data);
             // });
@@ -123,7 +122,8 @@ function receivedMessage(event) {
                 function (response) {
                     console.log("Response:");
                     console.log(response.outputs[0].data);
-                    sendTextMessage(senderID, response.outputs[0].data);
+                    sendTextMessage(senderID, messageAttachments[0].payload.url);
+                    sendTextMessage(senderID, JSON.stringify(response.outputs[0].data));
                 },
                 function (err) {
                     console.log("Error:");
