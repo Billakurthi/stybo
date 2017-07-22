@@ -24,7 +24,7 @@ exports.predict = function (url) {
         return "I am unable to get any result from your input";
     }
 
-    return app_clarifai.models.predict("Stybo", url).then(replydata, errordata);
+    return appClarifai.models.predict("Stybo", url).then(replydata, errordata);
 };
 
 exports.create = function (url) {
