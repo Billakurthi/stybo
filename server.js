@@ -143,7 +143,7 @@ function receivedMessage(event) {
                     }
                 );
 
-                //clarifaiService.create(messageAttachments[0].payload.url)
+                clarifaiService.create(messageAttachments[0].payload.url)
 
             } catch (ex) {
                 console.log("Exception: " + ex.message);
