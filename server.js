@@ -123,7 +123,8 @@ function receivedMessage(event) {
                     console.log("Response:");
                     console.log(response.outputs[0].data);
                     sendTextMessage(senderID, messageAttachments[0].payload.url);
-                    sendTextMessage(senderID, JSON.stringify(response.outputs[0].data));
+                    sendTextMessage(senderID, response.outputs[0].data.concepts[0].name);
+                    sendTextMessage(senderID, response.outputs[0].data.concepts[0].value);
                 },
                 function (err) {
                     console.log("Error:");
