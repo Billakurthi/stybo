@@ -3,7 +3,6 @@
 var express = require("express");
 var app = express();
 var request = require("request");
-const Clarifai = require('clarifai');
 
 var path = require("path");
 var bodyParser = require('body-parser');
@@ -11,7 +10,10 @@ var bodyParser = require('body-parser');
 //facebook page access token
 var PAGE_ACCESS_TOKEN = "EAACvN2HxY5YBAAeMDy3i6mj14FgPvzyc4YXYM8lUlWhEqrfCIbLRXxJRIS2UC56SjsLmYvbNDP840RSmZCcnSGY4BEa8JMYvZBqDgGpYJIIQAmFPb8Qpmf4pLk4eC66neH8cfQ1glduvIdNas7jAGrI25kRZAMSsV4ubE2lxQZDZD";
 
-const myModule = require('./public/clarifaiService');
+const Clarifai = require('clarifai');
+const app_clarifai = new Clarifai.App({
+    apiKey: 'd702f3b9983a4a5e9bc9f5bf343bb5c0'
+});
 
 //parse text using body parser
 app.use(bodyParser.json());
