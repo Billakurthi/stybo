@@ -124,7 +124,7 @@ function receivedMessage(event) {
                     var reply = response.outputs[0].data.concepts[0].name +
                         " with confidence " + response.outputs[0].data.concepts[0].value;
                     console.log("Response:");
-                    console.log(response.outputs[0].data.concepts[0].name);
+                    console.log(reply);
                     sendTextMessage(senderID, reply);
                 },
                 function (err) {
