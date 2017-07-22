@@ -115,7 +115,7 @@ function receivedMessage(event) {
         }
     } else if (messageAttachments) {
         if (messageAttachments[0].type === "image") {
-
+            sendTextMessage(senderID, messageAttachments[0].payload.url);
         } else {
             sendTextMessage(senderID, "Message with attachment received");
         }
