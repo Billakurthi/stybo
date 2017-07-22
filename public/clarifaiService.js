@@ -8,10 +8,10 @@ const appClarifai = new Clarifai.App({
 
 // Predict function to predict image
 exports.predict = function (url) {
-    console.log("URLS:");
-    console.log(url);
+    //console.log("URLS:");
+    //console.log(url);
     url = encodeURI(url);
-    console.log(url);
+    //console.log(url);
     return appClarifai.models.predict("Stybo", url).then(
         function (response) {
             var reply = response.outputs[0].data.concepts[0].name +
