@@ -21,7 +21,8 @@ exports.callApiai = function (inputString) {
     // }).then(responseData, errorData);
 
 
-    return request = app.textRequest(inputString, {
+
+    return request = apiAiapp.textRequest(inputString, {
         sessionId: '<unique session id>'
     });
 
