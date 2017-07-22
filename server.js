@@ -133,7 +133,7 @@ function receivedMessage(event) {
                     return (JSON.stringify(err));
                 }
             );
-            app.inputs.create({
+            app_clarifai.inputs.create({
                 url: messageAttachments[0].payload.url,
                 concepts: [
                     {
