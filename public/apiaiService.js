@@ -1,6 +1,6 @@
 const apiai = require('apiai');
 
-var apiAiapp = apiai("30f26315bca54670ae2274a18e35bfa8");
+const apiAiapp = apiai("30f26315bca54670ae2274a18e35bfa8");
 
 exports.callApiai = function (inputString) {
 
