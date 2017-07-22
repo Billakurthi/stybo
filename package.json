@@ -17,6 +17,7 @@
   "author": "Vajrang",
   "license": "ISC",
   "devDependencies": {
+    "apiai": "^4.0.3",
     "clarifai": "^2.2.0"
   },
   "repository": {
