@@ -12,8 +12,7 @@ var bodyParser = require('body-parser');
 var PAGE_ACCESS_TOKEN = "EAACvN2HxY5YBAAeMDy3i6mj14FgPvzyc4YXYM8lUlWhEqrfCIbLRXxJRIS2UC56SjsLmYvbNDP840RSmZCcnSGY4BEa8JMYvZBqDgGpYJIIQAmFPb8Qpmf4pLk4eC66neH8cfQ1glduvIdNas7jAGrI25kRZAMSsV4ubE2lxQZDZD";
 
 const myModule = require('./public/clarifaiService');
-var val = myModule.hello(); // val is "Hello"
-console.log(val);
+
 
 //parse text using body parser
 app.use(bodyParser.json());
@@ -116,6 +115,9 @@ function receivedMessage(event) {
     } else if (messageAttachments) {
         if (messageAttachments[0].type === "image") {
             sendTextMessage(senderID, messageAttachments[0].payload.url);
+            myModule.hello(messageAttachments[0].payload.url).then(function(data){
+                sendTextMessage(senderID, data);
+            });
         } else {
             sendTextMessage(senderID, "Message with attachment received");
         }
