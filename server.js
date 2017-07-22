@@ -13,7 +13,6 @@ var PAGE_ACCESS_TOKEN = "EAACvN2HxY5YBAAeMDy3i6mj14FgPvzyc4YXYM8lUlWhEqrfCIbLRXx
 
 const myModule = require('./public/clarifaiService');
 
-
 //parse text using body parser
 app.use(bodyParser.json());
 
@@ -115,9 +114,21 @@ function receivedMessage(event) {
     } else if (messageAttachments) {
         if (messageAttachments[0].type === "image") {
             sendTextMessage(senderID, messageAttachments[0].payload.url);
-            myModule.hello(messageAttachments[0].payload.url).then(function(data){
-                sendTextMessage(senderID, data);
-            });
+            // myModule.hello(messageAttachments[0].payload.url).then(function(data){
+            //     sendTextMessage(senderID, data);
+            // });
+            app_clarifai.models.predict("Stybo", messageAttachments[0].payload.url).then(
+                function (response) {
+                    console.log("Response:");
+                    console.log(response.outputs[0].data);
+                    sendTextMessage(senderID, response.outputs[0].data);
+                },
+                function (err) {
+                    console.log("Error:");
+                    console.log(err);
+                    return (JSON.stringify(err));
+                }
+            );
         } else {
             sendTextMessage(senderID, "Message with attachment received");
         }
