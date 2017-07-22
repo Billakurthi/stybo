@@ -136,7 +136,7 @@ function receivedMessage(event) {
     console.log("Message Attachment: "+messageAttachments[0].payload.url);
     if (messageAttachments[0].type === "image") {
       try {
-        (clarifaiService.predict(senderID, messageAttachments[0].payload.url)).then(
+        (clarifaiService.predict(messageAttachments[0].payload.url)).then(
           function (reply) {
             sendTextMessage(senderID, reply);
           }
