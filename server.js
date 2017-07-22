@@ -11,10 +11,10 @@ var bodyParser = require('body-parser');
 var PAGE_ACCESS_TOKEN = "EAACvN2HxY5YBAAeMDy3i6mj14FgPvzyc4YXYM8lUlWhEqrfCIbLRXxJRIS2UC56SjsLmYvbNDP840RSmZCcnSGY4BEa8JMYvZBqDgGpYJIIQAmFPb8Qpmf4pLk4eC66neH8cfQ1glduvIdNas7jAGrI25kRZAMSsV4ubE2lxQZDZD";
 
 //clarifai api token
-const Clarifai = require('clarifai');
-const appClarifai = new Clarifai.App({
-  apiKey: 'd702f3b9983a4a5e9bc9f5bf343bb5c0'
-});
+// const Clarifai = require('clarifai');
+// const appClarifai = new Clarifai.App({
+//   apiKey: 'd702f3b9983a4a5e9bc9f5bf343bb5c0'
+// });
 
 const clarifaiService = require('./public/clarifaiService');
 //const apiaiService = require('./public/apiaiService');
