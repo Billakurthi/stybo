@@ -94,13 +94,17 @@ function receivedMessage(event) {
 
     // If we receive a text message, check to see if it matches a keyword
     // and send back the example. Otherwise, just echo the text we received.
-    var buildReply = apiaiService.callApiai(messageText);
     try {
-      console.log("Build Reply Message: "+buildReply);
-      sendTextMessage(senderID, buildReply);
+      (apiaiService.callApiai(messageText)).then(
+        function (buildReply) {
+          console.log("Build Reply Message: " + buildReply);
+          sendTextMessage(senderID, buildReply);
+        }
+      );
     } catch (ex) {
       console.log("buildReply Error " + ex);
     }
+
     // switch (messageText) {
 
 
