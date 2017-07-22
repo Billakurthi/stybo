@@ -21,7 +21,7 @@ exports.callApiai = function (inputString) {
     // }).then(responseData, errorData);
 
 
-    var request = app.textRequest(inputString, {
+    return request = app.textRequest(inputString, {
         sessionId: '<unique session id>'
     });
 
