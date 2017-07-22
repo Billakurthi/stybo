@@ -17,7 +17,7 @@ const appClarifai = new Clarifai.App({
 });
 
 const clarifaiService = require('./public/clarifaiService');
-const apiaiService = require('./public/apiaiService');
+//const apiaiService = require('./public/apiaiService');
 
 
 //parse text using body parser
