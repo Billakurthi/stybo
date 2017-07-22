@@ -1,4 +1,4 @@
-const ApiAi = require("api-ai-javascript");
+const ApiAI = require("api-ai-javascript");
 
 const apiai_app = new ApiAI.ApiAiClient({accessToken: '30f26315bca54670ae2274a18e35bfa8'});
 
