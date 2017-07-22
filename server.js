@@ -89,6 +89,7 @@ function receivedMessage(event) {
 
     var messageText = message.text;
     var messageAttachments = message.attachments;
+    var messageStickers = message.sticker_id;
 
     if (messageText) {
 
@@ -133,7 +134,7 @@ function receivedMessage(event) {
 
 
         //}
-    } else if (messageAttachments) {
+    } else if (messageAttachments && !messageStickers) {
         console.log("Message Attachment: " + messageAttachments[0].payload.url);
         if (messageAttachments[0].type === "image") {
             try {
@@ -151,6 +152,8 @@ function receivedMessage(event) {
         } else {
             sendTextMessage(senderID, "Message with attachment received");
         }
+    }else{
+      sendTextMessage(senderID, "Please upload your image");
     }
 }
 
