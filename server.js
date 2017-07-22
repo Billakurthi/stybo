@@ -96,6 +96,7 @@ function receivedMessage(event) {
     // and send back the example. Otherwise, just echo the text we received.
     var buildReply = apiaiService.callApiai(messageText);
     try {
+      console.log("Build Reply Message: "+buildReply);
       sendTextMessage(senderID, buildReply);
     } catch (ex) {
       console.log("buildReply Error " + ex);

@@ -10,7 +10,7 @@ exports.callApiai = function (inputString) {
 
     var responseData = request.on('response', function (response) {
         console.log(response);
-        return response;
+        return response.result.fulfillment.speech;
     });
 
     request.on('error', function (error) {
