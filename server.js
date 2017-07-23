@@ -93,8 +93,8 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
   var messageStickers = message.sticker_id;
 
-//store sender information in local object
-  if (senderID) {
+  //store sender information in local object
+  if (!current_users[senderID]) {
     try {
       current_users[senderID] = {
         'imgUrl': 'someImg Url',
@@ -122,8 +122,14 @@ function receivedMessage(event) {
 
   } else if (messageAttachments && !messageStickers) {
     console.log("Message Attachment: " + messageAttachments[0].payload.url);
+    
+
+
     if (messageAttachments[0].type === "image") {
       try {
+
+        current_users[senderID].imgUrl = messageAttachments[0].payload.url;
+        console.log("current Users " + JSON.stringify(current_users));
 
         //call general search
         clarifaiService.generalModelSearch(messageAttachments[0].payload.url);
