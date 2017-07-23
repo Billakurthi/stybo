@@ -139,8 +139,7 @@ function receivedMessage(event) {
           function (reply) {
             apiaiService.callApiai(reply, sendTextMessage, senderID);
             sendTextMessage(senderID, reply);
-            sendGenericMessage(senderID);
-
+            if (reply != '#rejected') { sendGenericMessage(senderID); }
           }
         );
 
@@ -212,32 +211,34 @@ function sendGenericMessage(recipientId) {
         payload: {
           template_type: "generic",
           elements: [{
-            title: "rift",
-            subtitle: "Next-generation virtual reality",
-            item_url: "https://www.oculus.com/en-us/rift/",
-            image_url: "http://messengerdemo.parseapp.com/img/rift.png",
+            title: "Exotic",
+            subtitle: "Your best fit is here",
+            item_url: "https://stybo.azurewebsites.net/",
+            image_url: "http://ecx.images-amazon.com/images/I/71%2BQSzV%2B1cL._UL1500_.jpg",
             buttons: [{
-              type: "web_url",
-              url: "https://www.oculus.com/en-us/rift/",
-              title: "Open Web URL"
-            }, {
               type: "postback",
-              title: "Call Postback",
-              payload: "Payload for first bubble",
+              title: "Buy Now",
+              payload: "#buyClicked",
             }],
           }, {
-            title: "touch",
-            subtitle: "Your Hands, Now in VR",
-            item_url: "https://www.oculus.com/en-us/touch/",
-            image_url: "http://messengerdemo.parseapp.com/img/touch.png",
+            title: "Vibrant",
+            subtitle: "Be ready for party always",
+            item_url: "https://stybo.azurewebsites.net/",
+            image_url: "http://ecx.images-amazon.com/images/I/41nqVZKJz3L.jpg",
             buttons: [{
-              type: "web_url",
-              url: "https://www.oculus.com/en-us/touch/",
-              title: "Open Web URL"
-            }, {
               type: "postback",
-              title: "Call Postback",
-              payload: "Payload for second bubble",
+              title: "Buy Now",
+              payload: "#buyClicked",
+            }]
+          }, {
+            title: "Versatile",
+            subtitle: "Get Trendy",
+            item_url: "https://stybo.azurewebsites.net/",
+            image_url: "http://ecx.images-amazon.com/images/I/61w-Hv-tKqL._UL1500_.jpg",
+            buttons: [{
+              type: "postback",
+              title: "Buy Now",
+              payload: "#buyClicked",
             }]
           }]
         }
