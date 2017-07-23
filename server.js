@@ -122,7 +122,7 @@ function receivedMessage(event) {
 
   } else if (messageAttachments && !messageStickers) {
     console.log("Message Attachment: " + messageAttachments[0].payload.url);
-    
+
 
 
     if (messageAttachments[0].type === "image") {
@@ -139,6 +139,7 @@ function receivedMessage(event) {
           function (reply) {
             apiaiService.callApiai(reply, sendTextMessage, senderID);
             sendTextMessage(senderID, reply);
+            sendGenericMessage(senderID);
 
           }
         );
