@@ -141,7 +141,7 @@ function receivedMessage(event) {
                 (clarifaiService.predict(messageAttachments[0].payload.url)).then(
                     function (reply) {
                       apiaiService.callApiai(reply, sendTextMessage, senderID);
-                        //sendTextMessage(senderID, reply);
+                      sendTextMessage(senderID, reply);
                     }
                 );
 
