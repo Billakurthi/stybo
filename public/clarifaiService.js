@@ -1,6 +1,8 @@
 // Require the client
 const Clarifai = require('clarifai');
 
+
+
 // initialize with your api key. This will also work in your browser via http://browserify.org/
 const appClarifai = new Clarifai.App({
     apiKey: 'bd626861f2f24192945ce59e035f0d02'
@@ -14,11 +16,11 @@ exports.predict = function (url) {
     //console.log(url);
     return appClarifai.models.predict("Stybo", url).then(
         function (response) {
-            var reply = response.outputs[0].data.concepts[0].name +
-                " with confidence " + response.outputs[0].data.concepts[0].value;
+            var reply = response.outputs[0].data.concepts[0].name; 
+            // +                " with confidence " + response.outputs[0].data.concepts[0].value;
             console.log("Response:" + reply);
             // sendTextMessage(senderID, reply);
-            return reply;
+            return '#'+reply;
         },
         function (err) {
             console.log("Error:");
