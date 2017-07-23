@@ -12,10 +12,15 @@ exports.callApiai = function (inputString, callback, senderID) {
 
     request.on('response', function (response) {
         var reply = response.result.fulfillment.speech;
+        if (reply) {
+            console.log("Full: " + reply);
+            callback(senderID, reply);
+        } else {
+            callback(senderID, "no entities trained");
+        }
 
-        console.log("Full: " + reply);
 
-        callback(senderID, reply);
+
 
 
     });
@@ -26,19 +31,4 @@ exports.callApiai = function (inputString, callback, senderID) {
     });
 
     request.end();
-};
-
-exports.generalModelSearch = function(searchUrl){
-
-    app_apiai.models.predict(Clarifai.GENERAL_MODEL, searchUrl, { language: 'en' }).then(
-        function (response) {
-            console.log("General Model response =" + JSON.stringify(response));
-            // do something with response
-        },
-        function (err) {
-            console.log("General Model error =" + JSON.stringify(error));
-
-            // there was an error
-        }
-    );
 };

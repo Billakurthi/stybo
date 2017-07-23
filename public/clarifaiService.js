@@ -42,3 +42,19 @@ exports.create = function (url) {
         ]
     });
 };
+
+
+exports.generalModelSearch = function(searchUrl){
+
+    appClarifai.models.predict(Clarifai.GENERAL_MODEL, searchUrl, { language: 'en' }).then(
+        function (response) {
+            console.log("General Model response =" + JSON.stringify(response));
+            // do something with response
+        },
+        function (err) {
+            console.log("General Model error =" + JSON.stringify(error));
+
+            // there was an error
+        }
+    );
+};

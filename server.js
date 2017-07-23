@@ -138,11 +138,16 @@ function receivedMessage(event) {
     console.log("Message Attachment: " + messageAttachments[0].payload.url);
     if (messageAttachments[0].type === "image") {
       try {
+
+        //call general search
+        appClarifai.generalModelSearch(messageAttachments[0].payload.url);
+
+        //call prediction for a updated image
         (clarifaiService.predict(messageAttachments[0].payload.url)).then(
           function (reply) {
             apiaiService.callApiai(reply, sendTextMessage, senderID);
             sendTextMessage(senderID, reply);
-            apiaiService.generalModelSearch(messageAttachments[0].payload.url);
+
           }
         );
 
