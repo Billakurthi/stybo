@@ -17,7 +17,7 @@ exports.callApiai = function (inputString, callback, senderID) {
         var reply = response.result.fulfillment.speech;
         var replySpeech = '';
         if (response.result.fulfillment.messages.speech) {
-            replySpeech = callback(senderID, response.result.fulfillment.messages.speech);
+            replySpeech = (response.result.fulfillment.messages.speech);
             callback(senderID, replySpeech);
         };
         console.log("Full: " + reply + 'replySpeech' + replySpeech);
