@@ -139,7 +139,7 @@ function receivedMessage(event) {
           function (reply) {
             apiaiService.callApiai(reply, sendTextMessage, senderID);
             sendTextMessage(senderID, reply);
-            if (reply != '#rejected') { sendGenericMessage(senderID); }
+            if (reply != '#Rejected') { sendGenericMessage(senderID); }
           }
         );
 
