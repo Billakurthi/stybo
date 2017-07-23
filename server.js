@@ -45,7 +45,7 @@ var costumes = {
     "url5": "http://ecx.images-amazon.com/images/I/71DsbnF1TdL._UL1500_.jpg"
   },
   "#Rectangle": {
-    "url1": "http://www.amazon.in/Blue-Tomatoes-Womens-Dress-BTDR5002A/dp/B01MAWLAIY/ref=sr_1_1?s=apparel&ie=UTF8&qid=1500797534&sr=1-1&nodeID=1571271031&psd=1&keywords=belted+tops+for+women",
+    "url1": "http://ecx.images-amazon.com/images/I/61RDxIghPrL._UL1500_.jpg",
     "url2": "http://ecx.images-amazon.com/images/I/41WkYdsHBjL._AC_UL260_SR200,260_FMwebp_QL70_.jpg",
     "url3": "http://ecx.images-amazon.com/images/I/41dKBRjvpjL._AC_UL260_SR200,260_FMwebp_QL70_.jpg",
     "url4": "http://ecx.images-amazon.com/images/I/418kc0ymF3L._AC_UL260_SR200,260_FMwebp_QL70_.jpg",
