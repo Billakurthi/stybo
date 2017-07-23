@@ -213,7 +213,7 @@ function sendGenericMessage(recipientId) {
           elements: [{
             title: "Exotic",
             subtitle: "Your best fit is here",
-            item_url: "https://stybo.azurewebsites.net/",
+            item_url: "http://ecx.images-amazon.com/images/I/71%2BQSzV%2B1cL._UL1500_.jpg",
             image_url: "http://ecx.images-amazon.com/images/I/71%2BQSzV%2B1cL._UL1500_.jpg",
             buttons: [{
               type: "postback",
@@ -223,7 +223,7 @@ function sendGenericMessage(recipientId) {
           }, {
             title: "Vibrant",
             subtitle: "Be ready for party always",
-            item_url: "https://stybo.azurewebsites.net/",
+            item_url: "http://ecx.images-amazon.com/images/I/41nqVZKJz3L.jpg",
             image_url: "http://ecx.images-amazon.com/images/I/41nqVZKJz3L.jpg",
             buttons: [{
               type: "postback",
@@ -233,7 +233,7 @@ function sendGenericMessage(recipientId) {
           }, {
             title: "Versatile",
             subtitle: "Get Trendy",
-            item_url: "https://stybo.azurewebsites.net/",
+            item_url: "http://ecx.images-amazon.com/images/I/61w-Hv-tKqL._UL1500_.jpg",
             image_url: "http://ecx.images-amazon.com/images/I/61w-Hv-tKqL._UL1500_.jpg",
             buttons: [{
               type: "postback",
