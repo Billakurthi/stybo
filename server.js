@@ -10,15 +10,18 @@ var bodyParser = require('body-parser');
 //facebook page access token
 var PAGE_ACCESS_TOKEN = "EAACvN2HxY5YBAAeMDy3i6mj14FgPvzyc4YXYM8lUlWhEqrfCIbLRXxJRIS2UC56SjsLmYvbNDP840RSmZCcnSGY4BEa8JMYvZBqDgGpYJIIQAmFPb8Qpmf4pLk4eC66neH8cfQ1glduvIdNas7jAGrI25kRZAMSsV4ubE2lxQZDZD";
 
-//clarifai api token
-// const Clarifai = require('clarifai');
-// const appClarifai = new Clarifai.App({
-//   apiKey: 'd702f3b9983a4a5e9bc9f5bf343bb5c0'
-// });
-
 const clarifaiService = require('./public/clarifaiService');
 const apiaiService = require('./public/apiaiService');
 
+
+//user prototype object 
+function styboUser(uid, hasImageUrl, age) {
+  this.userid = uid;
+  this.imgUrl = hasImageUrl;
+  this.age = age;
+};
+//user prototype object 
+var current_users = {};
 
 //parse text using body parser
 app.use(bodyParser.json());
@@ -86,54 +89,32 @@ function receivedMessage(event) {
   console.log(JSON.stringify(message));
 
   var messageId = message.mid;
-
   var messageText = message.text;
   var messageAttachments = message.attachments;
   var messageStickers = message.sticker_id;
 
-  if (messageText) {
+  try {
+    current_users.push(styboUser(senderID, '', age));
+    console.clear();
+    console.log(current_users);
+  } catch (ex) {
+    console.log("error in pushing the values to the user" + ex);
+  }
 
-    // If we receive a text message, check to see if it matches a keyword
-    // and send back the example. Otherwise, just echo the text we received.
-    // sendTextMessage(senderID, 'koncham busy kanna Love you tarvatha matladatha');
+
+
+
+  if (messageText) {
     try {
+
       apiaiService.callApiai(messageText, sendTextMessage, senderID);
-      /*.then(
-      function (buildReply) {
-          console.log("Build Reply Message: " + buildReply);
-          sendTextMessage(senderID, buildReply);
-      }
-  );*/
+
     } catch (ex) {
+
       console.log("buildReply Error " + ex);
+
     }
 
-    // switch (messageText) {
-
-
-    // case 'generic':
-    //   sendGenericMessage(senderID);
-    //   break;
-    // case 'Hi':
-    //   sendTextMessage(senderID, 'Hi Bangaram, em cehstunnav');
-    //   break;
-    // case 'hi':
-    //   sendTextMessage(senderID, 'Hi Bangaram, miss you ra');
-    //   break;
-    // case 'Bye':
-    //   sendTextMessage(senderID, 'Bye Pandu, miss you soo much');
-    //   break;
-    // case 'bye':
-    //   sendTextMessage(senderID, '[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]');
-    //   break;
-    // case 'play':
-    //   sendPlayButtons(senderID);
-    //   break;
-    // default:
-    //   sendTextMessage(senderID, 'koncham busy kanna Love you tarvatha matladatha');
-
-
-    //}
   } else if (messageAttachments && !messageStickers) {
     console.log("Message Attachment: " + messageAttachments[0].payload.url);
     if (messageAttachments[0].type === "image") {
@@ -198,41 +179,6 @@ function sendPlayButtons(recipientId) {
           content_type: "text",
           title: "2",
           payload: "2"
-        },
-        {
-          content_type: "text",
-          title: "3",
-          payload: "4"
-        },
-        {
-          content_type: "text",
-          title: "4",
-          payload: "8"
-        },
-        {
-          content_type: "text",
-          title: "5",
-          payload: "16"
-        },
-        {
-          content_type: "text",
-          title: "6",
-          payload: "32"
-        },
-        {
-          content_type: "text",
-          title: "7",
-          payload: "64"
-        },
-        {
-          content_type: "text",
-          title: "8",
-          payload: "128"
-        },
-        {
-          content_type: "text",
-          title: "9",
-          payload: "256"
         }
       ]
     }
