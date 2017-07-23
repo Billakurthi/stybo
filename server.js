@@ -101,7 +101,7 @@ function receivedMessage(event) {
         'age': 25
       }
       console.clear();
-      console.log("current Users " + current_users);
+      console.log("current Users " + JSON.stringify(current_users));
     } catch (ex) {
       console.log("error in pushing the values to the user" + ex);
     }
