@@ -48,7 +48,7 @@ exports.generalModelSearch = function(searchUrl){
 
     console.log("inside searchUrl" +searchUrl);
 
-    appClarifai.models.predict('Clarifai.GENERAL_MODEL', searchUrl).then(
+    appClarifai.models.predict(Clarifai.GENERAL_MODEL,searchUrl).then(
         function (response) {
             console.log("General Model response =" + JSON.stringify(response));
             // do something with response
