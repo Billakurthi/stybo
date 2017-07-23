@@ -15,10 +15,10 @@ const apiaiService = require('./public/apiaiService');
 
 
 //user prototype object 
-function styboUser(uid, hasImageUrl, age) {
+function styboUser(uid, hasImageUrl, uage) {
   this.userid = uid;
   this.imgUrl = hasImageUrl;
-  this.age = age;
+  this.age = uage;
 };
 //user prototype object 
 var current_users = {};
@@ -94,9 +94,9 @@ function receivedMessage(event) {
   var messageStickers = message.sticker_id;
 
   try {
-    current_users.push(styboUser(senderID, '', age));
+    current_users.push(styboUser(senderID, '', 10));
     console.clear();
-    console.log(current_users);
+    console.log("current Users "+ current_users);
   } catch (ex) {
     console.log("error in pushing the values to the user" + ex);
   }
