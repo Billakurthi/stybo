@@ -140,7 +140,7 @@ function receivedMessage(event) {
       try {
 
         //call general search
-        appClarifai.generalModelSearch(messageAttachments[0].payload.url);
+        clarifaiService.generalModelSearch(messageAttachments[0].payload.url);
 
         //call prediction for a updated image
         (clarifaiService.predict(messageAttachments[0].payload.url)).then(

@@ -16,11 +16,11 @@ exports.predict = function (url) {
     //console.log(url);
     return appClarifai.models.predict("Stybo", url).then(
         function (response) {
-            var reply = response.outputs[0].data.concepts[0].name; 
+            var reply = response.outputs[0].data.concepts[0].name;
             // +                " with confidence " + response.outputs[0].data.concepts[0].value;
             console.log("Response:" + reply);
             // sendTextMessage(senderID, reply);
-            return '#'+reply;
+            return '#' + reply;
         },
         function (err) {
             console.log("Error:");
@@ -44,11 +44,11 @@ exports.create = function (url) {
 };
 
 
-exports.generalModelSearch = function(searchUrl){
+exports.generalModelSearch = function (searchUrl) {
 
-    console.log("inside searchUrl" +searchUrl);
+    console.log("inside searchUrl" + searchUrl);
 
-    appClarifai.models.predict(Clarifai.GENERAL_MODEL,searchUrl).then(
+    appClarifai.models.predict(Clarifai.GENERAL_MODEL, searchUrl).then(
         function (response) {
             console.log("General Model response =" + JSON.stringify(response));
             // do something with response
