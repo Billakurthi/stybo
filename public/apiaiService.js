@@ -14,13 +14,13 @@ exports.callApiai = function (inputString, callback, senderID) {
     });
 
     request.on('response', function (response) {
-        console.log("Full: " + response);
         var reply = response.result.fulfillment.speech;
         var replySpeech = response.result.messages[0].speech;
-        
+        console.log("Full: " + reply + 'replySpeech' + replySpeech);
+
         callback(senderID, reply);
         callback(senderID, replySpeech);
-        
+
     });
 
     request.on('error', function (error) {
