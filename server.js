@@ -8,7 +8,7 @@ var path = require("path");
 var bodyParser = require('body-parser');
 
 //facebook page access token
-var PAGE_ACCESS_TOKEN = "EAACvN2HxY5YBAAeMDy3i6mj14FgPvzyc4YXYM8lUlWhEqrfCIbLRXxJRIS2UC56SjsLmYvbNDP840RSmZCcnSGY4BEa8JMYvZBqDgGpYJIIQAmFPb8Qpmf4pLk4eC66neH8cfQ1glduvIdNas7jAGrI25kRZAMSsV4ubE2lxQZDZD";
+var PAGE_ACCESS_TOKEN = "EAACvN2HxY5YBAJIBP17DJkYfyWKXNiarYFO5qaoBdHdZBDlctUCV1ZBuSsH53oH2hAIP8X0pYU2oUrLR7uygYD9LEjKZBKYiKIRBwBMO8zXl5ugRcFsOOH0grTjQSvVIzKgWX9OAMwgZBx4zcHZAGDQBuT8jG91KJLhufsL5ANwZDZD";
 
 
 const clarifaiService = require('./public/clarifaiService');
