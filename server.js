@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 //facebook page access token
 var PAGE_ACCESS_TOKEN = "EAACvN2HxY5YBAAeMDy3i6mj14FgPvzyc4YXYM8lUlWhEqrfCIbLRXxJRIS2UC56SjsLmYvbNDP840RSmZCcnSGY4BEa8JMYvZBqDgGpYJIIQAmFPb8Qpmf4pLk4eC66neH8cfQ1glduvIdNas7jAGrI25kRZAMSsV4ubE2lxQZDZD";
 
+<<<<<<< HEAD
 const clarifaiService = require('./public/clarifaiService');
 const apiaiService = require('./public/apiaiService');
 
@@ -73,6 +74,10 @@ var costumes = {
     "url5": "http://ecx.images-amazon.com/images/I/71TSo0zPzfL._UL1500_.jpg"
   }
 }
+=======
+
+
+>>>>>>> master
 
 //parse text using body parser
 app.use(bodyParser.json());
