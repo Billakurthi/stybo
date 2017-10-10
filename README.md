@@ -1,4 +1,4 @@
-# Node JS empty site
+# Stybo application for women fashion
 
 #todo: add conversation bot with switch cases 
 
