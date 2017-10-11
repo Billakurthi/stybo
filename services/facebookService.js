@@ -155,7 +155,7 @@
         } else {
             sendTextMessage(senderID, "Please upload your image");
         }
-    }
+    } 
 
 
     function sendTextMessage(recipientId, messageText) {
