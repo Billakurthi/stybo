@@ -3,7 +3,7 @@
 
     var apiai = require('apiai');
     var apiaiConfig = require('./auth').apiaiConfig;
-    var facebookService = require('./facebookService').fbServiceFunctions;
+    var fbService = require('./facebookService');
     // const apiai_app = new ApiAI.ApiAiClient({accessToken: '30f26315bca54670ae2274a18e35bfa8'});
     var app_apiai = apiai(apiaiConfig.clientAccessToken, {
         language: "en",
@@ -88,7 +88,7 @@
                                     // if bodytype is not rejected then send a generic message with types of dresses
 
                                     if (bodyType == '#Rejected') {
-                                        facebookService.sendGenericMessage(senderID, "#Apple");
+                                        fbService.fbServiceFunctions.sendGenericMessage(senderID, "#Apple");
                                     }
 
                                     
