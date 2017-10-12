@@ -51,7 +51,12 @@
             cont = "#Rejected";//cannot be determined
         }
 
-        return (cont);
+        return new Promise(function (resolve, reject) {
+            if (cont) {
+                resolve(cont);
+            }
+            reject("error with body Type service");
+        });
 
 
     }

@@ -53,27 +53,35 @@
                                 //send parameters to calcuate body type function and get appropriate result
                                 var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustSize, responseParameters.waistsize, responseParameters.hipsize);
 
-                                if (bodyType) {
-
-                                    console.log("body-type.body-type-measurements");
-                                    console.log("data from body type service =\n" + bodyType);
-
-                                    setTimeout(() => {
-                                        fbService.sendTextMessage(senderID, bodyType);
-                                    }, 3000);
-
-                                    //recallAPIAIService(bodyType, senderID, timeOfMessage);
-
-                                    //resolve(bodyType);
+                                bodyType
+                                    .then((reply) => {
 
 
+                                        if (reply) {
+
+                                            console.log("body-type.body-type-measurements");
+                                            console.log("data from body type service =\n" + reply);
+
+                                            setTimeout(() => {
+                                                fbService.sendTextMessage(senderID, reply.toString());
+                                            }, 3000);
+
+                                            //recallAPIAIService(bodyType, senderID, timeOfMessage);
+
+                                            //resolve(bodyType);
+
+
+                                        }
+                                    })
+                                    .catch((reason) => {
+                                        console.log("body-type.body-type-measurements" + reason);
+                                    });
 
 
 
 
 
 
-                                }
 
                                 break;
 
