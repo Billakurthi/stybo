@@ -122,7 +122,7 @@
                 apiaiReply
                     .then(function (reply) {
 
-                        sendTextMessage(senderID, reply);
+                        console.log(senderID+"\n"+ reply);
 
 
 

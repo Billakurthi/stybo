@@ -57,7 +57,8 @@
 
                                     console.log("body-type.body-type-measurements");
                                     console.log("data from body type service =\n" + bodyType);
-                                    recallAPIAIService(bodyType, senderID, timeOfMessage);
+                                    fbService.sendTextMessage(senderID,bodyType);
+                                    //recallAPIAIService(bodyType, senderID, timeOfMessage);
 
                                     //resolve(bodyType);
 
@@ -112,17 +113,17 @@
         bodyParams.then(function (data) {
             console.log(JSON.stringify(data, null, 2));
             // try {
-                fbService.sendTextMessage(data, senderID);
-                // var fbresponse = 
-                // fbresponse.then((data) => {
-                //     console.log(data + "  fbresponse.then((data)");
-                // })
+            fbService.sendTextMessage(data, senderID);
+            // var fbresponse = 
+            // fbresponse.then((data) => {
+            //     console.log(data + "  fbresponse.then((data)");
+            // })
             // } catch (c) {
             //     console.log("JSON.stringify(c,"+JSON.stringify(c, null, 2));
             // }
 
         }).catch(function (reason) {
-            console.log("catch(function (reason) {"+JSON.stringify(reason, null, 2));
+            console.log("catch(function (reason) {" + JSON.stringify(reason, null, 2));
         })
 
     }
