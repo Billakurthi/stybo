@@ -155,12 +155,13 @@
                     //call prediction for a updated image
                     (clarifaiService.predict(messageAttachments[0].payload.url)).then(
                         function (reply) {
+                            sendTextMessage(senderID, reply);
                             var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
 
                             apiaiReply
                                 .then(function (reply) {
- 
-                                sendTextMessage(senderID, reply); 
+
+                                    sendTextMessage(senderID, reply);
 
                                 })
                                 .catch(function (reason) {
