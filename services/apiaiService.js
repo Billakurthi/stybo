@@ -27,7 +27,7 @@
             if (action && actionIncomplete == false) {
                 switch (action) {
                     case ("body-type.body-type-measurements"):
-                            var bustSize = resp
+                            
                             //send parameters to calcuate body type function and get appropriate result
                             var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustSize, responseParameters.waistsize, responseParameters.hipsize);
                             bodyType.then(function (dataa) {
