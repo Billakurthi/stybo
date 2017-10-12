@@ -58,9 +58,9 @@
                                     console.log("body-type.body-type-measurements");
                                     console.log("data from body type service =\n" + bodyType);
                                     recallAPIAIService(bodyType, senderID, timeOfMessage);
-                                    setTimeout(function () {
+                                   
                                         resolve(bodyType);
-                                    }, 2000);
+                                   
 
 
 
