@@ -122,10 +122,10 @@
                 apiaiReply
                     .then(function (reply) {
 
-                        console.log(senderID+"\n"+ reply);
+                        console.log(senderID + "\n" + reply);
 
 
-
+                        sendTextMessage(senderID, reply);
 
                         // var bodyTypeDescription = apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
 
@@ -173,6 +173,7 @@
             }
 
         } else if (messageAttachments && !messageStickers) {
+
             console.log("Message Attachment: " + messageAttachments[0].payload.url);
 
 
