@@ -13,7 +13,7 @@ exports.callApiai = function (inputString, callback, senderID) {
     request.on('response', function (response) {
         var reply = response.result.fulfillment.speech;
         if (reply) {
-            console.log("Full api result: " + JSON.parse(response.result.fulfillment,null,2));
+            console.log("Full api result: " + JSON.parse(reply,null,2));
             callback(senderID, reply);
         } else {
             callback(senderID, "no entities trained");
