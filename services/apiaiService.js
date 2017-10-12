@@ -61,10 +61,10 @@
 
                                             console.log("body-type.body-type-measurements");
                                             console.log("data from body type service =\n" + reply);
-
-                                            setTimeout(() => {
-                                                fbService.sendTextMessage(senderID, reply.toString());
-                                            }, 3000);
+                                            resolve(reply);
+                                            // setTimeout(() => {
+                                            //     fbService.sendTextMessage(senderID, reply.toString());
+                                            // }, 3000);
 
                                             //recallAPIAIService(bodyType, senderID, timeOfMessage);
 
