@@ -15,7 +15,7 @@
         request.on('response', function (response) {
             var reply = response.result.fulfillment.speech;
             if (reply) {
-                console.log("Full api result: " + JSON.stringify(reply, null, 2));
+                console.log("Full api result: " + JSON.parse(response, null, 2));
                 callback(senderID, reply);
             } else {
                 callback(senderID, "no entities trained");
