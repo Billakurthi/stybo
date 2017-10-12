@@ -116,13 +116,13 @@
                 // apiaiService.callApiai(messageText, sendTextMessage, senderID);
 
 
-              console.log("//send user message to apiai");  //send user message to apiai
+                console.log("//send user message to apiai");  //send user message to apiai
                 var apiaiReply = apiaiService.apiaiTextRequest(messageText, senderID, timeOfMessage);
 
                 apiaiReply
                     .then(function (reply) {
 
-                        sendTextMessage(senderID, reply);
+                        sendTextMessage(senderID, reply);                        
 
                     })
                     .catch(function (reason) {
@@ -155,9 +155,11 @@
                     //call prediction for a updated image
                     (clarifaiService.predict(messageAttachments[0].payload.url)).then(
                         function (reply) {
-                            apiaiService.callApiai(reply, sendTextMessage, senderID);
+                            apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
                             sendTextMessage(senderID, reply);
-                            if (reply != '#Rejected') { sendGenericMessage(senderID, reply); }
+                            if (reply != '#Rejected') {
+                                sendGenericMessage(senderID, reply);
+                            }
                         }
                     );
 
@@ -300,19 +302,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
     var fbServiceFunctions = {
 
-        receivedMessage: receivedMessage
+        receivedMessage: receivedMessage,
+        sendGenericMessage:sendGenericMessage,
+        sendTextMessage:sendTextMessage
 
     }
 

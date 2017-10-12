@@ -3,6 +3,7 @@
 
     var apiai = require('apiai');
     var apiaiConfig = require('./auth').apiaiConfig;
+    var facebookService = require('./facebookService').fbServiceFunctions;
     // const apiai_app = new ApiAI.ApiAiClient({accessToken: '30f26315bca54670ae2274a18e35bfa8'});
     var app_apiai = apiai(apiaiConfig.clientAccessToken, {
         language: "en",
@@ -56,7 +57,33 @@
 
                                     console.log("body-type.body-type-measurements");
                                     console.log("data from body type service =\n" + bodyType);
+
+
+
+
+                                    var bodyTypeDescription = apiaiService.apiaiTextRequest(bodyType, senderID, timeOfMessage);
+
+                                    //get body type description from api.ai
+                                    bodyTypeDescription
+                                        .then(function (reply) {
+
+                                            facebookService.sendTextMessage(senderID, reply);
+
+                                        })
+                                        .catch(function (reason) {
+
+                                            facebookService.sendTextMessage(senderID, JSON.stringify(reason));
+
+                                        });
+                                    // if bodytype is not rejected then send a generic message with types of dresses
+
+                                    if (bodyType != '#Rejected') {
+                                        facebookService.sendGenericMessage(senderID, bodyType);
+                                    }
+
                                     resolve("data from body type service " + bodyType);
+
+
 
                                 }
 

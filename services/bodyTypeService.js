@@ -16,42 +16,42 @@
 
 
         if ((parseFloat(bVal) < parseFloat(wVal)) && (parseFloat(wVal) < parseFloat(hVal))) {
-            cont = 1;//Diamond
+            cont = "#Apple";//Diamond
         }
         else if ((parseFloat(bVal) == parseFloat(wVal)) && (parseFloat(wVal) == parseFloat(hVal)) && (parseFloat(bVal) == parseFloat(hVal))) {
-            cont = 2;//Oval
+            cont = "#Apple";//Oval
         }
         else if ((parseFloat(bVal) > parseFloat(wVal)) && (parseFloat(bVal) > parseFloat(hVal))) {
-            cont = 3;//Inverted triangle
+            cont = "#Inverted Triangle";//Inverted triangle
         }
         else if ((parseFloat(wVal) < parseFloat(bVal)) && (parseFloat(wVal) < parseFloat(hVal)) && ((parseFloat(bVal) + 2) > parseFloat(hVal))) {
             if ((parseFloat(bVal) == (parseFloat(wVal) + 1)) && (parseFloat(hVal) == (parseFloat(wVal) + 1))) {
-                cont = 4;//Straight or rectangle
+                cont = "#Rectangle";//Straight or rectangle
             }
             else if ((parseFloat(bVal) == (parseFloat(wVal) + 2)) && (parseFloat(hVal) == (parseFloat(wVal) + 2))) {
-                cont = 5;//Hour glass
+                cont = "#Full Hourglass";//Hour glass
             }
             else {
-                cont = 6;//Top Hourglass
+                cont = "#Neat Hourglass";//Top Hourglass
             }
         }
         else if ((parseFloat(wVal) < parseFloat(bVal)) && (parseFloat(wVal) < parseFloat(hVal)) && (parseFloat(bVal) < parseFloat(hVal))) {
             if ((parseFloat(wVal) + 2) > parseFloat(bVal)) {
-                cont = 7;//Pear
+                cont = "#Pear";//Pear
             }
             else {
-                cont = 8;//Spoon
+                cont = "#Rectangle";//Spoon
             }
         }
         else if ((parseFloat(bVal) == parseFloat(wVal)) && (parseFloat(wVal) < parseFloat(hVal)) && (parseFloat(bVal) < parseFloat(hVal))) {
-            cont = 7;//pear
+            cont = "#Pear";//pear
         }
         else {
             var shpVal = 'Not matched';
-            cont = 9;//cannot be determined
+            cont = "#Rejected";//cannot be determined
         }
 
-        return(cont);
+        return (cont);
 
 
     }
