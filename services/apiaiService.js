@@ -112,10 +112,11 @@
         bodyParams.then(function (data) {
             console.log(JSON.stringify(data, null, 2));
             // try {
-                var fbresponse = fbService.sendTextMessage(data, senderID);
-                fbresponse.then((data) => {
-                    console.log(data + "  fbresponse.then((data)");
-                })
+                fbService.sendTextMessage(data, senderID);
+                // var fbresponse = 
+                // fbresponse.then((data) => {
+                //     console.log(data + "  fbresponse.then((data)");
+                // })
             // } catch (c) {
             //     console.log("JSON.stringify(c,"+JSON.stringify(c, null, 2));
             // }
