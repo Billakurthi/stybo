@@ -113,10 +113,10 @@
         if (messageText) {
             try {
 
-               // apiaiService.callApiai(messageText, sendTextMessage, senderID);
+                // apiaiService.callApiai(messageText, sendTextMessage, senderID);
 
 
-                //send user message to apiai
+              console.log("//send user message to apiai");  //send user message to apiai
                 var apiaiReply = apiaiService.apiaiTextRequest(messageText, senderID, timeOfMessage);
 
                 apiaiReply

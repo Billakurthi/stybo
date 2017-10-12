@@ -43,10 +43,10 @@
 
                             //send parameters to calcuate body type function and get appropriate result
                             var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustSize, responseParameters.waistsize, responseParameters.hipsize);
-                            
+
                             if (bodyType) {
 
-
+                                console.log("body-type.body-type-measurements");
                                 console.log("data from body type service =\n" + bodyType);
                                 resolve("data from body type service " + bodyType);
 
