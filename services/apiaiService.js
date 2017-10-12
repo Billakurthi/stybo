@@ -57,7 +57,7 @@
 
                                     console.log("body-type.body-type-measurements");
                                     console.log("data from body type service =\n" + bodyType);
-
+                                    recallAPIAIService(bodyType,senderID,timeOfMessage);
 
                                     resolve(bodyType);
 
@@ -102,11 +102,17 @@
     }
 
 
+    function recallAPIAIService(bodyType,senderID,timeOfMessage){
+        console.log("recallAPIAIService");
+        fbService.sendTextMessage(bodyType,senderID);
+    }
+
+
     var apiaiServiceFunctions = {
 
         apiaiTextRequest: apiaiTextRequest
 
-    }
+    };
 
     module.exports = {
         apiaiServiceFunctions: apiaiServiceFunctions

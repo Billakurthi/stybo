@@ -57,11 +57,11 @@
         appClarifai.models.predict(Clarifai.GENERAL_MODEL, searchUrl).then(
             function (response) {
                 
-                console.log("General Model response =" + JSON.stringify(response));
+                console.log("General Model response =" + JSON.stringify(response,null,2));
                 // do something with response
             },
             function (err) {
-                console.log("General Model error =" + JSON.stringify(error));
+                console.log("General Model error =" + JSON.stringify(error,null,2));
 
                 // there was an error
             }
