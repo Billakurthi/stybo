@@ -124,6 +124,40 @@
 
                         sendTextMessage(senderID, reply);
 
+
+
+
+                        var bodyTypeDescription = apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
+
+                        //get body type description from api.ai
+                        bodyTypeDescription
+                            .then(function (reply) {
+
+                                console.log("//get body type description from api.ai \n" + JSON.stringify(reply, null, 2));
+                                try {
+                                    console.log("sender ID " + senderID);
+                                    sendTextMessage(senderID, reply);
+                                    resolve("data from body type service " + bodyType);
+
+                                } catch (message) {
+                                    console.log("message of error" + message);
+                                }
+
+
+                            })
+                            .catch(function (reason) {
+                                console.log(JSON.stringify(reason, null, 2));
+
+                               sendTextMessage(senderID, JSON.stringify(reason));
+
+                            });
+                        // if bodytype is not rejected then send a generic message with types of dresses
+
+                        if (bodyType == '#Rejected') {
+                            console.log("sendGenericMessage(senderID,"+ "#Apple");
+                            sendGenericMessage(senderID, "#Apple");
+                        }
+
                     })
                     .catch(function (reason) {
 
