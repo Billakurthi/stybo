@@ -66,13 +66,15 @@
                                     //get body type description from api.ai
                                     bodyTypeDescription
                                         .then(function (reply) {
-
+                                            
+                                            console.log("//get body type description from api.ai \n"+JSON.stringify(reply,null,2));
                                             facebookService.sendTextMessage(senderID, reply);
 
                                         })
                                         .catch(function (reason) {
+                                            console.log(JSON.stringify(reason,null,2));
 
-                                            facebookService.sendTextMessage(senderID, JSON.stringify(reason));
+                                           // facebookService.sendTextMessage(senderID, JSON.stringify(reason));
 
                                         });
                                     // if bodytype is not rejected then send a generic message with types of dresses
