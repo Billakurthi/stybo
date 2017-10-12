@@ -31,6 +31,8 @@
             });
 
             request.on('response', function (response) {
+                
+                console.log("apiaiTextRequest");
 
                 var reply = response.result.fulfillment.speech;
                 var action = response.result.action;
@@ -38,6 +40,7 @@
                 var responseParameters = response.result.parameters;
 
                 if (action && actionIncomplete == false) {
+                    
                     switch (action) {
                         case ("body-type.body-type-measurements"):
 
