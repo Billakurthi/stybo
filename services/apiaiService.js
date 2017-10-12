@@ -88,7 +88,8 @@
                                     // if bodytype is not rejected then send a generic message with types of dresses
 
                                     if (bodyType == '#Rejected') {
-                                        fbService.fbServiceFunctions.sendGenericMessage(senderID, "#Apple");
+                                        console.log(fbService.fbServiceFunctions);
+                                        //fbService.fbServiceFunctions.sendGenericMessage(senderID, "#Apple");
                                     }
 
                                     
