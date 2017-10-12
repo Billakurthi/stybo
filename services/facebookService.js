@@ -146,8 +146,8 @@
             if (messageAttachments[0].type === "image") {
                 try {
 
-                    current_users[senderID].imgUrl = messageAttachments[0].payload.url;
-                    console.log("current Users " + JSON.stringify(current_users));
+                    //current_users[senderID].imgUrl = messageAttachments[0].payload.url;
+                    //console.log("current Users " + JSON.stringify(current_users));
 
                     //call general search
                     clarifaiService.generalModelSearch(messageAttachments[0].payload.url);
