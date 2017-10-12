@@ -65,13 +65,15 @@
                                             finalResult += reply + "\n";
 
 
-                                            var bodyParams = apiaiTextRequest(bodyType, senderID, timeOfMessage);
+                                            var bodyParams = apiaiTextRequest(reply, senderID, timeOfMessage);
 
-                                            console.log("body Params\n" + bodyParams);
+                                            
                                             bodyParams.then(function (data) {
                                                 console.log(JSON.stringify(data, null, 2));
                                                 // try {
+                                                    console.log(finalResult);
                                                 finalResult += data + "\n";
+                                                console.log("finalResult"+finalResult);
                                                 resolve(finalResult);
                                                 //fbService.sendTextMessage(data, senderID);
                                                 // var fbresponse = 
