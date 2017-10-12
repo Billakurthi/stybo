@@ -3,7 +3,7 @@ module.exports = {
 
     //ml and ai apiai config 
     apiaiConfig: {
-        clientAccessToken: 'f4508fa354b545829d1ee89d74be9e15'
+        clientAccessToken: '30f26315bca54670ae2274a18e35bfa8'
     },
     //facebook config tokens
     facebookConfig: {

@@ -13,7 +13,7 @@
     var PAGE_ACCESS_TOKEN = fbConfig.FACEBOOK_PAGE_ACCESS_TOKEN;
 
     const clarifaiService = require('./clarifaiService');
-    const apiaiService = require('./apiaiService');
+    const apiaiService = require('./apiaiService').apiaiServiceFunctions;
 
 
     // //user prototype object 
@@ -113,7 +113,24 @@
         if (messageText) {
             try {
 
-                apiaiService.callApiai(messageText, sendTextMessage, senderID);
+               // apiaiService.callApiai(messageText, sendTextMessage, senderID);
+
+
+                //send user message to apiai
+                var apiaiReply = apiaiService.apiaiTextRequest(messageText, senderID, timeOfMessage);
+
+                apiaiReply
+                    .then(function (reply) {
+
+                        sendTextMessage(senderID, reply);
+
+                    })
+                    .catch(function (reason) {
+
+                        sendTextMessage(senderID, JSON.stringify(reason));
+
+                    });
+                //analyse and do all the operations here to make all other api calls
 
             } catch (ex) {
 
