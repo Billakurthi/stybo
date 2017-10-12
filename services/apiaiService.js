@@ -69,10 +69,10 @@
 
                                             console.log("//get body type description from api.ai \n" + JSON.stringify(reply, null, 2));
                                             try {
-                                                console.log("sender ID "+ senderID);
+                                                console.log("sender ID " + senderID);
                                                 facebookService.sendTextMessage(senderID, reply);
                                                 resolve("data from body type service " + bodyType);
-                                
+
                                             } catch (message) {
                                                 console.log("message of error" + message);
                                             }
@@ -88,11 +88,11 @@
                                     // if bodytype is not rejected then send a generic message with types of dresses
 
                                     if (bodyType == '#Rejected') {
-                                        console.log(fbService.fbServiceFunctions);
+                                        console.log(fbService);
                                         //fbService.fbServiceFunctions.sendGenericMessage(senderID, "#Apple");
                                     }
 
-                                    
+
 
 
 
