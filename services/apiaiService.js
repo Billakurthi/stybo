@@ -40,8 +40,8 @@
                 var actionIncomplete = response.result.actionIncomplete;
                 var responseParameters = response.result.parameters;
 
-                console.log("Full api result : \n" + JSON.stringify(response, null, 2));
-                
+                //console.log("Full api result : \n" + JSON.stringify(response, null, 2));
+
                 if (reply) {
 
                     if (action && actionIncomplete == false) {
@@ -69,6 +69,8 @@
 
 
                         }
+                    }else {
+                        resolve(reply);
                     }
 
 
