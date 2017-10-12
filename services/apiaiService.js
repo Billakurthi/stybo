@@ -58,9 +58,9 @@
                                     console.log("body-type.body-type-measurements");
                                     console.log("data from body type service =\n" + bodyType);
                                     recallAPIAIService(bodyType, senderID, timeOfMessage);
-                                   
-                                        resolve(bodyType);
-                                   
+
+                                    resolve(bodyType);
+
 
 
 
@@ -112,7 +112,10 @@
         bodyParams.then(function (data) {
             console.log(JSON.stringify(data, null, 2));
             try {
-                fbService.sendTextMessage(data, senderID);
+                var fbresponse = fbService.sendTextMessage(data, senderID);
+                fbresponse.then((data) => {
+                    console.log(data + "  fbresponse.then((data)");
+                })
             } catch (c) {
                 console.log(JSON.stringify(c, null, 2));
             }
