@@ -122,7 +122,7 @@
                 apiaiReply
                     .then(function (reply) {
 
-                        sendTextMessage(senderID, reply);                        
+                        sendTextMessage(senderID, reply);
 
                     })
                     .catch(function (reason) {
@@ -178,6 +178,7 @@
 
 
     function sendTextMessage(recipientId, messageText) {
+        console.log("//inside send text message \n" + JSON.stringify(messageText, null, 2));
         var messageData = {
             recipient: {
                 id: recipientId
@@ -186,8 +187,13 @@
                 text: messageText
             }
         };
+        try {
+            callSendAPI(messageData);
 
-        callSendAPI(messageData);
+        } catch (m) {
+            console.log("//send api error \n" + JSON.stringify(m, null, 2));
+
+        }
     }
 
 
@@ -305,8 +311,8 @@
     var fbServiceFunctions = {
 
         receivedMessage: receivedMessage,
-        sendGenericMessage:sendGenericMessage,
-        sendTextMessage:sendTextMessage
+        sendGenericMessage: sendGenericMessage,
+        sendTextMessage: sendTextMessage
 
     }
 
