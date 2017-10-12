@@ -61,7 +61,7 @@
 
 
 
-                                    var bodyTypeDescription = apiaiService.apiaiTextRequest(bodyType, senderID, timeOfMessage);
+                                    var bodyTypeDescription = apiaiTextRequest(bodyType, senderID, timeOfMessage);
 
                                     //get body type description from api.ai
                                     bodyTypeDescription
