@@ -110,13 +110,13 @@
 
         console.log("body Params\n" + bodyParams);
         bodyParams.then(function (data) {
-            console.log(JSON.stringify(reason, null, 2));
+            console.log(JSON.stringify(data, null, 2));
             try {
                 fbService.sendTextMessage(data, senderID);
             } catch (c) {
                 console.log(JSON.stringify(c, null, 2));
             }
-            
+
         }).catch(function (reason) {
             console.log(JSON.stringify(reason, null, 2));
         })
