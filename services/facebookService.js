@@ -155,8 +155,20 @@
                     //call prediction for a updated image
                     (clarifaiService.predict(messageAttachments[0].payload.url)).then(
                         function (reply) {
-                            apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
-                            sendTextMessage(senderID, reply);
+                            var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
+
+                            apiaiReply
+                                .then(function (reply) {
+ 
+                                sendTextMessage(senderID, reply); 
+
+                                })
+                                .catch(function (reason) {
+
+                                    sendTextMessage(senderID, JSON.stringify(reason));
+
+                                });
+
                             if (reply != '#Rejected') {
                                 sendGenericMessage(senderID, reply);
                             }
