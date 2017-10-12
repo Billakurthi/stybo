@@ -108,9 +108,15 @@
         console.log("recallAPIAIService");
         var bodyParams = apiaiTextRequest(bodyType, senderID, timeOfMessage);
 
-console.log("body Params\n"+bodyParams);
+        console.log("body Params\n" + bodyParams);
         bodyParams.then(function (data) {
-            fbService.sendTextMessage(data, senderID);
+            console.log(JSON.stringify(reason, null, 2));
+            try {
+                fbService.sendTextMessage(data, senderID);
+            } catch (c) {
+                console.log(JSON.stringify(c, null, 2));
+            }
+            
         }).catch(function (reason) {
             console.log(JSON.stringify(reason, null, 2));
         })
