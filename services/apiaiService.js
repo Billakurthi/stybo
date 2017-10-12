@@ -3,7 +3,7 @@
 
     var apiai = require('apiai');
     var apiaiConfig = require('./auth').apiaiConfig;
-    var fbService = require('./facebookService').fbServiceFunctions;
+    var fbService = require('../services/facebookService').fbServiceFunctions;
     // const apiai_app = new ApiAI.ApiAiClient({accessToken: '30f26315bca54670ae2274a18e35bfa8'});
     var app_apiai = apiai(apiaiConfig.clientAccessToken, {
         language: "en",
@@ -57,9 +57,11 @@
 
                                     console.log("body-type.body-type-measurements");
                                     console.log("data from body type service =\n" + bodyType);
-                                    recallAPIAIService(bodyType,senderID,timeOfMessage);
+                                    recallAPIAIService(bodyType, senderID, timeOfMessage);
+                                    setTimeout(function () {
+                                        resolve(bodyType);
+                                    }, 2000);
 
-                                    resolve(bodyType);
 
 
 
@@ -102,9 +104,9 @@
     }
 
 
-    function recallAPIAIService(bodyType,senderID,timeOfMessage){
+    function recallAPIAIService(bodyType, senderID, timeOfMessage) {
         console.log("recallAPIAIService");
-        fbService.sendTextMessage(bodyType,senderID);
+        fbService.sendTextMessage(bodyType, senderID);
     }
 
 
@@ -113,6 +115,7 @@
         apiaiTextRequest: apiaiTextRequest
 
     };
+
 
     module.exports = {
         apiaiServiceFunctions: apiaiServiceFunctions

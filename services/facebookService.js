@@ -221,7 +221,7 @@
         } else {
             sendTextMessage(senderID, "Please upload your image");
         }
-    }
+    };
 
 
     function sendTextMessage(recipientId, messageText) {
@@ -360,7 +360,7 @@
         sendTextMessage: sendTextMessage
 
     }
-
+    exports.sendTextMessage = sendTextMessage;
     module.exports = {
         fbServiceFunctions: fbServiceFunctions
     }
