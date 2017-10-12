@@ -87,27 +87,27 @@
 
         console.log("Received message for user %d and page %d at %d with message:",
             senderID, recipientID, timeOfMessage);
-        console.log(JSON.stringify(message));
+        //console.log(JSON.stringify(message));
 
         var messageId = message.mid;
         var messageText = message.text;
         var messageAttachments = message.attachments;
         var messageStickers = message.sticker_id;
 
-        //store sender information in local object
-        if (!current_users[senderID]) {
-            try {
-                current_users[senderID] = {
-                    'imgUrl': 'someImg Url',
-                    'age': 25
-                }
-                console.clear();
-                console.log("current Users " + JSON.stringify(current_users));
-            } catch (ex) {
-                console.log("error in pushing the values to the user" + ex);
-            }
+        //store sender information in session object
+        // if (!current_users[senderID]) {
+        //     try {
+        //         current_users[senderID] = {
+        //             'imgUrl': 'someImg Url',
+        //             'age': 25
+        //         }
+        //         console.clear();
+        //         console.log("current Users " + JSON.stringify(current_users));
+        //     } catch (ex) {
+        //         console.log("error in pushing the values to the user" + ex);
+        //     }
 
-        }
+        // }
 
         //if we get a text message
         if (messageText) {
@@ -155,7 +155,7 @@
         } else {
             sendTextMessage(senderID, "Please upload your image");
         }
-    } 
+    }
 
 
     function sendTextMessage(recipientId, messageText) {
@@ -296,7 +296,7 @@
     var fbServiceFunctions = {
 
         receivedMessage: receivedMessage
-        
+
     }
 
     module.exports = {
