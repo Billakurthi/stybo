@@ -71,6 +71,8 @@
                                             try {
                                                 console.log("sender ID "+ senderID);
                                                 facebookService.sendTextMessage(senderID, reply);
+                                                resolve("data from body type service " + bodyType);
+                                
                                             } catch (message) {
                                                 console.log("message of error" + message);
                                             }
@@ -85,11 +87,11 @@
                                         });
                                     // if bodytype is not rejected then send a generic message with types of dresses
 
-                                    if (bodyType != '#Rejected') {
-                                        facebookService.sendGenericMessage(senderID, bodyType);
+                                    if (bodyType == '#Rejected') {
+                                        facebookService.sendGenericMessage(senderID, "#Apple");
                                     }
 
-                                    resolve("data from body type service " + bodyType);
+                                    
 
 
 
