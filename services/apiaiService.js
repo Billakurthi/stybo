@@ -27,13 +27,13 @@
             if (action && actionIncomplete == false) {
                 switch (action) {
                     case ("body-type.body-type-measurements"):
-                            
-                            //send parameters to calcuate body type function and get appropriate result
-                            var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustSize, responseParameters.waistsize, responseParameters.hipsize);
-                            bodyType.then(function (dataa) {
-                                console.log("data from body type service =\n" + dataa);
-                                callback(senderID, "data from body type service "+dataa);
-                            });
+
+                        //send parameters to calcuate body type function and get appropriate result
+                        var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustSize, responseParameters.waistsize, responseParameters.hipsize);
+
+                        console.log("data from body type service =\n" + bodyType);
+                        callback(senderID, "data from body type service " + dataa);
+
                         break;
                 }
             }
