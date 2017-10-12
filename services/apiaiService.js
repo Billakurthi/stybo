@@ -31,7 +31,7 @@
             });
 
             request.on('response', function (response) {
-                
+
                 console.log("apiaiTextRequest");
                 console.log("Full api result : \n" + JSON.stringify(response, null, 2));
 
@@ -40,30 +40,39 @@
                 var actionIncomplete = response.result.actionIncomplete;
                 var responseParameters = response.result.parameters;
 
-                if (action && actionIncomplete == false) {
+                console.log("Full api result : \n" + JSON.stringify(response, null, 2));
+                
+                if (reply) {
 
-                    switch (action) {
-                        case ("body-type.body-type-measurements"):
+                    if (action && actionIncomplete == false) {
 
-                            //send parameters to calcuate body type function and get appropriate result
-                            var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustSize, responseParameters.waistsize, responseParameters.hipsize);
+                        switch (action) {
+                            case ("body-type.body-type-measurements"):
 
-                            if (bodyType) {
+                                //send parameters to calcuate body type function and get appropriate result
+                                var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustSize, responseParameters.waistsize, responseParameters.hipsize);
 
-                                console.log("body-type.body-type-measurements");
-                                console.log("data from body type service =\n" + bodyType);
-                                resolve("data from body type service " + bodyType);
+                                if (bodyType) {
 
-                            }
+                                    console.log("body-type.body-type-measurements");
+                                    console.log("data from body type service =\n" + bodyType);
+                                    resolve("data from body type service " + bodyType);
 
-                            break;
+                                }
 
+                                break;
+
+                            default:
+
+                                resolve(reply);
+                                break;
+
+
+                        }
                     }
-                }
 
-                else if (reply) {
-                    console.log("Full api result : \n" + JSON.stringify(response, null, 2));
-                    resolve(reply);
+
+
                 }
                 else {
                     resolve("no entities trained");
