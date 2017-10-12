@@ -106,7 +106,7 @@
 
     function recallAPIAIService(bodyType, senderID, timeOfMessage) {
         console.log("recallAPIAIService");
-        apiaiTextRequest(inputString, senderID, timeOfMessage).then(function(data){
+        apiaiTextRequest(bodyType, senderID, timeOfMessage).then(function(data){
             fbService.sendTextMessage(data, senderID);
         })
         
