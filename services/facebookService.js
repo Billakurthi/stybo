@@ -137,7 +137,7 @@
                                 try {
                                     console.log("sender ID " + senderID);
                                     sendTextMessage(senderID, reply);
-                                    resolve("data from body type service " + bodyType);
+                                   
 
                                 } catch (message) {
                                     console.log("message of error" + message);
