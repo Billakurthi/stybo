@@ -21,6 +21,7 @@
                 callback(senderID, "no entities trained");
             }
         });
+        
 
         request.on('error', function (error) {
             console.log("Build Error Message: " + error);
