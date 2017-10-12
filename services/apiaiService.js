@@ -33,8 +33,8 @@
 
             request.on('response', function (response) {
 
-                console.log("apiaiTextRequest");
-                console.log("Full api result : \n" + JSON.stringify(response, null, 2));
+                // console.log("apiaiTextRequest");
+                // console.log("Full api result : \n" + JSON.stringify(response, null, 2));
 
                 var reply = response.result.fulfillment.speech;
                 var action = response.result.action;
@@ -117,11 +117,11 @@
                     console.log(data + "  fbresponse.then((data)");
                 })
             } catch (c) {
-                console.log(JSON.stringify(c, null, 2));
+                console.log("JSON.stringify(c,"+JSON.stringify(c, null, 2));
             }
 
         }).catch(function (reason) {
-            console.log(JSON.stringify(reason, null, 2));
+            console.log("catch(function (reason) {"+JSON.stringify(reason, null, 2));
         })
 
     }
