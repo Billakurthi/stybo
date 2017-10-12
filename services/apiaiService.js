@@ -69,7 +69,7 @@
 
 
                         }
-                    }else {
+                    } else {
                         resolve(reply);
                     }
 
