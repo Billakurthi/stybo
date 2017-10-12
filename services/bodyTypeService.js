@@ -3,9 +3,11 @@
 
 
     function calculateBodyType(bust, waist, hip) {
-        bVal = bust;
-        wVal = waist;
-        hVal = hip;
+        var bVal = bust,
+            wVal = waist,
+            hVal = hip;
+
+        var cont = 0;
 
         // for (var c = 1; c <= 8; c++) {
         //     $('#s' + c).css('opacity', 100);
@@ -48,8 +50,10 @@
                 var shpVal = 'Not matched';
                 cont = 9;//cannot be determined
             }
+            if (cont) {
+                resolve(cont);
+            }
 
-            resolve(cont);
         });
     }
 
