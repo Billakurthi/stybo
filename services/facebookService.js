@@ -153,7 +153,7 @@
                             });
                         // if bodytype is not rejected then send a generic message with types of dresses
 
-                        if (bodyType == '#Rejected') {
+                        if (reply == '#Rejected') {
                             console.log("sendGenericMessage(senderID,"+ "#Apple");
                             sendGenericMessage(senderID, "#Apple");
                         }
