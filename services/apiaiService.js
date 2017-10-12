@@ -106,10 +106,12 @@
 
     function recallAPIAIService(bodyType, senderID, timeOfMessage) {
         console.log("recallAPIAIService");
-        apiaiTextRequest(bodyType, senderID, timeOfMessage).then(function(data){
+        apiaiTextRequest(bodyType, senderID, timeOfMessage).then(function (data) {
             fbService.sendTextMessage(data, senderID);
+        }).catch(function (reason) {
+            console.log(JSON.stringify(reason, null, 2));
         })
-        
+
     }
 
 
