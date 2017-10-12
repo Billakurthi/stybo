@@ -4,6 +4,7 @@
     var apiai = require('apiai');
     // const apiai_app = new ApiAI.ApiAiClient({accessToken: '30f26315bca54670ae2274a18e35bfa8'});
     var app_apiai = apiai("30f26315bca54670ae2274a18e35bfa8");
+    var bodyTypeService = require('./bodyTypeService').bodyTypeServiceFunctions;
     var bodyParser = require('body-parser');
 
     // //parse text using body parser
@@ -17,9 +18,28 @@
         });
 
         request.on('response', function (response) {
+
             var reply = response.result.fulfillment.speech;
+            var action = response.result.action;
+            var actionIncomplete = response.result.actionIncomplete;
+            var responseParameters = response.result.parameters;
+
+            if (action && actionIncomplete == false) {
+                switch (action) {
+                    case ("body-type.body-type-measurements"):
+                            var bustSize = resp
+                            //send parameters to calcuate body type function and get appropriate result
+                            var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustSize, responseParameters.waistsize, responseParameters.hipsize);
+                            bodyType.then(function (dataa) {
+                                console.log("data from body type service =\n" + dataa);
+                                callback(senderID, "data from body type service "+dataa);
+                            });
+                        break;
+                }
+            }
+
             if (reply) {
-                console.log("Full api result : \n" + JSON.stringify(response,null,2));
+                console.log("Full api result : \n" + JSON.stringify(response, null, 2));
                 callback(senderID, reply);
             } else {
                 callback(senderID, "no entities trained");
