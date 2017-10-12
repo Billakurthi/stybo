@@ -37,6 +37,7 @@
                             callback(senderID, "data from body type service " + bodyType);
 
                         }
+                        
                         break;
                 }
             }

@@ -51,7 +51,7 @@
             cont = 9;//cannot be determined
         }
 
-        console.log(cont);
+        return(cont);
 
 
     }
