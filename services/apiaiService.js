@@ -6,8 +6,8 @@
     var app_apiai = apiai("30f26315bca54670ae2274a18e35bfa8");
     var bodyParser = require('body-parser');
 
-    //parse text using body parser
-    app_apiai.use(bodyParser.json());
+    // //parse text using body parser
+    // app_apiai.use(bodyParser.json());
 
 
     exports.callApiai = function (inputString, callback, senderID) {
@@ -19,7 +19,7 @@
         request.on('response', function (response) {
             var reply = response.result.fulfillment.speech;
             if (reply) {
-                console.log("Full api result : \n" + (response));
+                console.log("Full api result : \n" + JSON.stringify(response,null,2));
                 callback(senderID, reply);
             } else {
                 callback(senderID, "no entities trained");
