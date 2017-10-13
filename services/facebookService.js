@@ -12,7 +12,7 @@
     //facebook page access token
     var PAGE_ACCESS_TOKEN = fbConfig.FACEBOOK_PAGE_ACCESS_TOKEN;
 
-   
+
     //const apiaiService = require('./apiaiService').apiaiServiceFunctions;
 
 
@@ -77,7 +77,7 @@
     }
 
 
-   
+
 
     function sendTextMessage(recipientId, messageText) {
         console.log("//inside send text message \n" + JSON.stringify(messageText, null, 2));
@@ -92,8 +92,11 @@
                 text: messageText
             }
         };
-        callSendAPI(messageData);
-
+        try {
+            callSendAPI(messageData);
+        }catch(error){
+            console.log(JSON.stringify(error,null,2));
+        }
 
     }
 
