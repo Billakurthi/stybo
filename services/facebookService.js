@@ -12,7 +12,7 @@
     //facebook page access token
     var PAGE_ACCESS_TOKEN = fbConfig.FACEBOOK_PAGE_ACCESS_TOKEN;
 
-    const clarifaiService = require('./clarifaiService');
+   
     //const apiaiService = require('./apiaiService').apiaiServiceFunctions;
 
 

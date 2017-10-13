@@ -1,7 +1,9 @@
 (() => {
 
     var facebookService = require('./facebookService').fbServiceFunctions;
-    var apiaiService = require('./apiaiService').apiaiServiceFunctions;
+    var apiaiService = require('./apiaiService').apiaiServiceFunctions; 
+    const clarifaiService = require('./clarifaiService');
+
 
     function sendTextMessagefb(senderId, messageText) {
 
