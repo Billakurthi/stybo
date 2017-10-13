@@ -209,7 +209,7 @@
 
     var fbServiceFunctions = {
 
-        receivedMessage: receivedMessage,
+        //receivedMessage: receivedMessage,
         sendGenericMessage: sendGenericMessage,
         sendTextMessage: sendTextMessage
 
