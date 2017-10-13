@@ -119,27 +119,30 @@
 
                                         console.log('body-type-enquiry');
                                         try {
-                                            var messages = response.result.fulfillment.messages[0];
+                                            var messages = response.result.fulfillment.messages;
                                             console.log(messages);
                                             console.log(typeof(messages));
 
-                                            var quickReplyTitle = '', quickReplyOptions = '';
+                                            var quickReplyTitle = messages[0].speech,
+                                                quickReplyOptions = messages[1].payload.quick_replies;
 
-                                            messages.foreach(function(message){
+                                            // messages.foreach(function(message){
 
-                                                console.log(JSON.stringify(message, null, 2));
-                                                if (message.type == 0) {
+                                            //     console.log(JSON.stringify(message, null, 2));
+                                            //     if (message.type == 0) {
 
-                                                    quickReplyTitle = message.speech;
+                                            //         quickReplyTitle = message.speech;
 
-                                                }
-                                                if (message.type == 4) {
+                                            //     }
+                                            //     if (message.type == 4) {
 
-                                                    quickReplyOptions = message.payload.quick_replies;
+                                            //         quickReplyOptions = message.payload.quick_replies;
 
-                                                }
+                                            //     }
 
-                                            });
+                                            // });
+
+
                                             console.log(
                                                 "quickReplyOptions: " + quickReplyOptions + "\n" +
                                                 "quickReplyTitle: " + quickReplyTitle
