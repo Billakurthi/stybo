@@ -92,6 +92,7 @@
                 text: messageText
             }
         };
+        
         try {
             callSendAPI(messageData);
         } catch (error) {

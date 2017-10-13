@@ -6,9 +6,9 @@
     var bodyTypeService = require('./bodyTypeService').bodyTypeServiceFunctions;
 
 
-    function sendTextMessagefb(senderId, messageText) {
+    function sendTextMessagefb(senderID, messageText) {
 
-        facebookService.sendTextMessage(senderId, messageText);
+        facebookService.sendTextMessage(senderID, messageText);
 
     };
 
@@ -53,137 +53,11 @@
                 apiaiReply
                     .then(function (response) {
 
+                        handleApiAiResponse(senderID, response);
+
                         // console.log("apiaiTextRequest");
                         // console.log("Full api result : \n" + JSON.stringify(response, null, 2));
 
-                        var reply = response.result.fulfillment.speech;
-                        var action = response.result.action;
-                        var actionIncomplete = response.result.actionIncomplete;
-                        var responseParameters = response.result.parameters;
-                        var finalResult = "";
-
-                        console.log("Full api result : \n" + JSON.stringify(response, null, 2));
-
-                        if (reply) {
-
-                            if (action && actionIncomplete == false) {
-
-                                switch (action) {
-                                    case ("body-type.body-type-measurements"):
-
-                                        //send parameters to calcuate body type function and get appropriate result
-                                        // console.log(responseParameters.bustsize);
-                                        // console.log(responseParameters.waistsize); 
-                                        // console.log(responseParameters.hipsize);
-
-                                        var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustsize, responseParameters.waistsize, responseParameters.hipsize);
-
-                                        bodyType
-                                            .then((reply) => {
-
-
-                                                if (reply) {
-
-                                                    console.log("body-type.body-type-measurements");
-                                                    console.log("data from body type service =\n" + reply);
-
-                                                    //appMiddlewareService.sendTextMessagefb(senderID, reply);
-
-                                                    //resolve(reply);
-                                                    finalResult += reply + "\n";
-
-
-                                                    var bodyParams = apiaiService.apiaiTextRequest(reply, senderID);
-
-
-                                                    bodyParams.then(function (data) {
-                                                        console.log(JSON.stringify(data, null, 2));
-                                                        finalResult += data + "\n";
-                                                        console.log("finalResult +=" + finalResult);
-                                                        facebookService.sendTextMessage(senderID, finalResult);
-
-
-                                                    }).catch(function (reason) {
-                                                        console.log("catch(function (reason) {" + JSON.stringify(reason, null, 2));
-                                                    })
-                                                }
-                                            })
-                                            .catch((reason) => {
-                                                console.log("body-type.body-type-measurements" + reason);
-                                            });
-
-
-
-
-
-
-
-                                        break;
-
-
-
-                                    case ("body-type-enquiry"):
-
-                                        console.log('body-type-enquiry');
-                                        try {
-                                            var messages = response.result.fulfillment.messages;
-                                            console.log(messages);
-                                            console.log(typeof (messages));
-
-                                            // var quickReplyTitle = messages[0].speech,
-                                            //     quickReplyOptions = messages[1].payload.quick_replies;
-
-                                            messages.forEach(function (message) {
-
-                                                console.log(JSON.stringify(message, null, 2));
-                                                if (message.type == 0) {
-
-                                                    quickReplyTitle = message.speech;
-
-                                                }
-                                                if (message.type == 4) {
-
-                                                    quickReplyOptions = message.payload.quick_replies;
-
-                                                }
-
-                                            }, this);
-
-
-                                            console.log(
-                                                "quickReplyOptions: " + quickReplyOptions + "\n" +
-                                                "quickReplyTitle: " + quickReplyTitle
-
-                                            );
-
-
-                                            facebookService.sendQuickReply(senderID, quickReplyTitle, quickReplyOptions, "");
-
-                                        } catch (error) {
-
-                                            console.log(JSON.stringify(error, null, 2));
-
-                                        }
-                                        break;
-
-                                    default:
-                                        console.log("default action switch block");
-                                        facebookService.sendTextMessage(senderID, reply);
-
-                                        break;
-
-
-                                }
-                            } else {
-                                facebookService.sendTextMessage(senderID, reply);
-                            }
-
-
-
-                        }
-                        else {
-                            facebookService.sendTextMessage(senderID, "no entities trained");
-                        }
 
                         //console.log(senderID + "\n" + response);
 
@@ -297,9 +171,9 @@
         var apiaiReply = apiaiService.apiaiTextRequest(quickReplyPayload, senderID);
 
         apiaiReply
-            .then(function (reply) {
-
-                facebookService.sendTextMessage(senderID, reply);
+            .then(function (response) {
+                handleApiAiResponse(senderID, response);
+                // facebookService.sendTextMessage(senderID, response);
 
             })
             .catch(function (reason) {
@@ -309,6 +183,148 @@
             });
     };
 
+    //region handleApiAiAction
+    function handleApiAiAction(senderID, action, responseText, contexts, parameters, fulfillment) {
+        switch (action) {
+
+            case ("body-type.body-type-measurements"):
+
+                //send parameters to calcuate body type function and get appropriate result
+                let finalResult = "";
+                var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustsize, responseParameters.waistsize, responseParameters.hipsize);
+
+                bodyType
+                    .then((reply) => {
+
+
+                        if (reply) {
+
+                            console.log("body-type.body-type-measurements");
+                            console.log("data from body type service =\n" + reply);
+
+                            //appMiddlewareService.sendTextMessagefb(senderID, reply);
+
+                            //resolve(reply);
+                            finalResult += reply + "\n";
+
+
+                            var bodyParams = apiaiService.apiaiTextRequest(reply, senderID);
+
+
+                            bodyParams.then(function (data) {
+                                console.log(JSON.stringify(data, null, 2));
+                                finalResult += data + "\n";
+                                console.log("finalResult +=" + finalResult);
+                                facebookService.sendTextMessage(senderID, finalResult);
+
+
+                            }).catch(function (reason) {
+                                console.log("catch(function (reason) {" + JSON.stringify(reason, null, 2));
+                            })
+                        }
+                    })
+                    .catch((reason) => {
+                        console.log("body-type.body-type-measurements" + reason);
+                    });
+
+                break;
+
+
+
+            case ("body-type-enquiry"):
+
+                console.log('body-type-enquiry');
+                try {
+                    var messages = fulfillment.messages;
+                    console.log(messages);
+                    console.log(typeof (messages));
+
+                    // var quickReplyTitle = messages[0].speech,
+                    //     quickReplyOptions = messages[1].payload.quick_replies;
+
+                    messages.forEach(function (message) {
+
+                        console.log(JSON.stringify(message, null, 2));
+                        if (message.type == 0) {
+
+                            quickReplyTitle = message.speech;
+
+                        }
+                        if (message.type == 4) {
+
+                            quickReplyOptions = message.payload.quick_replies;
+
+                        }
+
+                    }, this);
+
+
+                    console.log(
+                        "quickReplyOptions: " + quickReplyOptions + "\n" +
+                        "quickReplyTitle: " + quickReplyTitle
+
+                    );
+
+
+                    facebookService.sendQuickReply(senderID, quickReplyTitle, quickReplyOptions, "");
+
+                } catch (error) {
+
+                    console.log(JSON.stringify(error, null, 2));
+
+                }
+                break;
+
+            default:
+                console.log("default action switch block");
+                facebookService.sendTextMessage(senderID, responseText);
+
+                break;
+
+
+        }
+
+    }
+    //endregion handleApiAiAction
+
+
+    function handleApiAiResponse(senderID, response) {
+
+
+        let action = response.result.action;
+        let contexts = response.result.contexts;
+        let responseParameters = response.result.parameters;
+        let actionIncomplete = response.result.actionIncomplete;
+
+        let fulfillment = response.result.fulfillment;
+        let responseText = fulfillment.speech;
+        let responseData = fulfillment.data;
+        let messages = fulfillment.messages;
+
+
+
+       
+
+        console.log("Full api result : \n" + JSON.stringify(response, null, 2));
+
+        if (responseText) {
+
+            if (action && actionIncomplete == false) {
+                handleApiAiAction(senderID, action, responseText, contexts, parameters);
+
+            } else {
+                facebookService.sendTextMessage(senderID, responseText);
+            }
+
+
+
+        }
+        else {
+            facebookService.sendTextMessage(senderID, "no entities trained");
+        }
+
+
+    };
 
     // function apiaiTextRequest(params) {
 
@@ -374,6 +390,20 @@
     //     }
 
     // }
+
+    //check if object is defined or not
+    function isDefined(obj) {
+        if (typeof obj == 'undefined') {
+            return false;
+        }
+
+        if (!obj) {
+            return false;
+        }
+
+        return obj != null;
+    }
+
 
     var appMiddlewareFunctions = {
         sendTextMessagefb: sendTextMessagefb,
