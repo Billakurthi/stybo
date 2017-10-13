@@ -77,7 +77,8 @@
                                             bodyParams.then(function (data) {
                                                 console.log(JSON.stringify(data, null, 2));
                                                 finalResult += data + "\n";
-                                                resolve(data);
+                                                console.log("finalResult +="+finalResult);
+                                                resolve(finalResult);
 
 
                                             }).catch(function (reason) {
