@@ -119,7 +119,7 @@
 
                                         console.log('body-type-enquiry');
                                         try {
-                                            var messages = response.result.fulfillment.messages;
+                                            var messages = response.result.fulfillment.messages[0];
                                             console.log(messages);
                                             console.log(typeof(messages));
 
