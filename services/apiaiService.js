@@ -24,11 +24,7 @@
 
 
     function apiaiTextRequest(inputString, senderID, timeOfMessage) {
-        try {
-            console.log("stringify(fbService," + JSON.stringify(fbService, null, 2));
-        } catch (error) {
-            console.log("inside apiai echo request" + error);
-        }
+       
 
 
         return new Promise(function (resolve, reject) {
@@ -78,19 +74,9 @@
 
                                             bodyParams.then(function (data) {
                                                 console.log(JSON.stringify(data, null, 2));
-                                                // try {
-                                                //console.log(finalResult);
-                                                // finalResult += data + "\n";
-                                                // console.log("finalResult" + finalResult);
+                                   
                                                 resolve(data);
-                                                //fbService.sendTextMessage(data, senderID);
-                                                // var fbresponse = 
-                                                // fbresponse.then((data) => {
-                                                //     console.log(data + "  fbresponse.then((data)");
-                                                // })
-                                                // } catch (c) {
-                                                //     console.log("JSON.stringify(c,"+JSON.stringify(c, null, 2));
-                                                // }
+                                            
 
                                             }).catch(function (reason) {
                                                 console.log("catch(function (reason) {" + JSON.stringify(reason, null, 2));

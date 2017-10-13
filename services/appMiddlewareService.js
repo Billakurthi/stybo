@@ -1,6 +1,6 @@
 (() => {
 
-    var facebookService = require('./facebookService'),
+    var facebookService = require('./facebookService');
 
     function sendTextMessagefb(senderId, messageText) {
         facebookService.fbServiceFunctions.sendTextMessage(senderId, messageText);
