@@ -30,11 +30,15 @@
         return new Promise(function (resolve, reject) {
 
             var request = app_apiai.textRequest(inputString, {
+
                 sessionId: senderID//'<unique session id>'
+                
             });
 
             request.on('response', function (response) {
+
                 resolve(response);                
+
             });
 
 
