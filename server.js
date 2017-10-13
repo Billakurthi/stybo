@@ -46,7 +46,13 @@ app.post('/webhook/', function (req, res) {
       entry.messaging.forEach(function (event) {
         if (event.message) {
 
-          appMiddlewareService.receivedMessagefb(event);
+          try {
+            appMiddlewareService.receivedMessagefb(event);
+          } catch (error) {
+            console.log(" appMiddlewareService.receivedMessagefb(event); error\n" + error);
+          }
+
+
 
           //console.log(event);
 
