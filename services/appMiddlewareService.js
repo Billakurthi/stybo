@@ -120,9 +120,13 @@
                                         console.log('body-type-enquiry');
                                         try {
                                             var messages = response.result.fulfillment.messages;
-                                            //console.log(JSON.stringify(messages, null, 2));
+                                            console.log(messages);
+                                            console.log(typeof(messages));
+
                                             var quickReplyTitle = '', quickReplyOptions = '';
-                                            messages.foreach((message) => {
+
+                                            messages.foreach(function(message){
+
                                                 console.log(JSON.stringify(message, null, 2));
                                                 if (message.type == 0) {
 
