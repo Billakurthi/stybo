@@ -121,26 +121,26 @@
                                         try {
                                             var messages = response.result.fulfillment.messages;
                                             console.log(messages);
-                                            console.log(typeof(messages));
+                                            console.log(typeof (messages));
 
-                                            var quickReplyTitle = messages[0].speech,
-                                                quickReplyOptions = messages[1].payload.quick_replies;
+                                            // var quickReplyTitle = messages[0].speech,
+                                            //     quickReplyOptions = messages[1].payload.quick_replies;
 
-                                            // messages.foreach(function(message){
+                                            messages.forEach(function (message) {
 
-                                            //     console.log(JSON.stringify(message, null, 2));
-                                            //     if (message.type == 0) {
+                                                console.log(JSON.stringify(message, null, 2));
+                                                if (message.type == 0) {
 
-                                            //         quickReplyTitle = message.speech;
+                                                    quickReplyTitle = message.speech;
 
-                                            //     }
-                                            //     if (message.type == 4) {
+                                                }
+                                                if (message.type == 4) {
 
-                                            //         quickReplyOptions = message.payload.quick_replies;
+                                                    quickReplyOptions = message.payload.quick_replies;
 
-                                            //     }
+                                                }
 
-                                            // });
+                                            }, this);
 
 
                                             console.log(
