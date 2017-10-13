@@ -118,29 +118,30 @@
                                     case ("body-type-enquiry"):
 
                                         console.log('body-type-enquiry');
-
-                                        var messages = response.result.fulfillment.messages;
-                                        var quickReplyTitle = '', quickReplyOptions = '';
-                                        messages.foreach((message) => {
-
-                                            if (message.type == 0) {
-
-                                                quickReplyTitle = message.speech;
-
-                                            }
-                                            if (message.type == 4) {
-
-                                                quickReplyOptions = message.payload.quick_replies;
-
-                                            }
-
-                                        });
-                                        console.log(
-                                            "quickReplyOptions: " + quickReplyOptions + "\n" +
-                                            "quickReplyTitle: " + quickReplyTitle
-
-                                        );
                                         try {
+                                            var messages = response.result.fulfillment.messages;
+                                            console.log(JSON.stringify(messages, null, 2));
+                                            var quickReplyTitle = '', quickReplyOptions = '';
+                                            messages.foreach((message) => {
+
+                                                if (message.type == 0) {
+
+                                                    quickReplyTitle = message.speech;
+
+                                                }
+                                                if (message.type == 4) {
+
+                                                    quickReplyOptions = message.payload.quick_replies;
+
+                                                }
+
+                                            });
+                                            console.log(
+                                                "quickReplyOptions: " + quickReplyOptions + "\n" +
+                                                "quickReplyTitle: " + quickReplyTitle
+
+                                            );
+
 
                                             facebookService.sendQuickReply(senderID, quickReplyTitle, quickReplyOptions, "");
 
