@@ -233,10 +233,10 @@
 
             case ("body-type-enquiry"):
 
-                console.log('body-type-enquiry');
+                console.log(' in handleApiAiAction body-type-enquiry');
                 try {
                     var messages = fulfillment.messages;
-                    console.log(messages);
+                    console.log("fulfillment.messages;"+ messages);
                     console.log(typeof (messages));
 
                     // var quickReplyTitle = messages[0].speech,
@@ -310,7 +310,7 @@
         if (responseText) {
 
             if (action && actionIncomplete == false) {
-                handleApiAiAction(senderID, action, responseText, contexts, parameters);
+                handleApiAiAction(senderID, action, responseText, contexts, parameters,fulfillment);
 
             } else {
                 facebookService.sendTextMessage(senderID, responseText);
