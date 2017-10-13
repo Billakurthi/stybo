@@ -23,7 +23,7 @@
 
 
 
-    function apiaiTextRequest(inputString, senderID, timeOfMessage) {
+    function apiaiTextRequest(inputString, senderID) {
 
 
 

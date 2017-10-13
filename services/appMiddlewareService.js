@@ -26,12 +26,19 @@
 
         console.log("Received message for user %d and page %d at %d with message:",
             senderID, recipientID, timeOfMessage);
-        console.log(JSON.stringify(message,null,2));
+        console.log(JSON.stringify(message, null, 2));
 
         var messageId = message.mid;
         var messageText = message.text;
         var messageAttachments = message.attachments;
         var messageStickers = message.sticker_id;
+        var quickReply = message.quick_reply;
+
+
+        if (quickReply) {
+            handleQuickReply(senderID, quickReply, messageId);
+            return;
+        }
 
         //if we get a text message
         if (messageText) {
@@ -41,7 +48,7 @@
 
 
                 console.log("//send user message to apiai");  //send user message to apiai
-                var apiaiReply = apiaiService.apiaiTextRequest(messageText, senderID, timeOfMessage);
+                var apiaiReply = apiaiService.apiaiTextRequest(messageText, senderID);
 
                 apiaiReply
                     .then(function (response) {
@@ -86,7 +93,7 @@
                                                     finalResult += reply + "\n";
 
 
-                                                    var bodyParams = apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
+                                                    var bodyParams = apiaiService.apiaiTextRequest(reply, senderID);
 
 
                                                     bodyParams.then(function (data) {
@@ -183,7 +190,7 @@
 
                         //facebookService.sendTextMessage(senderID, response);
 
-                        // var bodyTypeDescription = apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
+                        // var bodyTypeDescription = apiaiService.apiaiTextRequest(reply, senderID);
 
                         // //get body type description from api.ai
                         // bodyTypeDescription
@@ -246,7 +253,7 @@
                     (clarifaiService.predict(messageAttachments[0].payload.url)).then(
                         function (reply) {
                             facebookService.sendTextMessage(senderID, reply);
-                            var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
+                            var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID);
 
                             apiaiReply
                                 .then(function (reply) {
@@ -280,7 +287,24 @@
     };
 
 
+    function handleQuickReply(senderID, quickReply, messageId) {
 
+        var quickReplyPayload = quickReply.payload;
+        console.log("Quick reply for message %s with payload %s", messageId, quickReplyPayload);
+        //send payload to api.ai
+        let apiaiReply = apiaiService.apiaiTextRequest(senderID, quickReplyPayload);
+        apiaiReply
+            .then(function (reply) {
+
+                facebookService.sendTextMessage(senderID, reply);
+
+            })
+            .catch(function (reason) {
+
+                facebookService.sendTextMessage(senderID, JSON.stringify(reason));
+
+            });
+    }
 
 
     function apiaiTextRequest(params) {
@@ -301,7 +325,7 @@
 
                     facebookService.facebookService.sendTextMessage(senderID, reply);
 
-                    // var bodyTypeDescription = apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
+                    // var bodyTypeDescription = apiaiService.apiaiTextRequest(reply, senderID);
 
                     // //get body type description from api.ai
                     // bodyTypeDescription
