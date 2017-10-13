@@ -93,7 +93,7 @@
                                                         console.log(JSON.stringify(data, null, 2));
                                                         finalResult += data + "\n";
                                                         console.log("finalResult +=" + finalResult);
-                                                        facebookService.sendTextMessage(finalResult);
+                                                        facebookService.sendTextMessage(senderID,finalResult);
 
 
                                                     }).catch(function (reason) {
@@ -115,20 +115,20 @@
 
                                     default:
 
-                                    facebookService.sendTextMessage(reply);
+                                        facebookService.sendTextMessage(senderID,reply);
                                         break;
 
 
                                 }
                             } else {
-                                facebookService.sendTextMessage(reply);
+                                facebookService.sendTextMessage(senderID,reply);
                             }
 
 
 
                         }
                         else {
-                            facebookService.sendTextMessage("no entities trained");
+                            facebookService.sendTextMessage(senderID,"no entities trained");
                         }
 
                         console.log(senderID + "\n" + response);
