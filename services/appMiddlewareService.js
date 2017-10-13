@@ -93,7 +93,7 @@
                                                         console.log(JSON.stringify(data, null, 2));
                                                         finalResult += data + "\n";
                                                         console.log("finalResult +=" + finalResult);
-                                                        facebookService.sendTextMessage(senderID,finalResult);
+                                                        facebookService.sendTextMessage(senderID, finalResult);
 
 
                                                     }).catch(function (reason) {
@@ -115,26 +115,26 @@
 
                                     default:
 
-                                        facebookService.sendTextMessage(senderID,reply);
+                                        facebookService.sendTextMessage(senderID, reply);
                                         break;
 
 
                                 }
                             } else {
-                                facebookService.sendTextMessage(senderID,reply);
+                                facebookService.sendTextMessage(senderID, reply);
                             }
 
 
 
                         }
                         else {
-                            facebookService.sendTextMessage(senderID,"no entities trained");
+                            facebookService.sendTextMessage(senderID, "no entities trained");
                         }
 
                         console.log(senderID + "\n" + response);
 
 
-                        facebookService.sendTextMessage(senderID, response);
+                        //facebookService.sendTextMessage(senderID, response);
 
                         // var bodyTypeDescription = apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
 
