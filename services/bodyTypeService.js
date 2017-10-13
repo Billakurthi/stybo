@@ -14,6 +14,8 @@
         // }
 
 
+        console.log("bust"+bVal+"waist"+wVal+"hip"+hVal);
+
 
         if ((parseFloat(bVal) < parseFloat(wVal)) && (parseFloat(wVal) < parseFloat(hVal))) {
             cont = "#Apple";//Diamond

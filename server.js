@@ -6,7 +6,8 @@ var request = require("request");
 
 var path = require("path");
 var bodyParser = require('body-parser');
-var fbService = require('./services/facebookService');
+//var fbService = require('./services/facebookService');
+var appMiddlewareService = require('./services/appMiddlewareService').appMiddlewareFunctions;
 
 
 //parse text using body parser
@@ -44,12 +45,13 @@ app.post('/webhook/', function (req, res) {
       // Iterate over each messaging event
       entry.messaging.forEach(function (event) {
         if (event.message) {
-          fbService.fbServiceFunctions.receivedMessage(event);
-         
+
+          appMiddlewareService.receivedMessagefb(event);
+
           //console.log(event);
 
         } else {
-          
+
           console.log("Webhook received unknown event: ", event);
         }
       });
