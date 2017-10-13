@@ -54,7 +54,11 @@
                             case ("body-type.body-type-measurements"):
 
                                 //send parameters to calcuate body type function and get appropriate result
-                                var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustSize, responseParameters.waistsize, responseParameters.hipsize);
+                                // console.log(responseParameters.bustsize);
+                                // console.log(responseParameters.waistsize); 
+                                // console.log(responseParameters.hipsize);
+
+                                var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustsize, responseParameters.waistsize, responseParameters.hipsize);
 
                                 bodyType
                                     .then((reply) => {
@@ -77,7 +81,7 @@
                                             bodyParams.then(function (data) {
                                                 console.log(JSON.stringify(data, null, 2));
                                                 finalResult += data + "\n";
-                                                console.log("finalResult +="+finalResult);
+                                                console.log("finalResult +=" + finalResult);
                                                 resolve(finalResult);
 
 
