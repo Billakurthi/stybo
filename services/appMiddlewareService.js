@@ -115,20 +115,20 @@
 
                                     default:
 
-                                        resolve(reply);
+                                    facebookService.sendTextMessage(reply);
                                         break;
 
 
                                 }
                             } else {
-                                resolve(reply);
+                                facebookService.sendTextMessage(reply);
                             }
 
 
 
                         }
                         else {
-                            resolve("no entities trained");
+                            facebookService.sendTextMessage("no entities trained");
                         }
 
                         console.log(senderID + "\n" + response);
