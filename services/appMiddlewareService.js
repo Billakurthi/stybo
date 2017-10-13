@@ -1,8 +1,9 @@
 (() => {
 
     var facebookService = require('./facebookService').fbServiceFunctions;
-    var apiaiService = require('./apiaiService').apiaiServiceFunctions; 
+    var apiaiService = require('./apiaiService').apiaiServiceFunctions;
     const clarifaiService = require('./clarifaiService');
+    var bodyTypeService = require('./bodyTypeService').bodyTypeServiceFunctions;
 
 
     function sendTextMessagefb(senderId, messageText) {
@@ -43,12 +44,97 @@
                 var apiaiReply = apiaiService.apiaiTextRequest(messageText, senderID, timeOfMessage);
 
                 apiaiReply
-                    .then(function (reply) {
+                    .then(function (response) {
 
-                        console.log(senderID + "\n" + reply);
+                        // console.log("apiaiTextRequest");
+                        // console.log("Full api result : \n" + JSON.stringify(response, null, 2));
+
+                        var reply = response.result.fulfillment.speech;
+                        var action = response.result.action;
+                        var actionIncomplete = response.result.actionIncomplete;
+                        var responseParameters = response.result.parameters;
+                        var finalResult = "";
+
+                        console.log("Full api result : \n" + JSON.stringify(response, null, 2));
+
+                        if (reply) {
+
+                            if (action && actionIncomplete == false) {
+
+                                switch (action) {
+                                    case ("body-type.body-type-measurements"):
+
+                                        //send parameters to calcuate body type function and get appropriate result
+                                        // console.log(responseParameters.bustsize);
+                                        // console.log(responseParameters.waistsize); 
+                                        // console.log(responseParameters.hipsize);
+
+                                        var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustsize, responseParameters.waistsize, responseParameters.hipsize);
+
+                                        bodyType
+                                            .then((reply) => {
 
 
-                        facebookService.sendTextMessage(senderID, reply);
+                                                if (reply) {
+
+                                                    console.log("body-type.body-type-measurements");
+                                                    console.log("data from body type service =\n" + reply);
+
+                                                    //appMiddlewareService.sendTextMessagefb(senderID, reply);
+
+                                                    //resolve(reply);
+                                                    finalResult += reply + "\n";
+
+
+                                                    var bodyParams = apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
+
+
+                                                    bodyParams.then(function (data) {
+                                                        console.log(JSON.stringify(data, null, 2));
+                                                        finalResult += data + "\n";
+                                                        console.log("finalResult +=" + finalResult);
+                                                        facebookService.sendTextMessage(finalResult);
+
+
+                                                    }).catch(function (reason) {
+                                                        console.log("catch(function (reason) {" + JSON.stringify(reason, null, 2));
+                                                    })
+                                                }
+                                            })
+                                            .catch((reason) => {
+                                                console.log("body-type.body-type-measurements" + reason);
+                                            });
+
+
+
+
+
+
+
+                                        break;
+
+                                    default:
+
+                                        resolve(reply);
+                                        break;
+
+
+                                }
+                            } else {
+                                resolve(reply);
+                            }
+
+
+
+                        }
+                        else {
+                            resolve("no entities trained");
+                        }
+
+                        console.log(senderID + "\n" + response);
+
+
+                        facebookService.sendTextMessage(senderID, response);
 
                         // var bodyTypeDescription = apiaiService.apiaiTextRequest(reply, senderID, timeOfMessage);
 
