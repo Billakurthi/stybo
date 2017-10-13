@@ -46,7 +46,7 @@ app.post('/webhook/', function (req, res) {
         if (event.message) {
           fbService.fbServiceFunctions.receivedMessage(event);
           fbService.fbServiceFunctions.sendTextMessage(event.sender.id," entry.messaging.forEach");
-          console.log(event);
+          //console.log(event);
 
         } else {
           

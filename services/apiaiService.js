@@ -25,11 +25,11 @@
 
     function apiaiTextRequest(inputString, senderID, timeOfMessage) {
         try {
-            fbService.sendTextMessage(senderID,"inside apiai text request");
+            console.log("stringify(fbService," + JSON.stringify(fbService, null, 2));
         } catch (error) {
-            console.log("inside apiai echo request"+error);
+            console.log("inside apiai echo request" + error);
         }
-        
+
 
         return new Promise(function (resolve, reject) {
 
@@ -73,13 +73,13 @@
 
                                             var bodyParams = apiaiTextRequest(reply, senderID, timeOfMessage);
 
-                                            
+
                                             bodyParams.then(function (data) {
                                                 console.log(JSON.stringify(data, null, 2));
                                                 // try {
-                                                    console.log(finalResult);
+                                                console.log(finalResult);
                                                 finalResult += data + "\n";
-                                                console.log("finalResult"+finalResult);
+                                                console.log("finalResult" + finalResult);
                                                 resolve(finalResult);
                                                 //fbService.sendTextMessage(data, senderID);
                                                 // var fbresponse = 
