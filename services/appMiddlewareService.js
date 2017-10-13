@@ -117,6 +117,8 @@
 
                                     case ("body-type-enquiry"):
 
+                                        console.log('body-type-enquiry');
+
                                         var messages = response.result.fulfillment.messages;
                                         var quickReplyTitle = '', quickReplyOptions = '';
                                         messages.foreach((message) => {
@@ -133,13 +135,26 @@
                                             }
 
                                         });
-                                        
-                                        facebookService.sendQuickReply(senderID, quickReplyTitle, quickReplyOptions);
+                                        console.log(
+                                            "quickReplyOptions: " + quickReplyOptions + "\n" +
+                                            "quickReplyTitle: " + quickReplyTitle
 
+                                        );
+                                        try {
+
+                                            facebookService.sendQuickReply(senderID, quickReplyTitle, quickReplyOptions, "");
+
+                                        } catch (error) {
+
+                                            console.log(JSON.stringify(error, null, 2));
+
+                                        }
                                         break;
+
                                     default:
 
                                         facebookService.sendTextMessage(senderID, reply);
+
                                         break;
 
 
