@@ -94,10 +94,30 @@
         };
         try {
             callSendAPI(messageData);
-        }catch(error){
-            console.log(JSON.stringify(error,null,2));
+        } catch (error) {
+            console.log(JSON.stringify(error, null, 2));
         }
 
+    }
+
+    /*
+     * Send a message with Quick Reply buttons.
+     *
+     */
+
+    function sendQuickReply(recipientId, text, replies, metadata) {
+        var messageData = {
+            recipient: {
+                id: recipientId
+            },
+            message: {
+                text: text,
+                metadata: isDefined(metadata) ? metadata : '',
+                quick_replies: replies
+            }
+        };
+
+        callSendAPI(messageData);
     }
 
 
@@ -207,14 +227,27 @@
         });
     }
 
+    //region check if obj is defined or not
+    function isDefined(obj) {
+        if (typeof obj == 'undefined') {
+            return false;
+        }
 
+        if (!obj) {
+            return false;
+        }
 
+        return obj != null;
+    }
+
+    //endregion check if obj is defined or not
 
     var fbServiceFunctions = {
 
         //receivedMessage: receivedMessage,
         sendGenericMessage: sendGenericMessage,
-        sendTextMessage: sendTextMessage
+        sendTextMessage: sendTextMessage,
+        sendQuickReply:sendQuickReply
 
     }
     module.exports = {

@@ -113,6 +113,30 @@
 
                                         break;
 
+
+
+                                    case ("body-type-enquiry"):
+
+                                        var messages = response.result.fulfillment.messages;
+                                        var quickReplyTitle = '', quickReplyOptions = '';
+                                        messages.foreach((message) => {
+
+                                            if (message.type == 0) {
+
+                                                quickReplyTitle = message.speech;
+
+                                            }
+                                            if (message.type == 4) {
+
+                                                quickReplyOptions = message.payload.quick_replies;
+
+                                            }
+
+                                        });
+                                        
+                                        facebookService.sendQuickReply(senderID, quickReplyTitle, quickReplyOptions);
+
+                                        break;
                                     default:
 
                                         facebookService.sendTextMessage(senderID, reply);
@@ -131,7 +155,7 @@
                             facebookService.sendTextMessage(senderID, "no entities trained");
                         }
 
-                        console.log(senderID + "\n" + response);
+                        //console.log(senderID + "\n" + response);
 
 
                         //facebookService.sendTextMessage(senderID, response);
