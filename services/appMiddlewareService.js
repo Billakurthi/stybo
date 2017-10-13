@@ -312,7 +312,12 @@
 
             if (action && actionIncomplete == false) {
                 console.log("if (action && actionIncomplete == false)");
-                handleApiAiAction(senderID, action, responseText, contexts, parameters, fulfillment);
+                try {
+                    handleApiAiAction(senderID, action, responseText, contexts, parameters, fulfillment);
+                } catch (error) {
+                    console.log(error);
+                }
+
 
             } else {
                 facebookService.sendTextMessage(senderID, responseText);
