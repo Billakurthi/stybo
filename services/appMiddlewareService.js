@@ -184,7 +184,7 @@
     };
 
     //region handleApiAiAction
-    function handleApiAiAction(senderID, action, responseText, contexts, parameters, fulfillment) {
+    function handleApiAiAction(senderID, action, responseText, contexts, responseParameters, fulfillment) {
         console.log("handleApiAiAction action" + action);
         switch (action) {
 
@@ -313,7 +313,7 @@
             if (action && actionIncomplete == false) {
                 console.log("if (action && actionIncomplete == false)");
                 try {
-                    handleApiAiAction(senderID, action, responseText, contexts, parameters, fulfillment);
+                    handleApiAiAction(senderID, action, responseText, contexts, responseParameters, fulfillment);
                 } catch (error) {
                     console.log(error);
                 }
