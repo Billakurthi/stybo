@@ -185,6 +185,7 @@
 
     //region handleApiAiAction
     function handleApiAiAction(senderID, action, responseText, contexts, parameters, fulfillment) {
+        console.log("handleApiAiAction action" + action);
         switch (action) {
 
             case ("body-type.body-type-measurements"):
@@ -236,7 +237,7 @@
                 console.log(' in handleApiAiAction body-type-enquiry');
                 try {
                     var messages = fulfillment.messages;
-                    console.log("fulfillment.messages;"+ messages);
+                    console.log("fulfillment.messages;" + messages);
                     console.log(typeof (messages));
 
                     // var quickReplyTitle = messages[0].speech,
@@ -303,14 +304,15 @@
 
 
 
-       
+
 
         console.log("Full api result : \n" + JSON.stringify(response, null, 2));
 
         if (responseText) {
 
             if (action && actionIncomplete == false) {
-                handleApiAiAction(senderID, action, responseText, contexts, parameters,fulfillment);
+                console.log("if (action && actionIncomplete == false)");
+                handleApiAiAction(senderID, action, responseText, contexts, parameters, fulfillment);
 
             } else {
                 facebookService.sendTextMessage(senderID, responseText);
