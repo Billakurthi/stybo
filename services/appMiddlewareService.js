@@ -52,7 +52,7 @@
 
                 apiaiReply
                     .then(function (response) {
-
+                        console.log("handleApiAiResponse(senderID, response)");
                         handleApiAiResponse(senderID, response);
 
                         // console.log("apiaiTextRequest");
@@ -177,7 +177,7 @@
 
             })
             .catch(function (reason) {
-
+                console.log("handleQuickReply catch reason" + reason);
                 facebookService.sendTextMessage(senderID, JSON.stringify(reason));
 
             });
