@@ -24,6 +24,12 @@
 
 
     function apiaiTextRequest(inputString, senderID, timeOfMessage) {
+        try {
+            fbService.sendTextMessage(senderID,"inside apiai text request");
+        } catch (error) {
+            console.log("inside apiai echo request"+error);
+        }
+        
 
         return new Promise(function (resolve, reject) {
 
