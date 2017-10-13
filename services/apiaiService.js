@@ -3,7 +3,7 @@
 
     var apiai = require('apiai');
     var apiaiConfig = require('./auth').apiaiConfig;
-    var fbService = require('./facebookService');
+    var appMiddlewareService = require('./appMiddlewareService').appMiddlewareFunctions;
     // const apiai_app = new ApiAI.ApiAiClient({accessToken: '30f26315bca54670ae2274a18e35bfa8'});
     var app_apiai = apiai(apiaiConfig.clientAccessToken, {
         language: "en",
@@ -46,7 +46,7 @@
                 var action = response.result.action;
                 var actionIncomplete = response.result.actionIncomplete;
                 var responseParameters = response.result.parameters;
-                var finalResult = "";
+                // var finalResult = "";
 
                 //console.log("Full api result : \n" + JSON.stringify(response, null, 2));
 
@@ -68,7 +68,9 @@
 
                                             console.log("body-type.body-type-measurements");
                                             console.log("data from body type service =\n" + reply);
-                                            finalResult += reply + "\n";
+
+                                            appMiddlewareService.sendTextMessagefb(senderID, reply);
+                                            // finalResult += reply + "\n";
 
 
                                             var bodyParams = apiaiTextRequest(reply, senderID, timeOfMessage);
@@ -77,10 +79,10 @@
                                             bodyParams.then(function (data) {
                                                 console.log(JSON.stringify(data, null, 2));
                                                 // try {
-                                                console.log(finalResult);
-                                                finalResult += data + "\n";
-                                                console.log("finalResult" + finalResult);
-                                                resolve(finalResult);
+                                                //console.log(finalResult);
+                                                // finalResult += data + "\n";
+                                                // console.log("finalResult" + finalResult);
+                                                resolve(data);
                                                 //fbService.sendTextMessage(data, senderID);
                                                 // var fbresponse = 
                                                 // fbresponse.then((data) => {
