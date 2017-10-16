@@ -14,40 +14,37 @@ var appMiddlewareService = require('./services/appMiddlewareService').appMiddlew
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'))
+	res.sendFile(path.join(__dirname + '/index.html'))
 })
 
 //starting a webhook code
 
 app.get('/webhook/', function (req, res) {
-  if (req.query['hub.mode'] === 'subscribe' &&
-    req.query['hub.verify_token'] === 'my-secrete') {
-    console.log("Validating webhook");
-    res.status(200).send(req.query['hub.challenge']);
-  } else {
-    console.error("Failed validation. Make sure the validation tokens match.");
-    res.sendStatus(403);
-  }
+	if (req.query['hub.mode'] === 'subscribe' &&
+		req.query['hub.verify_token'] === 'my-secrete') {
+		console.log("Validating webhook");
+		res.status(200).send(req.query['hub.challenge']);
+	} else {
+		console.error("Failed validation. Make sure the validation tokens match.");
+		res.sendStatus(403);
+	}
 });
 
 
 app.post('/webhook/', function (req, res) {
-  var data = req.body;
+	var data = req.body;
 
-  // Make sure this is a page subscription
-  if (data.object === 'page') {
+	// Make sure this is a page subscription
+	if (data.object === 'page') {
 
-    appMiddlewareService.postRequestRecievedFromFb(data);
-
-    
-
-    // Assume all went well.
-    //
-    // You must send back a 200, within 20 seconds, to let us know
-    // you've successfully received the callback. Otherwise, the request
-    // will time out and we will keep trying to resend.
-    res.sendStatus(200);
-  }
+		appMiddlewareService.postRequestRecievedFromFb(data);
+		// Assume all went well.
+		//
+		// You must send back a 200, within 20 seconds, to let us know
+		// you've successfully received the callback. Otherwise, the request
+		// will time out and we will keep trying to resend.
+		res.sendStatus(200);
+	}
 });
 
 
