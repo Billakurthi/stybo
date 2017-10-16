@@ -15,7 +15,7 @@
     });
 
     // Predict function to predict image
-    exports.predict = function (url) {
+    var predict = function (url) {
         //console.log("URLS:");
         //console.log(url);
         url = encodeURI(url);
@@ -37,7 +37,7 @@
         );
     };
 
-    exports.create = function (url) {
+    var create = function (url) {
         appClarifai.inputs.create({
             url: url,
             concepts: [
@@ -50,22 +50,30 @@
     };
 
 
-    exports.generalModelSearch = function (searchUrl) {
+    var generalModelSearch = function (searchUrl) {
 
         console.log("inside searchUrl" + searchUrl);
 
         appClarifai.models.predict(Clarifai.GENERAL_MODEL, searchUrl).then(
             function (response) {
-                
-                console.log("General Model response =" + JSON.stringify(response,null,2));
+
+                console.log("General Model response =" + JSON.stringify(response, null, 2));
                 // do something with response
             },
             function (err) {
-                console.log("General Model error =" + JSON.stringify(error,null,2));
+                console.log("General Model error =" + JSON.stringify(error, null, 2));
 
                 // there was an error
             }
         );
     };
+
+
+    module.exports = {
+
+        predict: predict,
+        generalModelSearch: generalModelSearch,
+        create: create
+    }
 
 }());
