@@ -46,7 +46,7 @@
 
 						//console.log(event);
 
-					} else if (messagingEvent.postback) {
+					} else if (event.postback) {
 
 						receivedPostback(event);
 
