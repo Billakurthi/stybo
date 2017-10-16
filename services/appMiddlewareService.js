@@ -523,8 +523,8 @@
 
     var appMiddlewareFunctions = {
         sendTextMessage: sendTextMessage,
-        receivedMessage: receivedMessage
-        //apiaiTextRequest: apiaiTextRequest
+        receivedMessage: receivedMessage,
+        postRequestRecievedFromFb: postRequestRecievedFromFb
     };
 
     module.exports = {
