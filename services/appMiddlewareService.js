@@ -5,7 +5,7 @@
 	const clarifaiService = require('./clarifaiService');
 	var uuid = require("uuid");
 	var bodyTypeService = require('./bodyTypeService').bodyTypeServiceFunctions;
-
+	let userData = require('./userService');
 
 	var sessionIds = new Map();
 	var usersMap = new Map();
