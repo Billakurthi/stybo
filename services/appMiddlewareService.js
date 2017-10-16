@@ -159,9 +159,10 @@
 		//#endregion user message variables
 
 		//#region user message variables
-		var messageId = message.mid,
+		var messageID = message.mid,
 			messageText = message.text,
 			messageAttachments = message.attachments,
+			messageStickerID = message.sticker_id,
 			quickReply = message.quick_Reply;
 		//#endregion user message variables
 
@@ -173,7 +174,7 @@
 		console.log(JSON.stringify(message, null, 2));
 
 		if (quickReply) {
-			handleQuickReply(senderID, quickReply, messageId);
+			handleQuickReply(senderID, quickReply, messageID);
 			return;
 		}
 
@@ -254,7 +255,10 @@
 			} else {
 				facebookService.sendTextMessage(senderID, "Message with attachment received");
 			}
-		} else {
+		}else if(messageStickers){
+			facebookService.sendTextMessage(senderID, "Sticker recieved");
+		}
+		 else {
 			facebookService.sendTextMessage(senderID, "Please upload your image");
 		}
 		//endregion if we get a text message
@@ -442,70 +446,6 @@
 
 	};
 
-	// function apiaiTextRequest(params) {
-
-	//     try {
-
-	//         // apiaiService.callApiai(messageText, facebookService.sendTextMessage, senderID);
-
-
-	//         console.log("//send user message to apiai");  //send user message to apiai
-	//         var apiaiReply = apiaiService.apiaiTextRequest(messageText, senderID, timeOfMessage);
-
-	//         apiaiReply
-	//             .then(function (reply) {
-
-	//                 console.log(senderID + "\n" + reply);
-
-
-	//                 facebookService.facebookService.sendTextMessage(senderID, reply);
-
-	//                 // var bodyTypeDescription = apiaiService.apiaiTextRequest(reply, senderID);
-
-	//                 // //get body type description from api.ai
-	//                 // bodyTypeDescription
-	//                 //     .then(function (reply) {
-
-	//                 //         console.log("//get body type description from api.ai \n" + JSON.stringify(reply, null, 2));
-	//                 //         try {
-	//                 //             console.log("sender ID " + senderID);
-	//                 //             facebookService.sendTextMessage(senderID, reply);
-
-
-	//                 //         } catch (message) {
-	//                 //             console.log("message of error" + message);
-	//                 //         }
-
-
-	//                 //     })
-	//                 //     .catch(function (reason) {
-	//                 //         console.log(JSON.stringify(reason, null, 2));
-
-	//                 //        facebookService.sendTextMessage(senderID, JSON.stringify(reason));
-
-	//                 //     });
-	//                 // // if bodytype is not rejected then send a generic message with types of dresses
-
-	//                 // if (reply == '#Rejected') {
-	//                 //     console.log("sendGenericMessage(senderID,"+ "#Apple");
-	//                 //     sendGenericMessage(senderID, "#Apple");
-	//                 // }
-
-	//             })
-	//             .catch(function (reason) {
-
-	//                 facebookService.sendTextMessage(senderID, JSON.stringify(reason));
-
-	//             });
-	//         //analyse and do all the operations here to make all other api calls
-
-	//     } catch (ex) {
-
-	//         console.log("buildReply Error " + ex);
-
-	//     }
-
-	// }
 
 	//check if object is defined or not
 	function isDefined(obj) {
