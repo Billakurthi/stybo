@@ -83,7 +83,7 @@
                 text: messageText
             }
         };
-        
+
         try {
             callSendAPI(messageData);
         } catch (error) {
@@ -119,13 +119,22 @@
     // send generic message
 
     function sendGenericMessage(recipientId, reply) {
-
+        var reply = reply || "#Apple";
         var sr1 = costumes[reply].url1;
         var sr2 = costumes[reply].url2;
         var sr3 = costumes[reply].url3;
         var sr4 = costumes[reply].url4;
         var sr5 = costumes[reply].url5;
-
+        var BUY_BUTTON = {
+            type: "postback",
+            title: "Buy Now",
+            payload: "BUY_NOW_POSTBACK",
+        },
+            ADD_TO_CART = {
+                type: "postback",
+                title: "Add to cart",
+                payload: "ADD_TO_CART_POSTBACK",
+            }
 
         var messageData = {
             recipient: {
@@ -141,51 +150,31 @@
                             subtitle: "Your best fit is here",
                             item_url: sr1,
                             image_url: sr1,
-                            buttons: [{
-                                type: "postback",
-                                title: "Buy Now",
-                                payload: "#buyClicked",
-                            }],
+                            buttons: [BUY_BUTTON, ADD_TO_CART],
                         }, {
                             title: "Vibrant",
                             subtitle: "Be ready for party always",
                             item_url: sr2,
                             image_url: sr2,
-                            buttons: [{
-                                type: "postback",
-                                title: "Buy Now",
-                                payload: "#buyClicked",
-                            }]
+                            buttons: [BUY_BUTTON, ADD_TO_CART]
                         }, {
                             title: "Versatile",
                             subtitle: "Get Trendy",
                             item_url: sr3,
                             image_url: sr3,
-                            buttons: [{
-                                type: "postback",
-                                title: "Buy Now",
-                                payload: "#buyClicked",
-                            }]
+                            buttons: [BUY_BUTTON, ADD_TO_CART]
                         }, {
                             title: "Dhana Dhan",
                             subtitle: "You are princess",
                             item_url: sr4,
                             image_url: sr4,
-                            buttons: [{
-                                type: "postback",
-                                title: "Buy Now",
-                                payload: "#buyClicked",
-                            }]
+                            buttons: [BUY_BUTTON, ADD_TO_CART]
                         }, {
                             title: "Angel here",
                             subtitle: "Rock on Style",
                             item_url: sr5,
                             image_url: sr5,
-                            buttons: [{
-                                type: "postback",
-                                title: "Buy Now",
-                                payload: "#buyClicked",
-                            }]
+                            buttons: [BUY_BUTTON, ADD_TO_CART]
                         }]
                     }
                 }
@@ -239,7 +228,7 @@
         //receivedMessage: receivedMessage,
         sendGenericMessage: sendGenericMessage,
         sendTextMessage: sendTextMessage,
-        sendQuickReply:sendQuickReply
+        sendQuickReply: sendQuickReply
 
     }
     module.exports = {

@@ -108,10 +108,11 @@
 			case 'GET_STARTED':
 				greetUserText(senderID);
 				break;
-			// case 'MY_CART':
-			//     //get feedback with new jobs
-			//     sendToApiAi(senderID, "job openings");
-			//     break;
+			case 'TRENDING_PAYLOAD':
+				//get top trending dresses
+				facebookService.sendGenericMessage(senderID);
+			    //sendToApiAi(senderID, "job openings");
+			    break;
 			case 'MY_CART':
 				//user wants to chat
 				facebookService.sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
@@ -190,10 +191,9 @@
 
 				apiaiReply
 					.then(function (response) {
+
 						console.log("handleApiAiResponse(senderID, response)");
 						handleApiAiResponse(senderID, response);
-
-
 
 					})
 					.catch(function (reason) {
@@ -253,10 +253,12 @@
 			} else {
 				facebookService.sendTextMessage(senderID, "Message with attachment received");
 			}
-		}else if(messageStickerID){
-			facebookService.sendTextMessage(senderID, "Sticker recieved");
+		} else if (messageStickerID) {
+			//send sticker back to user
+			facebookService.sendTextMessage(senderID, messageAttachments[0].payload.url);
+
 		}
-		 else {
+		else {
 			facebookService.sendTextMessage(senderID, "Please upload your image");
 		}
 		//endregion if we get a text message
