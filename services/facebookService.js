@@ -13,15 +13,6 @@
     var PAGE_ACCESS_TOKEN = fbConfig.FACEBOOK_PAGE_ACCESS_TOKEN;
 
 
-    //const apiaiService = require('./apiaiService').apiaiServiceFunctions;
-
-
-    // //user prototype object 
-    // function styboUser(uid, hasImageUrl, uage) {
-    //   this.userid = uid;
-    //   this.imgUrl = hasImageUrl;
-    //   this.age = uage;
-    // };
     //user prototype object 
     var current_users = {};
     var costumes = {

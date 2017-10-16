@@ -3,44 +3,181 @@
     var facebookService = require('./facebookService').fbServiceFunctions;
     var apiaiService = require('./apiaiService').apiaiServiceFunctions;
     const clarifaiService = require('./clarifaiService');
+    var uuid = require("uuid");
     var bodyTypeService = require('./bodyTypeService').bodyTypeServiceFunctions;
 
 
-    function sendTextMessagefb(senderID, messageText) {
+    var sessionIds = new Map();
+    var usersMap = new Map();
+
+    //region setSessionAndUser
+    //TODO:  setSessionAndUser should be global
+    function setSessionAndUser(senderID) {
+        if (!sessionIds.has(senderID)) {
+            sessionIds.set(senderID, uuid.v1());
+        }
+
+        if (!usersMap.has(senderID)) {
+            userData(function (user) {
+                usersMap.set(senderID, user);
+            }, senderID);
+
+            console.log("User Map Data \n" + JSON.stringify(usersMap));
+        }
+    };
+    //endregion setSessionAndUser
+
+    //region postRequestRecievedFromFb
+    function postRequestRecievedFromFb(data) {
+
+        // Iterate over each entry - there may be multiple if batched
+        data.entry.forEach(function (entry) {
+            var pageID = entry.id;
+            var timeOfEvent = entry.time;
+
+            // Iterate over each messaging event
+            entry.messaging.forEach(function (event) {
+
+                try {
+
+                    if (event.message) {
+
+                        receivedMessage(event);
+
+                        //console.log(event);
+
+                    } else if (messagingEvent.postback) {
+
+                        receivedPostback(event);
+
+                    } else {
+
+                        console.log("Webhook received unknown event: ", event);
+                    }
+
+
+                } catch (error) {
+
+                    console.log("entry.messaging.forEach(function (event) { \n" + error);
+
+                }
+
+            });
+        });
+    };
+    //endregion postRequestRecievedFromFb
+
+    /*
+     * Postback Event
+     *
+     * This event is called when a postback is tapped on a Structured Message.
+     * https://developers.facebook.com/docs/messenger-platform/webhook-reference/postback-received
+     *
+     */
+    function receivedPostback(event) {
+
+        // if (postback) {
+
+        //                 let payload = postback.payload;
+
+        //                 handlePostbackPayload(senderID, payload, messageId);
+
+
+        //             }
+
+        //region handlePostbackPayload
+        // function handlePostbackPayload(senderID, payload, messageId) {
+
+
+
+        // };
+        //endregion handlePostbackPayload
+
+
+        var senderID = event.sender.id;
+        var recipientID = event.recipient.id;
+        var timeOfPostback = event.timestamp;
+
+        setSessionAndUser(senderID);
+
+        // The 'payload' param is a developer-defined field which is set in a postback
+        // button for Structured Messages.
+        var payload = event.postback.payload;
+
+        switch (payload) {
+            case 'GET_STARTED':
+                greetUserText(senderID);
+                break;
+            // case 'MY_CART':
+            //     //get feedback with new jobs
+            //     sendToApiAi(senderID, "job openings");
+            //     break;
+            case 'MY_CART':
+                //user wants to chat
+                facebookService.sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
+                break;
+            default:
+                //unindentified payload
+                facebookService.sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
+                break;
+
+        }
+        console.log("payload" + payload);
+
+        console.log("Received postback for user %d and page %d with payload '%s' " +
+            "at %d", senderID, recipientID, payload, timeOfPostback);
+
+    };
+
+
+    function greetUserText(userId) {
+
+        let user = usersMap.get(userId);
+
+        facebookService.sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
+            'I can answer frequently asked questions for you ' +
+            'and I perform job interviews. What can I help you with?');
+    }
+
+
+
+    function sendTextMessage(senderID, messageText) {
 
         facebookService.sendTextMessage(senderID, messageText);
 
     };
 
 
-    function receivedMessagefb(event) {
+    //received msg event function
+    function receivedMessage(event) {
 
-        //recieved msg event function from messenger
+        //#region user message variables
+        var senderID = event.sender.id,
+            recipientID = event.recipient.id,
+            timeOfMessage = event.timestamp,
+            message = event.message;
+        //#endregion user message variables
+
+        //#region user message variables
+        var messageId = message.mid,
+            messageText = message.text,
+            messageAttachments = message.attachments,
+            quickReply = message.quick_Reply;
+        //#endregion user message variables
 
 
-
-        var senderID = event.sender.id;
-        var recipientID = event.recipient.id;
-        var timeOfMessage = event.timestamp;
-        var message = event.message;
+        setSessionAndUser(senderID);
 
         console.log("Received message for user %d and page %d at %d with message:",
             senderID, recipientID, timeOfMessage);
         console.log(JSON.stringify(message, null, 2));
-
-        var messageId = message.mid;
-        var messageText = message.text;
-        var messageAttachments = message.attachments;
-        var messageStickers = message.sticker_id;
-        var quickReply = message.quick_reply;
-
 
         if (quickReply) {
             handleQuickReply(senderID, quickReply, messageId);
             return;
         }
 
-        //if we get a text message
+        //region if we get a text message
         if (messageText) {
             try {
 
@@ -55,45 +192,7 @@
                         console.log("handleApiAiResponse(senderID, response)");
                         handleApiAiResponse(senderID, response);
 
-                        // console.log("apiaiTextRequest");
-                        // console.log("Full api result : \n" + JSON.stringify(response, null, 2));
-
-
-                        //console.log(senderID + "\n" + response);
-
-
-                        //facebookService.sendTextMessage(senderID, response);
-
-                        // var bodyTypeDescription = apiaiService.apiaiTextRequest(reply, senderID);
-
-                        // //get body type description from api.ai
-                        // bodyTypeDescription
-                        //     .then(function (reply) {
-
-                        //         console.log("//get body type description from api.ai \n" + JSON.stringify(reply, null, 2));
-                        //         try {
-                        //             console.log("sender ID " + senderID);
-                        //             facebookService.sendTextMessage(senderID, reply);
-
-
-                        //         } catch (message) {
-                        //             console.log("message of error" + message);
-                        //         }
-
-
-                        //     })
-                        //     .catch(function (reason) {
-                        //         console.log(JSON.stringify(reason, null, 2));
-
-                        //        facebookService.sendTextMessage(senderID, JSON.stringify(reason));
-
-                        //     });
-                        // // if bodytype is not rejected then send a generic message with types of dresses
-
-                        // if (reply == '#Rejected') {
-                        //     console.log("sendGenericMessage(senderID,"+ "#Apple");
-                        //     sendGenericMessage(senderID, "#Apple");
-                        // }
+                        
 
                     })
                     .catch(function (reason) {
@@ -158,7 +257,10 @@
         } else {
             facebookService.sendTextMessage(senderID, "Please upload your image");
         }
+        //endregion if we get a text message
     };
+
+
 
     //region handleQuickReply
     function handleQuickReply(senderID, quickReply, messageId) {
@@ -222,7 +324,7 @@
                                 //finalResult += data + "\n";
 
                                 handleApiAiResponse(senderID,data);
-                               // console.log("finalResult +=" + finalResult);
+                                // console.log("finalResult +=" + finalResult);
                                 //facebookService.sendTextMessage(senderID, finalResult);
 
 
@@ -420,8 +522,8 @@
 
 
     var appMiddlewareFunctions = {
-        sendTextMessagefb: sendTextMessagefb,
-        receivedMessagefb: receivedMessagefb
+        sendTextMessage: sendTextMessage,
+        receivedMessage: receivedMessage
         //apiaiTextRequest: apiaiTextRequest
     };
 

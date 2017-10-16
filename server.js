@@ -37,31 +37,9 @@ app.post('/webhook/', function (req, res) {
   // Make sure this is a page subscription
   if (data.object === 'page') {
 
-    // Iterate over each entry - there may be multiple if batched
-    data.entry.forEach(function (entry) {
-      var pageID = entry.id;
-      var timeOfEvent = entry.time;
+    appMiddlewareService.postRequestRecievedFromFb(data);
 
-      // Iterate over each messaging event
-      entry.messaging.forEach(function (event) {
-        if (event.message) {
-
-          try {
-            appMiddlewareService.receivedMessagefb(event);
-          } catch (error) {
-            console.log(" appMiddlewareService.receivedMessagefb(event); error\n" + error);
-          }
-
-
-
-          //console.log(event);
-
-        } else {
-
-          console.log("Webhook received unknown event: ", event);
-        }
-      });
-    });
+    
 
     // Assume all went well.
     //
