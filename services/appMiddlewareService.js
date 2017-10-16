@@ -208,11 +208,9 @@
 				console.log("buildReply Error " + ex);
 
 			}
-		} else if (messageAttachments && !messageStickers) {
+		} else if (messageAttachments && !messageStickerID) {
 
 			console.log("Message Attachment: " + messageAttachments[0].payload.url);
-
-
 
 			if (messageAttachments[0].type === "image") {
 				try {
@@ -255,7 +253,7 @@
 			} else {
 				facebookService.sendTextMessage(senderID, "Message with attachment received");
 			}
-		}else if(messageStickers){
+		}else if(messageStickerID){
 			facebookService.sendTextMessage(senderID, "Sticker recieved");
 		}
 		 else {
