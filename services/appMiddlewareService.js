@@ -160,7 +160,7 @@
         }
     };
 
-
+    //region handleQuickReply
     function handleQuickReply(senderID, quickReply, messageId) {
 
         var quickReplyPayload = quickReply.payload;
@@ -182,6 +182,8 @@
 
             });
     };
+    //endregion handleQuickReply
+
 
     //region handleApiAiAction
     function handleApiAiAction(senderID, action, responseText, contexts, responseParameters, fulfillment) {
@@ -191,7 +193,7 @@
             case ("body-type.body-type-measurements"):
 
                 //send parameters to calcuate body type function and get appropriate result
-                let finalResult = "";
+                //let finalResult = "";
                 var bodyType = bodyTypeService.calculateBodyType(responseParameters.bustsize, responseParameters.waistsize, responseParameters.hipsize);
 
                 bodyType
@@ -206,7 +208,10 @@
                             //appMiddlewareService.sendTextMessagefb(senderID, reply);
 
                             //resolve(reply);
-                            finalResult += reply + "\n";
+
+                            //send body type from calculator service
+                            facebookService.sendTextMessage(senderID, reply);
+                            //finalResult += reply + "\n";
 
 
                             var bodyParams = apiaiService.apiaiTextRequest(reply, senderID);
@@ -214,9 +219,11 @@
 
                             bodyParams.then(function (data) {
                                 console.log(JSON.stringify(data, null, 2));
-                                finalResult += data + "\n";
-                                console.log("finalResult +=" + finalResult);
-                                facebookService.sendTextMessage(senderID, finalResult);
+                                //finalResult += data + "\n";
+
+                                handleApiAiResponse(senderID,data);
+                               // console.log("finalResult +=" + finalResult);
+                                //facebookService.sendTextMessage(senderID, finalResult);
 
 
                             }).catch(function (reason) {
