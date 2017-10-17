@@ -99,6 +99,7 @@
 			switch (postbackAndParams[0]) {
 				case 'ADD_TO_CART_POSTBACK':
 					console.log("added " + postbackAndParams[1] + " to cart");
+					facebookService.sendTextMessage(senderID,"added " + postbackAndParams[1] + " to cart");
 					break;
 				default:
 					//unindentified payload					
@@ -106,28 +107,29 @@
 					facebookService.sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
 					break;
 			}
-		}
+		} else {
 
-		switch (payload) {
-			case 'GET_STARTED':
-				greetUserText(senderID);
-				break;
-			case 'TRENDING_PAYLOAD':
-				//get top trending dresses
-				facebookService.sendGenericMessage(senderID);
-				//sendToApiAi(senderID, "job openings");
-				break;
-			case 'MY_CART':
-				//user wants to chat
-				facebookService.sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
-				break;
-			default:
-				//unindentified payload
-				console.log("unidentified payload " + this);
-				//facebookService.sendVideo(senderID);
-				facebookService.sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
-				break;
+			switch (payload) {
+				case 'GET_STARTED':
+					greetUserText(senderID);
+					break;
+				case 'TRENDING_PAYLOAD':
+					//get top trending dresses
+					facebookService.sendGenericMessage(senderID);
+					//sendToApiAi(senderID, "job openings");
+					break;
+				case 'MY_CART':
+					//user wants to chat
+					facebookService.sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
+					break;
+				default:
+					//unindentified payload
+					console.log("unidentified payload " + this);
+					//facebookService.sendVideo(senderID);
+					facebookService.sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
+					break;
 
+			}
 		}
 		console.log("payload" + payload);
 
