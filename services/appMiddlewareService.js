@@ -104,8 +104,8 @@
 					};
 					userCart[senderID].push(postbackAndParams[1]);
 
-					console.log("added to cart" + JSON.stringify(userCart[senderID],null,2));
-					
+					console.log("added to cart" + JSON.stringify(userCart[senderID], null, 2));
+
 					facebookService.sendTextMessage(senderID, "added " + postbackAndParams[1] + " to cart");
 					break;
 				default:
@@ -125,9 +125,31 @@
 					facebookService.sendGenericMessage(senderID);
 					//sendToApiAi(senderID, "job openings");
 					break;
-				case 'MY_CART':
-					//user wants to chat
-					facebookService.sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
+				case 'MY_CART'://send all user cart items
+
+
+
+					function getCartItems(senderID) {
+
+						if (!(userCart.hasOwnProperty(senderID)) && (userCart[senderID]).length > 0) {
+
+							facebookService.sendTextMessage(senderID, "No Items available in your cart");
+							return
+
+						} else {
+
+							let cartItems = userCart[senderID];
+
+							cartItems.forEach(function (item) {
+								facebookService.sendTextMessage(senderID, item);
+							}, this);
+
+						}
+
+					};
+					
+					getCartItems(senderID);
+
 					break;
 				default:
 					//unindentified payload
