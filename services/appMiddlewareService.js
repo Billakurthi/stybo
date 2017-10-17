@@ -180,7 +180,7 @@
 
 		if (quickReply) {
 			handleQuickReply(senderID, quickReply, messageID);
-			return;
+			return 0;
 		}
 
 		//region if we get a text message
