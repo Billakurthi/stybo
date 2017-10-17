@@ -131,7 +131,7 @@
 
 					function getCartItems(senderID) {
 
-						if (!(userCart.hasOwnProperty(senderID)) && (userCart[senderID]).length > 0) {
+						if (!(userCart.hasOwnProperty(senderID)) && (userCart[senderID]) === undefined) {
 
 							facebookService.sendTextMessage(senderID, "No Items available in your cart");
 							return
@@ -147,7 +147,7 @@
 						}
 
 					};
-					
+
 					getCartItems(senderID);
 
 					break;
