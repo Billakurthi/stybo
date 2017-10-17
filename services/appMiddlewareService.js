@@ -178,93 +178,91 @@
 			senderID, recipientID, timeOfMessage);
 		console.log(JSON.stringify(message, null, 2));
 
-		if (quickReply) {
+		if (quickReply && messageText) {
+
 			handleQuickReply(senderID, quickReply, messageID);
-			return 0;
-		}
 
-		//region if we get a text message
-		if (messageText) {
-			try {
-
-				// apiaiService.callApiai(messageText, sendTextMessage, senderID);
-
-
-				console.log("//send user message to apiai");  //send user message to apiai
-				var apiaiReply = apiaiService.apiaiTextRequest(messageText, senderID);
-
-				apiaiReply
-					.then(function (response) {
-
-						console.log("handleApiAiResponse(senderID, response)");
-						handleApiAiResponse(senderID, response);
-
-					})
-					.catch(function (reason) {
-
-						facebookService.sendTextMessage(senderID, JSON.stringify(reason));
-
-					});
-				//analyse and do all the operations here to make all other api calls
-
-			} catch (ex) {
-
-				console.log("buildReply Error " + ex);
-
-			}
-		} else if (messageAttachments && !messageStickerID) {
-
-			console.log("Message Attachment: " + messageAttachments[0].payload.url);
-
-			if (messageAttachments[0].type === "image") {
+		} else
+			if (messageText && !quickReply) {//region if we get a text message
+		
 				try {
 
-					//current_users[senderID].imgUrl = messageAttachments[0].payload.url;
-					//console.log("current Users " + JSON.stringify(current_users));
+					// apiaiService.callApiai(messageText, sendTextMessage, senderID);
+					console.log("//send user message to apiai");  //send user message to apiai
+					var apiaiReply = apiaiService.apiaiTextRequest(messageText, senderID);
 
-					//call general search
-					clarifaiService.generalModelSearch(messageAttachments[0].payload.url);
+					apiaiReply
+						.then(function (response) {
 
-					//call prediction for a updated image
-					(clarifaiService.predict(messageAttachments[0].payload.url)).then(
-						function (reply) {
-							facebookService.sendTextMessage(senderID, reply);
-							var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID);
+							console.log("handleApiAiResponse(senderID, response)");
+							handleApiAiResponse(senderID, response);
 
-							apiaiReply
-								.then(function (reply) {
+						})
+						.catch(function (reason) {
 
-									facebookService.sendTextMessage(senderID, reply);
+							facebookService.sendTextMessage(senderID, JSON.stringify(reason));
 
-								})
-								.catch(function (reason) {
-
-									facebookService.sendTextMessage(senderID, JSON.stringify(reason));
-
-								});
-
-							if (reply != '#Rejected') {
-								facebookService.sendGenericMessage(senderID, reply);
-							}
-						}
-					);
-
-					clarifaiService.create(messageAttachments[0].payload.url)
+						});
+					//analyse and do all the operations here to make all other api calls
 
 				} catch (ex) {
-					console.log("Exception: " + ex.message);
-				}
-			} else {
-				facebookService.sendTextMessage(senderID, "Message with attachment received");
-			}
-		} else if (messageStickerID) {
-			//send sticker back to user
-			facebookService.sendTextMessage(senderID, messageAttachments[0].payload.url);
 
-		}
-		else {
-			facebookService.sendTextMessage(senderID, "Please upload your image");
-		}
+					console.log("buildReply Error " + ex);
+
+				}
+			} else if (messageAttachments && !messageStickerID) {
+
+				console.log("Message Attachment: " + messageAttachments[0].payload.url);
+
+				if (messageAttachments[0].type === "image") {
+					try {
+
+						//current_users[senderID].imgUrl = messageAttachments[0].payload.url;
+						//console.log("current Users " + JSON.stringify(current_users));
+
+						//call general search
+						clarifaiService.generalModelSearch(messageAttachments[0].payload.url);
+
+						//call prediction for a updated image
+						(clarifaiService.predict(messageAttachments[0].payload.url)).then(
+							function (reply) {
+								facebookService.sendTextMessage(senderID, reply);
+								var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID);
+
+								apiaiReply
+									.then(function (reply) {
+
+										facebookService.sendTextMessage(senderID, reply);
+
+									})
+									.catch(function (reason) {
+
+										facebookService.sendTextMessage(senderID, JSON.stringify(reason));
+
+									});
+
+								if (reply != '#Rejected') {
+									facebookService.sendGenericMessage(senderID, reply);
+								}
+							}
+						);
+
+						clarifaiService.create(messageAttachments[0].payload.url)
+
+					} catch (ex) {
+						console.log("Exception: " + ex.message);
+					}
+				} else {
+					facebookService.sendTextMessage(senderID, "Message with attachment received");
+				}
+			} else if (messageStickerID) {
+				//send sticker back to user
+				facebookService.sendTextMessage(senderID, messageAttachments[0].payload.url);
+
+			}
+			else {
+				facebookService.sendTextMessage(senderID, "Please upload your image");
+			}
 		//endregion if we get a text message
 	};
 
