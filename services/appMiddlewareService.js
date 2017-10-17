@@ -122,7 +122,7 @@
 			default:
 				//unindentified payload
 				console.log("unidentified payload "+this);
-				facebookService.sendVideo(senderID);
+				//facebookService.sendVideo(senderID);
 				facebookService.sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
 				break;
 

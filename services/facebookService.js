@@ -209,7 +209,7 @@
     }
 
     //send Video
-    function sendVideo(recipientId) {
+    function sendVideo(recipientId,videoPath) {
 
         var messageData = {
             recipient: {
@@ -219,7 +219,7 @@
                 attachment: {
                     type: "video",
                     payload: {
-                        url: "https://www.youtube.com/embed/XGSy3_Czz8k"
+                        url: videoPath
                     }
                 }
             }
