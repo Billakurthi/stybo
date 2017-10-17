@@ -179,7 +179,7 @@
 		console.log(JSON.stringify(message, null, 2));
 
 		if (quickReply && messageText) {
-			console.log("quickRepl \n" + quickReply);
+			console.log("quickRepl \n" + JSON.stringify(quickReply,null,2)) ;
 			handleQuickReply(senderID, quickReply, messageID);
 		} else
 			if (messageText) {//region if we get a text message
