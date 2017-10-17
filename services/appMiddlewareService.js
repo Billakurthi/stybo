@@ -22,8 +22,8 @@
 				usersMap.set(senderID, user);
 			}, senderID);
 
-			console.log("User Map Data \n" + JSON.stringify(usersMap,null,2));
-			console.log("SessionID's Data \n" + JSON.stringify(sessionIds,null,2));
+			console.log("User Map Data \n" + JSON.stringify(usersMap, null, 2));
+			console.log("SessionID's Data \n" + JSON.stringify(sessionIds, null, 2));
 
 		}
 	};
@@ -121,7 +121,7 @@
 				break;
 			default:
 				//unindentified payload
-				console.log("unidentified payload "+this);
+				console.log("unidentified payload " + this);
 				//facebookService.sendVideo(senderID);
 				facebookService.sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
 				break;
@@ -323,6 +323,8 @@
 							facebookService.sendTextMessage(senderID, reply);
 							//finalResult += reply + "\n";
 
+							//send generic message
+							facebookService.sendGenericMessage(senderID, reply);
 
 							var bodyParams = apiaiService.apiaiTextRequest(reply, senderID);
 
