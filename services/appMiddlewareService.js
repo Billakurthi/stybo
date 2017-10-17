@@ -121,6 +121,7 @@
 				break;
 			default:
 				//unindentified payload
+				console.log("unidentified payload "+this);
 				facebookService.sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
 				break;
 
