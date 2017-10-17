@@ -22,7 +22,9 @@
 				usersMap.set(senderID, user);
 			}, senderID);
 
-			console.log("User Map Data \n" + JSON.stringify(usersMap));
+			console.log("User Map Data \n" + JSON.stringify(usersMap,null,2));
+			console.log("SessionID's Data \n" + JSON.stringify(sessionIds,null,2));
+
 		}
 	};
 	//endregion setSessionAndUser
@@ -111,8 +113,8 @@
 			case 'TRENDING_PAYLOAD':
 				//get top trending dresses
 				facebookService.sendGenericMessage(senderID);
-			    //sendToApiAi(senderID, "job openings");
-			    break;
+				//sendToApiAi(senderID, "job openings");
+				break;
 			case 'MY_CART':
 				//user wants to chat
 				facebookService.sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
