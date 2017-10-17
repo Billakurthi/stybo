@@ -133,7 +133,7 @@
             ADD_TO_CART = {
                 type: "postback",
                 title: "Add to cart",
-                payload: "ADD_TO_CART_POSTBACK",
+                payload: "ADD_TO_CART_POSTBACK("+sr1+")",
             }
 
         var messageData = {
