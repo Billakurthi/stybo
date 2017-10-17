@@ -9,6 +9,7 @@
 
 	var sessionIds = new Map();
 	var usersMap = new Map();
+	var userCart = {};
 
 	//region setSessionAndUser
 	//TODO:  setSessionAndUser should be global
@@ -98,8 +99,14 @@
 
 			switch (postbackAndParams[0]) {
 				case 'ADD_TO_CART_POSTBACK':
-					console.log("added " + postbackAndParams[1] + " to cart");
-					facebookService.sendTextMessage(senderID,"added " + postbackAndParams[1] + " to cart");
+					if (!(userCart.hasOwnProperty(senderID))) {
+						userCart[senderID] = [];
+					};
+					userCart[senderID].push(postbackAndParams[1]);
+
+					console.log("added to cart" + JSON.stringify(userCart[senderID],null,2));
+					
+					facebookService.sendTextMessage(senderID, "added " + postbackAndParams[1] + " to cart");
 					break;
 				default:
 					//unindentified payload					
