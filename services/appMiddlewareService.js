@@ -78,24 +78,6 @@
 		*/
 	function receivedPostback(event) {
 
-		// if (postback) {
-
-		//                 let payload = postback.payload;
-
-		//                 handlePostbackPayload(senderID, payload, messageId);
-
-
-		//             }
-
-		//region handlePostbackPayload
-		// function handlePostbackPayload(senderID, payload, messageId) {
-
-
-
-		// };
-		//endregion handlePostbackPayload
-
-
 		var senderID = event.sender.id;
 		var recipientID = event.recipient.id;
 		var timeOfPostback = event.timestamp;
@@ -105,6 +87,26 @@
 		// The 'payload' param is a developer-defined field which is set in a postback
 		// button for Structured Messages.
 		var payload = event.postback.payload;
+		//check if payload has comma seperated parameters
+		//first parameter should be function name
+		//remaining parameters should be function parameters
+		var hasParams = payload.includes(",");
+
+		if (hasParams) {
+
+			var postbackAndParams = payload.split(",");
+
+			switch (postbackAndParams[0]) {
+				case 'ADD_TO_CART_POSTBACK':
+					console.log("added " + postbackAndParams[1] + " to cart");
+					break;
+				default:
+					//unindentified payload					
+					//facebookService.sendVideo(senderID);
+					facebookService.sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
+					break;
+			}
+		}
 
 		switch (payload) {
 			case 'GET_STARTED':
@@ -179,7 +181,7 @@
 		console.log(JSON.stringify(message, null, 2));
 
 		if (quickReply && messageText) {
-			console.log("quickRepl \n" + JSON.stringify(quickReply,null,2)) ;
+			console.log("quickRepl \n" + JSON.stringify(quickReply, null, 2));
 			handleQuickReply(senderID, quickReply, messageID);
 		} else
 			if (messageText) {//region if we get a text message
