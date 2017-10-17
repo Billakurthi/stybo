@@ -208,6 +208,27 @@
         });
     }
 
+    //send Video
+    function sendVideo(recipientId) {
+
+        var messageData = {
+            recipient: {
+                id: recipientId
+            },
+            message: {
+                attachment: {
+                    type: "video",
+                    payload: {
+                        url: "https://www.youtube.com/embed/XGSy3_Czz8k"
+                    }
+                }
+            }
+        }
+
+        callSendAPI(messageData);
+
+    }
+
     //region check if obj is defined or not
     function isDefined(obj) {
         if (typeof obj == 'undefined') {
@@ -228,7 +249,8 @@
         //receivedMessage: receivedMessage,
         sendGenericMessage: sendGenericMessage,
         sendTextMessage: sendTextMessage,
-        sendQuickReply: sendQuickReply
+        sendQuickReply: sendQuickReply,
+        sendVideo: sendVideo
 
     }
     module.exports = {
