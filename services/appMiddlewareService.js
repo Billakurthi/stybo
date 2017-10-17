@@ -134,7 +134,7 @@
 						if (!(userCart.hasOwnProperty(senderID)) && (userCart[senderID]) === undefined) {
 
 							facebookService.sendTextMessage(senderID, "No Items available in your cart");
-							return
+							return;
 
 						} else {
 
