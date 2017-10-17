@@ -168,7 +168,7 @@
 			messageText = message.text,
 			messageAttachments = message.attachments,
 			messageStickerID = message.sticker_id,
-			quickReply = message.quick_Reply || null;
+			quickReply = message.quick_reply || null;
 		//#endregion user message variables
 
 
@@ -181,9 +181,8 @@
 		if (quickReply && messageText) {
 			console.log("quickRepl \n" + quickReply);
 			handleQuickReply(senderID, quickReply, messageID);
-
 		} else
-			if (messageText && !quickReply) {//region if we get a text message
+			if (messageText) {//region if we get a text message
 				console.log("quickRepl \n" + quickReply);
 				try {
 
