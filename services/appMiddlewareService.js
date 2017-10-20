@@ -147,6 +147,7 @@
 
 							}, this);
 
+							sendListMessage(senderID);
 						}
 
 					};
@@ -224,7 +225,7 @@
 			handleQuickReply(senderID, quickReply, messageID);
 		} else
 			if (messageText) {//region if we get a text message
-				console.log("quickRepl \n" + quickReply);
+				console.log("Text Message \n" + messageText);
 				try {
 
 					// apiaiService.callApiai(messageText, sendTextMessage, senderID);
