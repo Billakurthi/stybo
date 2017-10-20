@@ -273,8 +273,9 @@
                     messageId, recipientId);
             } else {
                 console.error("Unable to send message.");
-                console.error(response);
-                console.error(error);
+                console.error("response \n "+ JSON.stringify(response,null,3));
+                console.error("error \n "+ JSON.stringify(error,null,3));
+                
             }
         });
     }
