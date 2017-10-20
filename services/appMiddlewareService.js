@@ -134,14 +134,17 @@
 						if (!(userCart.hasOwnProperty(senderID)) && (userCart[senderID]) === undefined) {
 
 							facebookService.sendTextMessage(senderID, "No Items available in your cart");
+
 							return;
- 
+
 						} else {
 
 							let cartItems = userCart[senderID];
 
 							cartItems.forEach(function (item) {
+
 								facebookService.sendTextMessage(senderID, item);
+
 							}, this);
 
 						}
@@ -171,10 +174,15 @@
 	function greetUserText(userId) {
 
 		let user = usersMap.get(userId);
+		while (user !== undefined) {
+			facebookService.sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
+				'I can answer frequently asked questions for you ' +
+				'and I perform job interviews. What can I help you with?');
 
-		facebookService.sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
-			'I can answer frequently asked questions for you ' +
-			'and I perform job interviews. What can I help you with?');
+			return;
+		}
+
+
 	}
 
 
