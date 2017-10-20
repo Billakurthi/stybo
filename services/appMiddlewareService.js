@@ -135,7 +135,7 @@
 
 							facebookService.sendTextMessage(senderID, "No Items available in your cart");
 							return;
-
+ 
 						} else {
 
 							let cartItems = userCart[senderID];
