@@ -121,12 +121,15 @@
     function sendGenericMessage(recipientId, reply) {
         var reply = reply || "#Apple";
 
+
+        //creating new button object
         function BUTTON_TEMPLATE(type, title, functionName, payload) {
             this.type = type;
             this.title = title;
             this.payload = functionName + ',' + payload;
         };
 
+        //Creating new Element object in Generic Template
         function ELEMENT_TEMPLATE(title, subtitle, item_url, image_url, buttons) {
             this.title = title,
                 this.subtitle = subtitle,
@@ -140,6 +143,7 @@
         var generic_elements = [];
 
         for (var key in costumes[reply]) {
+
             var BUY_BUTTON = new BUTTON_TEMPLATE("postback", "Buy Now", "BUY_NOW_POSTBACK", (costumes[reply])[key]);
 
             var ADD_TO_CART = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", (costumes[reply])[key]);
@@ -154,14 +158,16 @@
         }
 
         var messageData = {
+
             recipient: {
 
                 id: recipientId
 
             },
+
             message: {
                 attachment: {
-                    
+
                     type: "template",
 
                     payload: {
@@ -173,6 +179,8 @@
                 }
             }
         };
+
+        console.log(JSON.stringify(messageData,null,2));
 
         callSendAPI(messageData);
     }
