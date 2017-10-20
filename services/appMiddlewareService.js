@@ -157,7 +157,7 @@
 					break;
 				default:
 					//unindentified payload
-					console.log("unidentified payload " + this);
+					console.log("unidentified payload \n"+JSON.stringify(this,null,2));
 					//facebookService.sendVideo(senderID);
 					facebookService.sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
 					break;
