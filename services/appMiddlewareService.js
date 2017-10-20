@@ -147,7 +147,7 @@
 
 							}, this);
 
-							sendListMessage(senderID);
+							facebookService.sendListMessage(senderID);
 						}
 
 					};
