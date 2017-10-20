@@ -140,8 +140,7 @@
                                 default_action: {
                                     type: "web_url",
                                     url: "https://www.google.com",
-                                    webview_height_ratio: "tall",
-                                    fallback_url: "https://www.google.com"
+                                    
                                 }
                             }
                         ],
