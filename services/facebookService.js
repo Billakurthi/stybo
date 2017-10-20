@@ -110,7 +110,7 @@
 
     //region send list Items
 
-    function sendListMessage(recipientId) {
+    function sendListMessage(recipientId, top_element_style, elements, buttons) {
         var listTemplate = {
             recipient: {
                 id: recipientId
@@ -120,36 +120,10 @@
                     type: "template",
                     payload: {
                         template_type: "list",
-                        top_element_style: "compact",
-                        elements: [
-                            {
-                                title: "Classic T-Shirt Collection",
-                                subtitle: "See all our colors",
-                                image_url: "https://scontent.fbho1-1.fna.fbcdn.net/v/t34.0-12/22551692_1310823159029437_2060216769_n.jpg?oh=eafef5030f73ab210ab20a82bd459609&oe=59ECB8BF",
-                                buttons: [
-                                    {
-                                        title: "View",
-                                        type: "web_url",
-                                        url: "https://www.google.com"
-                                    }
-                                ]
-                            },
-                            {
-                                title: "Classic White T-Shirt",
-                                subtitle: "See all our colors",
-                                default_action: {
-                                    type: "web_url",
-                                    url: "https://www.google.com",
-                                    
-                                }
-                            }
-                        ],
+                        top_element_style: top_element_style || "compact",
+                        elements: elements,
                         buttons: [
-                            {
-                                title: "View More",
-                                type: "postback",
-                                payload: "payload"
-                            }
+                            buttons
                         ]
                     }
                 }
@@ -182,7 +156,7 @@
         }
 
 
-        var buttons = [];
+        //var buttons = [];
         var generic_elements = [];
 
         for (var key in costumes[reply]) {
@@ -246,9 +220,9 @@
                     messageId, recipientId);
             } else {
                 console.error("Unable to send message.");
-                console.error("response \n "+ JSON.stringify(response,null,3));
-                console.error("error \n "+ JSON.stringify(error,null,3));
-                
+                console.error("response \n " + JSON.stringify(response, null, 3));
+                console.error("error \n " + JSON.stringify(error, null, 3));
+
             }
         });
     }
