@@ -120,62 +120,55 @@
 
     function sendGenericMessage(recipientId, reply) {
         var reply = reply || "#Apple";
-        var sr1 = costumes[reply].url1;
-        var sr2 = costumes[reply].url2;
-        var sr3 = costumes[reply].url3;
-        var sr4 = costumes[reply].url4;
-        var sr5 = costumes[reply].url5;
-        var BUY_BUTTON = {
-            type: "postback",
-            title: "Buy Now",
-            payload: "BUY_NOW_POSTBACK",
-        },
-            ADD_TO_CART = {
-                type: "postback",
-                title: "Add to cart",
-                payload: "ADD_TO_CART_POSTBACK,"+sr1,
-            }
+
+        function BUTTON_TEMPLATE(type, title, functionName, payload) {
+            this.type = type;
+            this.title = title;
+            this.payload = functionName + ',' + payload;
+        };
+
+        function ELEMENT_TEMPLATE(title, subtitle, item_url, image_url, buttons) {
+            this.title = title,
+                this.subtitle = subtitle,
+                this.item_url = item_url,
+                this.image_url = image_url,
+                this.buttons = buttons
+        }
+
+
+        var buttons = [];
+        var generic_elements = [];
+
+        for (var key in costumes[reply]) {
+            var BUY_BUTTON = new BUTTON_TEMPLATE("postback", "Buy Now", "BUY_NOW_POSTBACK", (costumes[reply])[key]);
+
+            var ADD_TO_CART = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", (costumes[reply])[key]);
+
+            var buttons = [];
+
+            buttons.push(ADD_TO_CART, BUY_BUTTON);
+
+            var newElement = new ELEMENT_TEMPLATE("title", "Subtitle", (costumes[reply])[key], (costumes[reply])[key], buttons);
+
+            generic_elements.push(newElement);
+        }
 
         var messageData = {
             recipient: {
+
                 id: recipientId
+
             },
             message: {
                 attachment: {
+                    
                     type: "template",
+
                     payload: {
+
                         template_type: "generic",
-                        elements: [{
-                            title: "Exotic",
-                            subtitle: "Your best fit is here",
-                            item_url: sr1,
-                            image_url: sr1,
-                            buttons: [BUY_BUTTON, ADD_TO_CART],
-                        }, {
-                            title: "Vibrant",
-                            subtitle: "Be ready for party always",
-                            item_url: sr2,
-                            image_url: sr2,
-                            buttons: [BUY_BUTTON, ADD_TO_CART]
-                        }, {
-                            title: "Versatile",
-                            subtitle: "Get Trendy",
-                            item_url: sr3,
-                            image_url: sr3,
-                            buttons: [BUY_BUTTON, ADD_TO_CART]
-                        }, {
-                            title: "Dhana Dhan",
-                            subtitle: "You are princess",
-                            item_url: sr4,
-                            image_url: sr4,
-                            buttons: [BUY_BUTTON, ADD_TO_CART]
-                        }, {
-                            title: "Angel here",
-                            subtitle: "Rock on Style",
-                            item_url: sr5,
-                            image_url: sr5,
-                            buttons: [BUY_BUTTON, ADD_TO_CART]
-                        }]
+
+                        elements: generic_elements
                     }
                 }
             }
@@ -209,7 +202,7 @@
     }
 
     //send Video
-    function sendVideo(recipientId,videoPath) {
+    function sendVideo(recipientId, videoPath) {
 
         var messageData = {
             recipient: {
