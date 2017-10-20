@@ -131,7 +131,6 @@
                                         title: "View",
                                         type: "web_url",
                                         url: "https://www.google.com",
-
                                         webview_height_ratio: "tall",
                                         fallback_url: "https://www.google.com"
                                     }
@@ -142,33 +141,10 @@
                                 subtitle: "See all our colors",
                                 default_action: {
                                     type: "web_url",
-                                    url: "hhttps://www.google.com",
-
+                                    url: "https://www.google.com",
                                     webview_height_ratio: "tall",
                                     fallback_url: "https://www.google.com"
                                 }
-                            },
-                            {
-                                title: "Classic Blue T-Shirt",
-                                image_url: "https://scontent.fbho1-1.fna.fbcdn.net/v/t34.0-12/22551692_1310823159029437_2060216769_n.jpg?oh=eafef5030f73ab210ab20a82bd459609&oe=59ECB8BF",
-                                subtitle: "100% Cotton, 200% Comfortable",
-                                default_action: {
-                                    type: "web_url",
-                                    url: "https://www.google.com",
-
-                                    webview_height_ratio: "tall",
-                                    fallback_url: "https://www.google.com"
-                                },
-                                buttons: [
-                                    {
-                                        title: "Shop Now",
-                                        type: "web_url",
-                                        url: "https://www.google.com",
-
-                                        webview_height_ratio: "tall",
-                                        fallback_url: "https://www.google.com"
-                                    }
-                                ]
                             }
                         ],
                         buttons: [
