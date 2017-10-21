@@ -171,12 +171,12 @@
 
                   listElements = [];
 
-                  i = 0;
+                  i = -1;
 
                 };
                 
                 i++;
-                
+
                 facebookService.sendTextMessage(senderID, item);
 
               }, this);
