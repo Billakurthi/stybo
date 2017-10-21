@@ -146,14 +146,26 @@
                 this.title = title;
                 this.payload = functionName + ',' + payload;
               };
+
+              //creating default action template
+              function DEFAULT_ACTION_TEMPLATE(url, webview_height) {
+
+                this.type = "web_url",
+                  this.url = url,
+                  this.webview_height_ratio = webview_height || "COMPACT";
+
+              };
+
+
               //creating new ListElement
-              function listElementTemplate(title, subtitle, image_url, button) {
-                {
-                  this.title = title || "title",
-                    this.subtitle = subtitle || "subtitle",
-                    this.image_url = image_url || "https://scontent.fbho1-1.fna.fbcdn.net/v/t34.0-12/22551692_1310823159029437_2060216769_n.jpg?oh=eafef5030f73ab210ab20a82bd459609&oe=59ECB8BF",
-                    this.buttons = [button]
-                }
+              function listElementTemplate(title, subtitle, image_url, button, default_action) {
+
+                this.title = title || "title",
+                  this.subtitle = subtitle || "subtitle",
+                  this.image_url = image_url || "https://scontent.fbho1-1.fna.fbcdn.net/v/t34.0-12/22551692_1310823159029437_2060216769_n.jpg?oh=eafef5030f73ab210ab20a82bd459609&oe=59ECB8BF",
+                  this.buttons = [button],
+                  this.default_action = default_action
+
 
               }
               var listElements = [], i = 0;
@@ -161,7 +173,11 @@
 
               cartItems.forEach(function (item) {
 
-                var listElement = new listElementTemplate("ItemName", "ItemSubTitle", item, new BUTTON_TEMPLATE("postback", "Remove From Cart", "REMOVE_FROM_CART_PAYLOAD", item));
+                var button = new BUTTON_TEMPLATE("postback", "Remove From Cart", "REMOVE_FROM_CART_PAYLOAD", item);
+
+                var default_action = new DEFAULT_ACTION_TEMPLATE(item, "TALL");
+
+                var listElement = new listElementTemplate("ItemName", "ItemSubTitle", item, button, default_action);
 
                 listElements.push(listElement);
 
@@ -174,10 +190,10 @@
                   i = -1;
 
                 };
-                
+
                 i++;
 
-                facebookService.sendTextMessage(senderID, item);
+                //facebookService.sendTextMessage(senderID, item);
 
               }, this);
 
