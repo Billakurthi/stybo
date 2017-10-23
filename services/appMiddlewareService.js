@@ -393,7 +393,10 @@
   function handleApiAiAction(senderID, action, responseText, contexts, responseParameters, fulfillment) {
     console.log("handleApiAiAction action" + action);
     switch (action) {
+      case ("trending"):
 
+        facebookService.sendGenericMessage(senderID);
+        break;
       case ("body-type.body-type-measurements"):
 
         //send parameters to calcuate body type function and get appropriate result
