@@ -188,7 +188,7 @@
       }
       var listElements = [], i = 0;
 
-      facebookService.sendTextMessage(senderID,"Your car has "+cartItems.length +" items");
+      facebookService.sendTextMessage(senderID,"Your cart has "+cartItems.length +" items");
       cartItems.forEach(function (item) {
 
         var button = new BUTTON_TEMPLATE("postback", "Remove From Cart", "REMOVE_FROM_CART_PAYLOAD", item);
