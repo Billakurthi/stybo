@@ -127,86 +127,6 @@
           break;
         case 'MY_CART'://send all user cart items
 
-
-
-          function getCartItems(senderID) {
-
-            if (!(userCart.hasOwnProperty(senderID)) && (userCart[senderID]) === undefined) {
-
-              facebookService.sendTextMessage(senderID, "No Items available in your cart");
-
-              return;
-
-            } else {
-
-              let cartItems = userCart[senderID];
-              //creating new button object
-              function BUTTON_TEMPLATE(type, title, functionName, payload) {
-                this.type = type;
-                this.title = title;
-                this.payload = functionName + ',' + payload;
-              };
-
-              //creating default action template
-              function DEFAULT_ACTION_TEMPLATE(url, webview_height) {
-
-                this.type = "web_url",
-                  this.url = url,
-                  this.webview_height_ratio = webview_height || "COMPACT";
-
-              };
-
-
-              //creating new ListElement
-              function listElementTemplate(title, subtitle, image_url, button, default_action) {
-
-                this.title = title || "title",
-                  this.subtitle = subtitle || "subtitle",
-                  this.image_url = image_url || "https://scontent.fbho1-1.fna.fbcdn.net/v/t34.0-12/22551692_1310823159029437_2060216769_n.jpg?oh=eafef5030f73ab210ab20a82bd459609&oe=59ECB8BF",
-                  this.buttons = [button],
-                  this.default_action = default_action
-
-
-              }
-              var listElements = [], i = 0;
-
-
-              cartItems.forEach(function (item) {
-
-                var button = new BUTTON_TEMPLATE("postback", "Remove From Cart", "REMOVE_FROM_CART_PAYLOAD", item);
-
-                var default_action = new DEFAULT_ACTION_TEMPLATE(item, "TALL");
-
-                var listElement = new listElementTemplate("ItemName", "ItemSubTitle", item, button, default_action);
-
-                listElements.push(listElement);
-
-                if (i % 4 == 3) {
-
-                  facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
-
-                  listElements = [];
-
-                  i = -1;
-
-                };
-
-                i++;
-
-                //facebookService.sendTextMessage(senderID, item);
-
-              }, this);
-
-              if (listElements.length > 0) {
-
-                facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
-
-              }
-
-            }
-
-          };
-
           getCartItems(senderID);
 
           break;
@@ -223,6 +143,85 @@
 
     console.log("Received postback for user %d and page %d with payload '%s' " +
       "at %d", senderID, recipientID, payload, timeOfPostback);
+
+  };
+
+
+  function getCartItems(senderID) {
+
+    if (!(userCart.hasOwnProperty(senderID)) && (userCart[senderID]) === undefined) {
+
+      facebookService.sendTextMessage(senderID, "No Items available in your cart");
+
+      return;
+
+    } else {
+
+      let cartItems = userCart[senderID];
+      //creating new button object
+      function BUTTON_TEMPLATE(type, title, functionName, payload) {
+        this.type = type;
+        this.title = title;
+        this.payload = functionName + ',' + payload;
+      };
+
+      //creating default action template
+      function DEFAULT_ACTION_TEMPLATE(url, webview_height) {
+
+        this.type = "web_url",
+          this.url = url,
+          this.webview_height_ratio = webview_height || "COMPACT";
+
+      };
+
+
+      //creating new ListElement
+      function listElementTemplate(title, subtitle, image_url, button, default_action) {
+
+        this.title = title || "title",
+          this.subtitle = subtitle || "subtitle",
+          this.image_url = image_url || "https://scontent.fbho1-1.fna.fbcdn.net/v/t34.0-12/22551692_1310823159029437_2060216769_n.jpg?oh=eafef5030f73ab210ab20a82bd459609&oe=59ECB8BF",
+          this.buttons = [button],
+          this.default_action = default_action
+
+
+      }
+      var listElements = [], i = 0;
+
+
+      cartItems.forEach(function (item) {
+
+        var button = new BUTTON_TEMPLATE("postback", "Remove From Cart", "REMOVE_FROM_CART_PAYLOAD", item);
+
+        var default_action = new DEFAULT_ACTION_TEMPLATE(item, "TALL");
+
+        var listElement = new listElementTemplate("ItemName", "ItemSubTitle", item, button, default_action);
+
+        listElements.push(listElement);
+
+        if (i % 4 == 3) {
+
+          facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
+
+          listElements = [];
+
+          i = -1;
+
+        };
+
+        i++;
+
+        //facebookService.sendTextMessage(senderID, item);
+
+      }, this);
+
+      if (listElements.length > 0) {
+
+        facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
+
+      }
+
+    }
 
   };
 
@@ -393,9 +392,18 @@
   function handleApiAiAction(senderID, action, responseText, contexts, responseParameters, fulfillment) {
     console.log("handleApiAiAction action" + action);
     switch (action) {
+
+      case ("MY_CART"):
+
+        getCartItems(senderID);
+
+        break;
+
+
       case ("trending"):
 
         facebookService.sendGenericMessage(senderID);
+        
         break;
       case ("body-type.body-type-measurements"):
 
