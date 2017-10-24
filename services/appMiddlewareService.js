@@ -101,8 +101,13 @@
         case 'ADD_TO_CART_POSTBACK':
           if (!(userCart.hasOwnProperty(senderID))) {
             userCart[senderID] = [];
+            //userCart[senderID] = new Map();
           };
           userCart[senderID].push(postbackAndParams[1]);
+          // var item = postbackAndParams[1];
+          // //add a cartitem to  usercart
+          // userCart[senderID].set(item, userCart[senderID].get(item) ? (userCart[senderID].get(item) + 1) : 1);
+          // // userCart[senderID].push(postbackAndParams[1]);
 
           console.log("added to cart" + JSON.stringify(userCart[senderID], null, 2));
 
@@ -147,6 +152,8 @@
   };
 
 
+
+  //region get all cart items
   function getCartItems(senderID) {
 
     if (!(userCart.hasOwnProperty(senderID)) && (userCart[senderID]) === undefined) {
@@ -188,7 +195,8 @@
       }
       var listElements = [], i = 0;
 
-      facebookService.sendTextMessage(senderID,"Your cart has "+cartItems.length +" items");
+      facebookService.sendTextMessage(senderID, "Your cart has " + cartItems.length + " items");
+
       cartItems.forEach(function (item) {
 
         var button = new BUTTON_TEMPLATE("postback", "Remove From Cart", "REMOVE_FROM_CART_PAYLOAD", item);
@@ -224,7 +232,7 @@
     }
 
   };
-
+  //endregion get all cart items
 
   function greetUserText(userId) {
 
