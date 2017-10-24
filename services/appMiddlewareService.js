@@ -128,7 +128,9 @@
           };
           //check if cart has the item
           //if cart has item increment count else add item to cart
-          (userCart[senderID]).hasOwnProperty(url) ? (userCart[senderID])[url] += 1 : (userCart[senderID])[url] = 1;
+
+          let item = postbackAndParams[1];
+          (userCart[senderID]).hasOwnProperty(item) ? (userCart[senderID])[item] += 1 : (userCart[senderID])[item] = 1;
           // userCart[senderID].push(postbackAndParams[1]);
           // var item = postbackAndParams[1];
           // //add a cartitem to  usercart
