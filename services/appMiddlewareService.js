@@ -234,7 +234,7 @@
 
         var default_action = new DEFAULT_ACTION_TEMPLATE(item, "TALL");
 
-        var listElement = new listElementTemplate("ItemName", "ItemSubTitle \n" + "Count+" + cartItems[item], item, button, default_action);
+        var listElement = new listElementTemplate("ItemName", "ItemSubTitle \n" + "Count : " + cartItems[item], item, button, default_action);
 
         listElements.push(listElement);
 
