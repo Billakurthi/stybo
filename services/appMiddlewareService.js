@@ -434,7 +434,7 @@
         case 'DELETE_ITEM_POSTBACK':
           try {
 
-            delete (cartItems[senderID])[postbackAndParams[1]];
+            delete (userCart[senderID])[postbackAndParams[1]];
 
             getCartItems(senderID);
 
