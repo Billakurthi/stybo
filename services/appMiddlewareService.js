@@ -128,8 +128,8 @@
           };
           //check if cart has the item
           //if cart has item increment count else add item to cart
-          (cart['a']).hasOwnProperty(url) ? (cart['a'])[url] += 1 : (cart['a'])[url] = 1;
-          userCart[senderID].push(postbackAndParams[1]);
+          (userCart[senderID]).hasOwnProperty(url) ? (userCart[senderID])[url] += 1 : (userCart[senderID])[url] = 1;
+          // userCart[senderID].push(postbackAndParams[1]);
           // var item = postbackAndParams[1];
           // //add a cartitem to  usercart
           // userCart[senderID].set(item, userCart[senderID].get(item) ? (userCart[senderID].get(item) + 1) : 1);
