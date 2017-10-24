@@ -223,7 +223,7 @@
       }
       var listElements = [], i = 0;
 
-      facebookService.sendTextMessage(senderID, "Your cart has " + cartItems.length + " items");
+      facebookService.sendTextMessage(senderID, "Your cart has " + Object.keys(cartItems).length + " items");
 
       for (item in cartItems) {
         //cartItems.forEach(function (item) {
