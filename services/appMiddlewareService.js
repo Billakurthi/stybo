@@ -206,7 +206,6 @@
 
     } else {
 
-      let cartItems = userCart[senderID];
       //creating new button object
       function BUTTON_TEMPLATE(type, title, functionName, payload) {
         this.type = type;
@@ -235,14 +234,23 @@
 
 
       }
+
+      let cartItems = userCart[senderID];
+
+      let MAX_ITEMS_PER_LIST = 4;
+
       var listElements = [], i = 0;
 
+
       facebookService.sendTextMessage(senderID, "Your cart has " + Object.keys(cartItems).length + " items");
+      if ((Object.keys(cartItems).length) % 4 === 0) {
+
+        MAX_ITEMS_PER_LIST--;
+
+      };
+
 
       for (item in cartItems) {
-        //cartItems.forEach(function (item) {
-
-
 
         var button = new BUTTON_TEMPLATE("postback", "Edit item", "EDIT_CART_ITEM_PAYLOAD", item);
 
@@ -252,7 +260,7 @@
 
         listElements.push(listElement);
 
-        if (i % 4 == 3) {
+        if ((i % MAX_ITEMS_PER_LIST) == (MAX_ITEMS_PER_LIST-1)) {
 
           facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
 
