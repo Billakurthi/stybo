@@ -97,7 +97,30 @@
 
       var postbackAndParams = payload.split(",");
 
+
+      function QUICK_REPLIES_BUTTON_TEMPLATE(content_type, title, POSTBACK_PAYLOAD, image_url) {
+        this.content_type = content_type,//"text",location
+          this.title = title,
+          this.payload = POSTBACK_PAYLOAD,
+          this.image_url = image_url
+      }
+
       switch (postbackAndParams[0]) {
+        case 'EDIT_CART_ITEM_PAYLOAD':
+          let quick_replies = [];
+
+          //create a delete button
+          let delete_button = new QUICK_REPLIES_BUTTON_TEMPLATE(text, 'Delete item', DELETE_ITEM_POSTBACK + "," + postbackAndParams[1], postbackAndParams[1]);
+          //create a edit count button
+
+          let edit_count_button = new QUICK_REPLIES_BUTTON_TEMPLATE(text, 'Edit count', EDIT_ITEM_COUNT_POSTBACK + "," + postbackAndParams[1], postbackAndParams[1]);
+
+          quick_replies.push(delete_button, edit_count_button);
+
+          //create a change count button
+          facebookService.sendQuickReply(senderID, "How would you like to proceed with order", quick_replies, "");
+
+          break;
         case 'ADD_TO_CART_POSTBACK':
           if (!(userCart.hasOwnProperty(senderID))) {
             userCart[senderID] = [];
