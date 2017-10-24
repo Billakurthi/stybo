@@ -421,22 +421,53 @@
 
     var quickReplyPayload = quickReply.payload;
 
+    var hasParams = quickReplyPayload.includes(",");
+
     console.log("Quick reply for message %s with payload %s", messageId, quickReplyPayload);
 
-    //send payload to api.ai
-    var apiaiReply = apiaiService.apiaiTextRequest(quickReplyPayload, senderID);
+    if (hasParams) {
 
-    apiaiReply
-      .then(function (response) {
-        handleApiAiResponse(senderID, response);
-        // facebookService.sendTextMessage(senderID, response);
+      let postbackAndParams = payload.split(",");
 
-      })
-      .catch(function (reason) {
-        console.log("handleQuickReply catch reason" + reason);
-        facebookService.sendTextMessage(senderID, JSON.stringify(reason));
 
-      });
+      switch (postbackAndParams[0]) {
+        case 'DELETE_ITEM_POSTBACK':
+          try {
+
+            delete (cartItems[senderID])[postbackAndParams[1]];
+
+            getCartItems(senderID);
+
+          } catch (error) {
+
+            console.log(error);
+
+          }
+
+          break;
+        default:
+          //unindentified payload					
+          //facebookService.sendVideo(senderID);
+          facebookService.sendTextMessage(senderID, "DELETE_ITEM_POSTBACK" + "I'm not sure what you want. Can you be more specific?");
+          break;
+      }
+    } else {
+
+      //send payload to api.ai
+      var apiaiReply = apiaiService.apiaiTextRequest(quickReplyPayload, senderID);
+
+      apiaiReply
+        .then(function (response) {
+          handleApiAiResponse(senderID, response);
+          // facebookService.sendTextMessage(senderID, response);
+
+        })
+        .catch(function (reason) {
+          console.log("handleQuickReply catch reason" + reason);
+          facebookService.sendTextMessage(senderID, JSON.stringify(reason));
+
+        });
+    }
   };
   //endregion handleQuickReply
 
