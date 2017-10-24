@@ -110,10 +110,10 @@
           let quick_replies = [];
 
           //create a delete button
-          let delete_button = new QUICK_REPLIES_BUTTON_TEMPLATE('text', 'Delete item', DELETE_ITEM_POSTBACK + "," + postbackAndParams[1], postbackAndParams[1]);
+          let delete_button = new QUICK_REPLIES_BUTTON_TEMPLATE('text', 'Delete item', "DELETE_ITEM_POSTBACK" + "," + postbackAndParams[1], postbackAndParams[1]);
           //create a edit count button
 
-          let edit_count_button = new QUICK_REPLIES_BUTTON_TEMPLATE('text', 'Edit count', EDIT_ITEM_COUNT_POSTBACK + "," + postbackAndParams[1], postbackAndParams[1]);
+          let edit_count_button = new QUICK_REPLIES_BUTTON_TEMPLATE('text', 'Edit count', "EDIT_ITEM_COUNT_POSTBACK" + "," + postbackAndParams[1], postbackAndParams[1]);
 
           quick_replies.push(delete_button, edit_count_button);
 
