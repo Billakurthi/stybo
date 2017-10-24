@@ -427,7 +427,7 @@
 
     if (hasParams) {
 
-      let postbackAndParams = payload.split(",");
+      let postbackAndParams = quickReplyPayload.split(",");
 
 
       switch (postbackAndParams[0]) {
