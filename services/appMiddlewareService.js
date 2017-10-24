@@ -106,6 +106,20 @@
       }
 
       switch (postbackAndParams[0]) {
+        case 'DELETE_ITEM_POSTBACK':
+          try {
+
+            delete (cartItems[senderID])[postbackAndParams[1]];
+
+            getCartItems(senderID);
+
+          } catch (error) {
+
+            console.log(error);
+
+          }
+
+          break;
         case 'EDIT_CART_ITEM_PAYLOAD':
           let quick_replies = [];
 
