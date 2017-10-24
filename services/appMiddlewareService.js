@@ -123,9 +123,12 @@
           break;
         case 'ADD_TO_CART_POSTBACK':
           if (!(userCart.hasOwnProperty(senderID))) {
-            userCart[senderID] = [];
+            userCart[senderID] = {};
             //userCart[senderID] = new Map();
           };
+          //check if cart has the item
+          //if cart has item increment count else add item to cart
+          (cart['a']).hasOwnProperty(url) ? (cart['a'])[url] += 1 : (cart['a'])[url] = 1;
           userCart[senderID].push(postbackAndParams[1]);
           // var item = postbackAndParams[1];
           // //add a cartitem to  usercart
@@ -220,13 +223,16 @@
 
       facebookService.sendTextMessage(senderID, "Your cart has " + cartItems.length + " items");
 
-      cartItems.forEach(function (item) {
+      for (item in cartItems) {
+        //cartItems.forEach(function (item) {
+
+
 
         var button = new BUTTON_TEMPLATE("postback", "Edit item", "EDIT_CART_ITEM_PAYLOAD", item);
 
         var default_action = new DEFAULT_ACTION_TEMPLATE(item, "TALL");
 
-        var listElement = new listElementTemplate("ItemName", "ItemSubTitle", item, button, default_action);
+        var listElement = new listElementTemplate("ItemName", "ItemSubTitle \n" + "Count+" + cartItems[item], item, button, default_action);
 
         listElements.push(listElement);
 
@@ -244,7 +250,7 @@
 
         //facebookService.sendTextMessage(senderID, item);
 
-      }, this);
+      };
 
       if (listElements.length > 0) {
 
