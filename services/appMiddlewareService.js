@@ -199,7 +199,7 @@
 
       cartItems.forEach(function (item) {
 
-        var button = new BUTTON_TEMPLATE("postback", "Remove From Cart", "REMOVE_FROM_CART_PAYLOAD", item);
+        var button = new BUTTON_TEMPLATE("postback", "Edit item", "EDIT_CART_ITEM_PAYLOAD", item);
 
         var default_action = new DEFAULT_ACTION_TEMPLATE(item, "TALL");
 
