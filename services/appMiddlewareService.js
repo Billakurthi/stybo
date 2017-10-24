@@ -252,15 +252,15 @@
 
       for (item in cartItems) {
 
-        var button = new BUTTON_TEMPLATE("postback", "Edit item", "EDIT_CART_ITEM_PAYLOAD", item);
+        var edit_item_button = new BUTTON_TEMPLATE("postback", "Edit item", "EDIT_CART_ITEM_PAYLOAD", item);
 
-        var default_action = new DEFAULT_ACTION_TEMPLATE(item, "TALL");
+        var image_view_default_action = new DEFAULT_ACTION_TEMPLATE(item, "TALL");
 
-        var listElement = new listElementTemplate("ItemName", "ItemSubTitle \n" + "Count : " + cartItems[item], item, button, default_action);
+        var listElement = new listElementTemplate("ItemName", "ItemSubTitle \n" + "Count : " + cartItems[item], item, edit_item_button, image_view_default_action);
 
         listElements.push(listElement);
 
-        if ((i % MAX_ITEMS_PER_LIST) == (MAX_ITEMS_PER_LIST-1)) {
+        if ((i % MAX_ITEMS_PER_LIST) == (MAX_ITEMS_PER_LIST - 1)) {
 
           facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
 
@@ -276,8 +276,20 @@
 
       };
 
-      if (listElements.length > 0) {
+      if (listElements.length > 1) {
 
+        facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
+
+      } else {
+
+        var listElement = new listElementTemplate("Total of Products", "Total Item Count : " + Object.keys(cartItems).length);
+        delete listElement.buttons;
+        delete listElement.image_url;
+        delete listElement.default_action;
+
+        console.log(listElement);
+
+        listElements.push(listElement);
         facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
 
       }
