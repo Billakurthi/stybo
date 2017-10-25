@@ -123,7 +123,7 @@
                         top_element_style: top_element_style || "compact",
                         elements: elements,
                         buttons: [
-                            buttons
+                            buttons || {}
                         ]
                     }
                 }
