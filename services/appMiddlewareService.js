@@ -168,13 +168,16 @@
         case 'BUY_NOW_PAYLOAD':
 
           function buyNow() {
+
             let cartItems = userCart[senderID];
 
             facebookService.sendTextMessage(senderID,
               `Your order for ${Object.keys(cartItems).length} items is placed`
             );
 
-          }
+          };
+
+          buyNow();
 
           break;
 
@@ -200,6 +203,7 @@
 
       }
     }
+
     console.log("payload" + payload);
 
     console.log("Received postback for user %d and page %d with payload '%s' " +
