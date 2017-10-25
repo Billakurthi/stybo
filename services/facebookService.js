@@ -129,7 +129,11 @@
                 }
             }
         };
+
+        console.log(" list buttons"+ buttons);
         
+        console.log("buttons Type"+ typeof(buttons));
+
         //if buttons are not passed as parameter then delete button property
 
         if (buttons == undefined || buttons == null) {
