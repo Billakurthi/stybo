@@ -164,6 +164,20 @@
     } else {
 
       switch (payload) {
+
+        case 'BUY_NOW_PAYLOAD':
+
+          function buyNow() {
+            let cartItems = userCart[senderID];
+
+            facebookService.sendTextMessage(senderID,
+              `Your order for ${Object.keys(cartItems).length} items is placed`
+            );
+
+          }
+
+          break;
+
         case 'GET_STARTED':
           greetUserText(senderID);
           break;
@@ -292,7 +306,7 @@
         console.log(listElement);
 
         listElements.push(listElement);
-        facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
+        facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD"));
 
       }
 
