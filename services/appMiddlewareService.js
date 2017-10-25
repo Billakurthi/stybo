@@ -210,7 +210,8 @@
       function BUTTON_TEMPLATE(type, title, functionName, payload) {
         this.type = type;
         this.title = title;
-        this.payload = functionName + ',' + payload;
+        //check if url payload is available and else attach only function name
+        this.payload = payload ? functionName + ',' + payload : functionName;
       };
 
       //creating default action template
@@ -243,7 +244,7 @@
 
 
       //facebookService.sendTextMessage(senderID, "Your cart has " + Object.keys(cartItems).length + " items");
-      
+
       if ((Object.keys(cartItems).length) % 4 === 0) {
 
         MAX_ITEMS_PER_LIST--;
@@ -264,7 +265,6 @@
         if ((i % MAX_ITEMS_PER_LIST) == (MAX_ITEMS_PER_LIST - 1)) {
 
           facebookService.sendListMessage(senderID, 'compact', listElements);
-          //          facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
 
           listElements = [];
 
@@ -281,7 +281,6 @@
       if (listElements.length > 1) {
 
         facebookService.sendListMessage(senderID, 'compact', listElements);
-        //        facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
 
       } else {
 
