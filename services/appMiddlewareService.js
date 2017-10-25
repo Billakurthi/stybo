@@ -262,11 +262,7 @@
 
         if ((i % MAX_ITEMS_PER_LIST) == (MAX_ITEMS_PER_LIST - 1)) {
 
-          setTimeout(() => {
-            facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
-
-          }, 500);
-
+          facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
 
           listElements = [];
 
@@ -280,13 +276,10 @@
 
       };
 
-
       if (listElements.length > 1) {
-        setTimeout(() => {
 
-          facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
+        facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
 
-        }, 500);
       } else {
 
         var listElement = new listElementTemplate("Total of Products", "Total Item Count : " + Object.keys(cartItems).length);
@@ -297,12 +290,7 @@
         console.log(listElement);
 
         listElements.push(listElement);
-        
-        setTimeout(() => {
-
         facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
-
-        },500);
 
       }
 
