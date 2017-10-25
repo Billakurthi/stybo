@@ -286,7 +286,7 @@
 
           facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
 
-        }, 500)
+        }, 500);
       } else {
 
         var listElement = new listElementTemplate("Total of Products", "Total Item Count : " + Object.keys(cartItems).length);
@@ -302,7 +302,7 @@
 
         facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
 
-        },500)
+        },500);
 
       }
 
