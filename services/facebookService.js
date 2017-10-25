@@ -123,16 +123,14 @@
                         top_element_style: top_element_style || "compact",
                         elements: elements,
                         buttons: [
-                            buttons || {}
+                            buttons
                         ]
                     }
                 }
             }
         };
 
-        console.log(" list buttons"+ buttons);
-        
-        console.log("buttons Type"+ typeof(buttons));
+
 
         //if buttons are not passed as parameter then delete button property
 

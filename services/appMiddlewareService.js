@@ -242,7 +242,8 @@
       var listElements = [], i = 0;
 
 
-      facebookService.sendTextMessage(senderID, "Your cart has " + Object.keys(cartItems).length + " items");
+      //facebookService.sendTextMessage(senderID, "Your cart has " + Object.keys(cartItems).length + " items");
+      
       if ((Object.keys(cartItems).length) % 4 === 0) {
 
         MAX_ITEMS_PER_LIST--;
