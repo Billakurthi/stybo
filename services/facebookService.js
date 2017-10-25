@@ -129,6 +129,12 @@
                 }
             }
         };
+        
+        //if buttons are not passed as parameter then delete button property
+
+        if (buttons == undefined || buttons == null) {
+            delete listTemplate.message.attachment.payload.buttons;
+        };
 
         callSendAPI(listTemplate);
     }
