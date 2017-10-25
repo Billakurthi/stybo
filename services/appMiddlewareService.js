@@ -262,7 +262,8 @@
 
         if ((i % MAX_ITEMS_PER_LIST) == (MAX_ITEMS_PER_LIST - 1)) {
 
-          facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
+          facebookService.sendListMessage(senderID, 'compact', listElements);
+          //          facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
 
           listElements = [];
 
@@ -278,7 +279,8 @@
 
       if (listElements.length > 1) {
 
-        facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
+        facebookService.sendListMessage(senderID, 'compact', listElements);
+        //        facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD", "BY_NOW_URL"));
 
       } else {
 
