@@ -174,9 +174,24 @@
 
             let cartItems = userCart[senderID];
 
-            facebookService.sendTextMessage(senderID,
-              `Your order for ${Object.keys(cartItems).length} items is placed`
-            );
+            let cartItemsLength = Object.keys(cartItems).length;
+
+            if (cartItemsLength) {
+
+              facebookService.sendTextMessage(senderID,
+                `Your order for ${cartItemsLength} items is placed`
+              );
+
+            } else {
+
+              facebookService.sendTextMessage(senderID,
+                `Your stybo cart is empty Please add items to cart`
+              );
+
+
+            }
+
+
 
           };
 
