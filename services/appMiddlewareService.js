@@ -234,7 +234,7 @@
   //region get all cart items
   function getCartItems(senderID) {
 
-    if (!(userCart.hasOwnProperty(senderID)) && (userCart[senderID]) === undefined) {
+    if ((!(userCart.hasOwnProperty(senderID)) && (userCart[senderID]) === undefined) || !(Object.keys(userCart[senderID]).length)) {
 
       facebookService.sendTextMessage(senderID, "No Items available in your cart");
 
