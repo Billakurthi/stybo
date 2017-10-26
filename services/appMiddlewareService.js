@@ -14,6 +14,9 @@
   //region setSessionAndUser
   //TODO:  setSessionAndUser should be global
   function setSessionAndUser(senderID) {
+
+    console.log(`sessionId's \n ${sessionIds} \n  usersMap ${usersMap} `);
+
     if (!sessionIds.has(senderID)) {
       sessionIds.set(senderID, uuid.v1());
     }
