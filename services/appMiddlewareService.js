@@ -16,8 +16,8 @@
   function setSessionAndUser(senderID) {
 
     console.log("sessionId's \n " + JSON.stringify(sessionIds) +
-                "\n  usersMap\n" + JSON.stringify(usersMap) +
-                "\n  userCart\n" + JSON.stringify(userCart));
+      "\n  usersMap\n" + JSON.stringify(usersMap) +
+      "\n  userCart\n" + JSON.stringify(userCart));
 
     if (!sessionIds.has(senderID)) {
       sessionIds.set(senderID, uuid.v1());
@@ -494,7 +494,7 @@
         case 'DELETE_ITEM_POSTBACK':
           try {
 
-            if (!((userCart[senderID]).hasOwnProperty(postbackAndParams[1]))) {
+            if (!(userCart[senderID]) && !((userCart[senderID]).hasOwnProperty(postbackAndParams[1]))) {
 
               delete (userCart[senderID])[postbackAndParams[1]];
 
