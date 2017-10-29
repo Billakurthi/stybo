@@ -15,8 +15,8 @@
   //TODO:  setSessionAndUser should be global
   function setSessionAndUser(senderID) {
 
-    console.log("sessionId's \n " + JSON.stringify(sessionIds) +
-      "\n  usersMap\n" + JSON.stringify(usersMap) +
+    console.log("sessionId's \n " +(sessionIds) +
+      "\n  usersMap\n" + (usersMap) +
       "\n  userCart\n" + JSON.stringify(userCart));
 
     if (!sessionIds.has(senderID)) {
