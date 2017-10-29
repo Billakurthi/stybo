@@ -496,7 +496,7 @@
 
             if (userCart[senderID]) {
 
-              if (!((userCart[senderID])[postbackAndParams[1]])) {
+              if ((userCart[senderID])[postbackAndParams[1]]) {
 
                 delete (userCart[senderID])[postbackAndParams[1]];
 
