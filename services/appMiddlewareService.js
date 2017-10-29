@@ -492,7 +492,7 @@
         case 'DELETE_ITEM_POSTBACK':
           try {
 
-            if ((userCart[senderID]).hasOwnProperty(postbackAndParams[1])) {
+            if (!((userCart[senderID]).hasOwnProperty(postbackAndParams[1]))) {
 
               delete (userCart[senderID])[postbackAndParams[1]];
 
