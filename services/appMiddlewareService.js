@@ -15,9 +15,6 @@
   //TODO:  setSessionAndUser should be global
   function setSessionAndUser(senderID) {
 
-    console.log("sessionId's \n " +(sessionIds) +
-      "\n  usersMap\n" + (usersMap) +
-      "\n  userCart\n" + JSON.stringify(userCart));
 
     if (!sessionIds.has(senderID)) {
       sessionIds.set(senderID, uuid.v1());
@@ -28,10 +25,11 @@
         usersMap.set(senderID, user);
       }, senderID);
 
-      console.log("User Map Data \n" + JSON.stringify(usersMap, null, 2));
-      console.log("SessionID's Data \n" + JSON.stringify(sessionIds, null, 2));
 
     }
+    console.log("User Map Data \n" + JSON.stringify(usersMap, null, 2));
+    console.log("SessionID's Data \n" + JSON.stringify(sessionIds, null, 2));
+    console.log("SessionID's Data \n" + JSON.stringify(userCart, null, 2));
   };
   //endregion setSessionAndUser
 
