@@ -66,7 +66,7 @@
 
           console.log("entry.messaging.forEach(function (event) { \n" + error);
 
-        }
+        };
 
       });
     });
@@ -492,7 +492,14 @@
         case 'DELETE_ITEM_POSTBACK':
           try {
 
-            delete (userCart[senderID])[postbackAndParams[1]];
+            if ((userCart[senderID]).hasOwnProperty(postbackAndParams[1])) {
+
+              delete (userCart[senderID])[postbackAndParams[1]];
+
+            } else {
+              facebookService.sendTextMessage(senderID, "This item is not available in your cart to perform further action");
+            }
+
 
             getCartItems(senderID);
 
