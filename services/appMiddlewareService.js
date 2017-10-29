@@ -494,12 +494,18 @@
         case 'DELETE_ITEM_POSTBACK':
           try {
 
-            if (!(userCart[senderID]) && !((userCart[senderID])[postbackAndParams[1]])) {
+            if (userCart[senderID]) {
 
-              delete (userCart[senderID])[postbackAndParams[1]];
+              if (!((userCart[senderID])[postbackAndParams[1]])) {
+
+                delete (userCart[senderID])[postbackAndParams[1]];
+
+              }
 
             } else {
+
               facebookService.sendTextMessage(senderID, "This item is not available in your cart to perform further action");
+
             }
 
 
