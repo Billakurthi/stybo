@@ -423,37 +423,30 @@
         if (messageAttachments[0].type === "image") {
           try {
 
+            var userImageInputQuickReplies = {
+              "quick_replies": [
+                {
+                  "content_type": "text",
+                  "title": "Get Similar Dresses",
+                  "payload": "GET_SIMILAR_DRESSES"
+                },
+                {
+                  "content_type": "text",
+                  "title": "Get Body Type",
+                  "payload": "GET_BODY_TYPE"
+                }
+              ]
+            };
+
+            facebookService.sendQuickReply(senderID, "How would you like to proceed?", userImageInputQuickReplies, null);
+
+           // clarifiaiFunctions(messageAttachments[0].payload.url);
+
             //current_users[senderID].imgUrl = messageAttachments[0].payload.url;
             //console.log("current Users " + JSON.stringify(current_users));
 
             //call general search
-            clarifaiService.generalModelSearch(messageAttachments[0].payload.url);
 
-            //call prediction for a updated image
-            (clarifaiService.predict(messageAttachments[0].payload.url)).then(
-              function (reply) {
-                facebookService.sendTextMessage(senderID, reply);
-                var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID);
-
-                apiaiReply
-                  .then(function (reply) {
-
-                    facebookService.sendTextMessage(senderID, reply);
-
-                  })
-                  .catch(function (reason) {
-
-                    facebookService.sendTextMessage(senderID, JSON.stringify(reason));
-
-                  });
-
-                if (reply != '#Rejected') {
-                  facebookService.sendGenericMessage(senderID, reply);
-                }
-              }
-            );
-
-            clarifaiService.create(messageAttachments[0].payload.url)
 
           } catch (ex) {
             console.log("Exception: " + ex.message);
@@ -472,7 +465,37 @@
     //endregion if we get a text message
   };
 
+  function clarifiaiFunctions(userImage) {
 
+    clarifaiService.generalModelSearch(userImage);
+
+    //call prediction for a updated image
+    (clarifaiService.predict(userImage)).then(
+      function (reply) {
+        facebookService.sendTextMessage(senderID, reply);
+        var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID);
+
+        apiaiReply
+          .then(function (reply) {
+
+            facebookService.sendTextMessage(senderID, reply);
+
+          })
+          .catch(function (reason) {
+
+            facebookService.sendTextMessage(senderID, JSON.stringify(reason));
+
+          });
+
+        if (reply != '#Rejected') {
+          facebookService.sendGenericMessage(senderID, reply);
+        }
+      }
+    );
+
+    clarifaiService.create(userImage);
+
+  };
 
   //region handleQuickReply
   function handleQuickReply(senderID, quickReply, messageId) {
