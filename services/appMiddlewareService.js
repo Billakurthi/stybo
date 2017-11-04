@@ -423,24 +423,22 @@
         if (messageAttachments[0].type === "image") {
           try {
 
-            var userImageInputQuickReplies = {
-              "quick_replies": [
-                {
-                  "content_type": "text",
-                  "title": "Get Similar Dresses",
-                  "payload": "GET_SIMILAR_DRESSES"
-                },
-                {
-                  "content_type": "text",
-                  "title": "Get Body Type",
-                  "payload": "GET_BODY_TYPE"
-                }
-              ]
-            };
+            var userImageInputQuickReplies = [
+              {
+                "content_type": "text",
+                "title": "Get Similar Dresses",
+                "payload": "GET_SIMILAR_DRESSES"
+              },
+              {
+                "content_type": "text",
+                "title": "Get Body Type",
+                "payload": "GET_BODY_TYPE"
+              }
+            ];
 
             facebookService.sendQuickReply(senderID, "How would you like to proceed?", userImageInputQuickReplies, null);
 
-           // clarifiaiFunctions(messageAttachments[0].payload.url);
+            // clarifiaiFunctions(messageAttachments[0].payload.url);
 
             //current_users[senderID].imgUrl = messageAttachments[0].payload.url;
             //console.log("current Users " + JSON.stringify(current_users));

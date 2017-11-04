@@ -90,7 +90,13 @@
 
     }
 
-    /** Send a message with Quick Reply buttons.**/
+    /** Send a message with Quick Reply buttons.
+     * 
+     * Text: Should be a question string ,
+     * 
+     * replies: Should be an array of reply objects
+     * 
+     * **/
 
     function sendQuickReply(recipientId, text, replies, metadata) {
         var messageData = {
