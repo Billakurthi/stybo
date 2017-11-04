@@ -89,10 +89,15 @@
                     //         return console.log(err);
                     //     }
                     // });
-                    imageResults.push(element.input.data.image.url);
 
+                    if (imageResults.length == 5) {
+                        return 0;
+                    };
+
+                    imageResults.push(element.input.data.image.url);
+                    
                 }, this);
-                
+
                 return imageResults;
 
             },

@@ -214,7 +214,7 @@
         console.log(JSON.stringify(messageData, null, 2));
 
         callSendAPI(messageData);
-    }
+    };
 
 
     //function to call callSendAPI
