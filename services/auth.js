@@ -20,7 +20,8 @@ module.exports = {
 
     clarifyConfig: {
 
-        CLARIFY_API_KEY: 'bd626861f2f24192945ce59e035f0d02'
+        CLARIFY_BODY_TYPE_API_KEY: 'bd626861f2f24192945ce59e035f0d02',
+        CLARIFY_IMAGE_SEARCH_API_KEY: 'cb5d3653967f4ca58ce061e483f1bfe6'
 
     }
 

@@ -521,7 +521,17 @@
 
           case 'GET_SIMILAR_DRESSES_PAYLOAD':
 
-          facebookService.sendTextMessage(senderID,"inside GET_SIMILAR_DRESSES_PAYLOAD");
+          clarifaiService.getSimilarDress(postbackAndParams[1]).then(function(replies){
+
+            replies.forEach(function(reply) {
+              
+              facebookService.sendTextMessage(senderID,reply);
+
+            }, this);
+
+          });
+
+          
           break;
 
 

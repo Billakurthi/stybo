@@ -1,8 +1,6 @@
 'use strict';
 (function () {
 
-
-
     // Require the client
     const Clarifai = require('clarifai'),
 
@@ -10,8 +8,8 @@
 
 
     // initialize with your api key. This will also work in your browser via http://browserify.org/
-    const appClarifai = new Clarifai.App({
-        apiKey: clarifyConfig.CLARIFY_API_KEY
+    const appClarifaiBodyType = new Clarifai.App({
+        apiKey: clarifyConfig.CLARIFY_BODY_TYPE_API_KEY
     });
 
     // Predict function to predict image
@@ -20,7 +18,7 @@
         //console.log(url);
         url = encodeURI(url);
         //console.log(url);
-        return appClarifai.models.predict("Stybo", url).then(
+        return appClarifaiBodyType.models.predict("Stybo", url).then(
             function (response) {
                 var reply = response.outputs[0].data.concepts[0].name;
                 // +                " with confidence " + response.outputs[0].data.concepts[0].value;
@@ -38,7 +36,7 @@
     };
 
     var create = function (url) {
-        appClarifai.inputs.create({
+        appClarifaiBodyType.inputs.create({
             url: url,
             concepts: [
                 {
@@ -54,7 +52,7 @@
 
         console.log("inside searchUrl" + searchUrl);
 
-        appClarifai.models.predict(Clarifai.GENERAL_MODEL, searchUrl).then(
+        appClarifaiBodyType.models.predict(Clarifai.GENERAL_MODEL, searchUrl).then(
             function (response) {
 
                 console.log("General Model response =" + JSON.stringify(response, null, 2));
@@ -69,11 +67,52 @@
     };
 
 
+
+
+    const appClarifaiImageSearch = new Clarifai.App({
+        apiKey: clarifyConfig.CLARIFY_IMAGE_SEARCH_API_KEY
+    });
+    function getSimilarDress(imageURL) {
+
+        var imageResults = [];
+
+        return appClarifaiImageSearch.inputs.search(
+            {
+                input: { url: imageURL }
+            }).then(
+            function (response) {
+                // do something with response
+                //console.log(JSON.stringify(response,null,2));
+                response.hits.forEach(function (element) {
+                    // fs.writeFile("test.txt",JSON.stringify(response,null,2) , function(err) {
+                    //     if(err) {
+                    //         return console.log(err);
+                    //     }
+                    // });
+                    imageResults.push(element.input.data.image.url);
+
+                }, this);
+                
+                return imageResults;
+
+            },
+            function (err) {
+                //                console.log(err);
+                console.log(JSON.stringify(err, null, 2));
+
+                // there was an error
+            }
+            );
+
+    }
+
+
     module.exports = {
 
         predict: predict,
         generalModelSearch: generalModelSearch,
-        create: create
+        create: create,
+        getSimilarDress: getSimilarDress
     }
 
 }());
