@@ -427,12 +427,12 @@
               {
                 "content_type": "text",
                 "title": "Get Similar Dresses",
-                "payload": "GET_SIMILAR_DRESSES"
+                "payload": "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url
               },
               {
                 "content_type": "text",
                 "title": "Get Body Type",
-                "payload": "GET_BODY_TYPE"
+                "payload": "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url
               }
             ];
 
@@ -510,6 +510,21 @@
 
 
       switch (postbackAndParams[0]) {
+        case 'GET_BODY_TYPE_PAYLOAD':
+
+          clarifiaiFunctions(postbackAndParams[1]);
+
+
+
+
+          break;
+
+          case 'GET_SIMILAR_DRESSES_PAYLOAD':
+
+          facebookService.sendTextMessage(senderID,"inside GET_SIMILAR_DRESSES_PAYLOAD");
+          break;
+
+
         case 'DELETE_ITEM_POSTBACK':
           try {
 
