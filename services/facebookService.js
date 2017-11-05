@@ -145,31 +145,45 @@
         };
 
         callSendAPI(listTemplate);
+    };
+
+/**
+ * creating new generic button item object
+ * @param {string} type 
+ * @param {sting} title 
+ * @param {Name of the function} functionName 
+ * @param {Unique Identifier of item} payload 
+ */
+
+
+    function BUTTON_TEMPLATE(type, title, functionName, payload) {
+        this.type = type;
+        this.title = title;
+        this.payload = functionName + ',' + payload;
+    };
+
+    //Creating new Generic Element object in Generic Template
+    /**
+     * 
+     * @param {string} title 
+     * @param {string} subtitle 
+     * @param {url} item_url 
+     * @param {Image url} image_url 
+     * @param {[]} buttons 
+     */
+
+    function ELEMENT_TEMPLATE(title, subtitle, item_url, image_url, buttons) {
+        this.title = title,
+            this.subtitle = subtitle,
+            this.item_url = item_url,
+            this.image_url = image_url,
+            this.buttons = buttons
     }
 
 
     // send generic message
-    function sendGenericMessage(recipientId, reply) {
+    function sendTrendingGenericMessage(recipientId, reply) {
         var reply = reply || "#Apple";
-
-
-        //creating new button object
-        function BUTTON_TEMPLATE(type, title, functionName, payload) {
-            this.type = type;
-            this.title = title;
-            this.payload = functionName + ',' + payload;
-        };
-
-        //Creating new Element object in Generic Template
-        function ELEMENT_TEMPLATE(title, subtitle, item_url, image_url, buttons) {
-            this.title = title,
-                this.subtitle = subtitle,
-                this.item_url = item_url,
-                this.image_url = image_url,
-                this.buttons = buttons
-        }
-
-
         //var buttons = [];
         var generic_elements = [];
 
@@ -187,6 +201,43 @@
 
             generic_elements.push(newElement);
         }
+
+
+        sendGenericMessage(recipientId, generic_elements);
+
+        // var messageData = {
+
+        //     recipient: {
+
+        //         id: recipientId
+
+        //     },
+
+        //     message: {
+        //         attachment: {
+
+        //             type: "template",
+
+        //             payload: {
+
+        //                 template_type: "generic",
+
+        //                 elements: generic_elements
+        //             }
+        //         }
+        //     }
+        // };
+
+        console.log(JSON.stringify(messageData, null, 2));
+
+        callSendAPI(messageData);
+    };
+
+
+
+    //send Generic Message
+
+    function sendGenericMessage(recipientId, generic_elements) {
 
         var messageData = {
 
@@ -214,7 +265,8 @@
         console.log(JSON.stringify(messageData, null, 2));
 
         callSendAPI(messageData);
-    };
+
+    }
 
 
     //function to call callSendAPI
@@ -262,6 +314,8 @@
 
     }
 
+
+
     //region check if obj is defined or not
     function isDefined(obj) {
         if (typeof obj == 'undefined') {
@@ -280,11 +334,12 @@
     var fbServiceFunctions = {
 
         //receivedMessage: receivedMessage,
-        sendGenericMessage: sendGenericMessage,
+        sendTrendingGenericMessage: sendTrendingGenericMessage,
         sendTextMessage: sendTextMessage,
         sendQuickReply: sendQuickReply,
         sendVideo: sendVideo,
-        sendListMessage: sendListMessage
+        sendListMessage: sendListMessage,
+        sendTrendingGenericMessage: sendGenericMessage
 
     }
     module.exports = {

@@ -204,7 +204,7 @@
           break;
         case 'TRENDING_PAYLOAD':
           //get top trending dresses
-          facebookService.sendGenericMessage(senderID);
+          facebookService.sendTrendingGenericMessage(senderID);
           //sendToApiAi(senderID, "job openings");
           break;
         case 'MY_CART'://send all user cart items
@@ -486,7 +486,7 @@
           });
 
         if (reply != '#Rejected') {
-          facebookService.sendGenericMessage(senderID, reply);
+          facebookService.sendTrendingGenericMessage(senderID, reply);
         }
       }
     );
@@ -494,6 +494,42 @@
     clarifaiService.create(userImage);
 
   };
+
+
+
+
+  /**
+   * creating new generic button item object
+   * @param {string} type 
+   * @param {sting} title 
+   * @param {Name of the function} functionName 
+   * @param {Unique Identifier of item} payload 
+   */
+
+
+  function BUTTON_TEMPLATE(type, title, functionName, payload) {
+    this.type = type;
+    this.title = title;
+    this.payload = functionName + ',' + payload;
+  };
+
+  //Creating new Generic Element object in Generic Template
+  /**
+  * 
+  * @param {string} title 
+  * @param {string} subtitle 
+  * @param {url} item_url 
+  * @param {Image url} image_url 
+  * @param {[]} buttons 
+  */
+
+  function ELEMENT_TEMPLATE(title, subtitle, item_url, image_url, buttons) {
+    this.title = title,
+      this.subtitle = subtitle,
+      this.item_url = item_url,
+      this.image_url = image_url,
+      this.buttons = buttons
+  }
 
   //region handleQuickReply
   function handleQuickReply(senderID, quickReply, messageId) {
@@ -519,19 +555,33 @@
 
           break;
 
-          case 'GET_SIMILAR_DRESSES_PAYLOAD':
+        case 'GET_SIMILAR_DRESSES_PAYLOAD':
 
-          clarifaiService.getSimilarDress(postbackAndParams[1]).then(function(replies){
+          let generic_elements = [];
 
-            replies.forEach(function(reply) {
-              
-              facebookService.sendTextMessage(senderID,reply);
+          clarifaiService.getSimilarDress(postbackAndParams[1]).then(function (replies) {
+
+            replies.forEach(function (reply) {
+
+              var BUY_BUTTON = new BUTTON_TEMPLATE("postback", "Buy Now", "BUY_NOW_POSTBACK", reply);
+
+              var ADD_TO_CART = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", reply);
+
+              var buttons = [];
+
+              buttons.push(ADD_TO_CART, BUY_BUTTON);
+
+              var newElement = new ELEMENT_TEMPLATE("title", "Subtitle", reply, reply, buttons);
+
+              generic_elements.push(newElement);
 
             }, this);
 
+            facebookService.sendGenericMessage(recipientId, generic_elements);
+
           });
 
-          
+
           break;
 
 
@@ -603,7 +653,7 @@
 
       case ("trending"):
 
-        facebookService.sendGenericMessage(senderID);
+        facebookService.sendTrendingGenericMessage(senderID);
 
         break;
       case ("body-type.body-type-measurements"):
@@ -630,7 +680,7 @@
               //finalResult += reply + "\n";
 
               //send generic message
-              facebookService.sendGenericMessage(senderID, reply);
+              facebookService.sendTrendingGenericMessage(senderID, reply);
 
               var bodyParams = apiaiService.apiaiTextRequest(reply, senderID);
 

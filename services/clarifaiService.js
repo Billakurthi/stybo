@@ -91,7 +91,7 @@
                     // });
 
                     if (imageResults.length == 5) {
-                        return 0;
+                        return;
                     };
 
                     imageResults.push(element.input.data.image.url);
