@@ -558,12 +558,13 @@
         case 'GET_SIMILAR_DRESSES_PAYLOAD':
 
           let generic_elements = [];
+          console.log("inside getSimilarDress");
 
           clarifaiService.getSimilarDress(postbackAndParams[1]).then(function (replies) {
 
             replies.forEach(function (reply) {
 
-              
+
 
               var BUY_BUTTON = new BUTTON_TEMPLATE("postback", "Buy Now", "BUY_NOW_POSTBACK", reply);
 
@@ -579,6 +580,7 @@
 
             }, this);
 
+            console.log(generic_elements);
             facebookService.sendGenericMessage(senderID, generic_elements);
 
           });
