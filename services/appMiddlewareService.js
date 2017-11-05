@@ -563,6 +563,8 @@
 
             replies.forEach(function (reply) {
 
+              
+
               var BUY_BUTTON = new BUTTON_TEMPLATE("postback", "Buy Now", "BUY_NOW_POSTBACK", reply);
 
               var ADD_TO_CART = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", reply);
@@ -577,7 +579,7 @@
 
             }, this);
 
-            facebookService.sendGenericMessage(recipientId, generic_elements);
+            facebookService.sendGenericMessage(senderID, generic_elements);
 
           });
 
