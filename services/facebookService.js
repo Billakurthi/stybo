@@ -342,7 +342,7 @@
         sendQuickReply: sendQuickReply,
         sendVideo: sendVideo,
         sendListMessage: sendListMessage,
-        sendTrendingGenericMessage: sendGenericMessage
+        sendGenericMessage: sendGenericMessage
 
     }
     module.exports = {
