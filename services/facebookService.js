@@ -147,13 +147,13 @@
         callSendAPI(listTemplate);
     };
 
-/**
- * creating new generic button item object
- * @param {string} type 
- * @param {sting} title 
- * @param {Name of the function} functionName 
- * @param {Unique Identifier of item} payload 
- */
+    /**
+     * creating new generic button item object
+     * @param {string} type 
+     * @param {sting} title 
+     * @param {Name of the function} functionName 
+     * @param {Unique Identifier of item} payload 
+     */
 
 
     function BUTTON_TEMPLATE(type, title, functionName, payload) {
@@ -183,6 +183,8 @@
 
     // send generic message
     function sendTrendingGenericMessage(recipientId, reply) {
+
+        console.log("SendTrendingGenericMessage");
         var reply = reply || "#Apple";
         //var buttons = [];
         var generic_elements = [];
@@ -202,6 +204,7 @@
             generic_elements.push(newElement);
         }
 
+        console.log(" generic_elements" + generic_elements);
 
         sendGenericMessage(recipientId, generic_elements);
 
