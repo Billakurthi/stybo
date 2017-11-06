@@ -73,6 +73,23 @@
   };
   //endregion postRequestRecievedFromFb
 
+  /**
+   * 
+   * @param {*} content_type 
+   * @param {*} title 
+   * @param {*} POSTBACK_PAYLOAD 
+   * @param {*} image_url 
+   */
+
+
+  function QUICK_REPLIES_BUTTON_TEMPLATE(content_type, title, POSTBACK_PAYLOAD, image_url) {
+    this.content_type = content_type,//"text",location
+      this.title = title,
+      this.payload = POSTBACK_PAYLOAD,
+      this.image_url = image_url
+  };
+
+
 	/*
 		* Postback Event
 		*
@@ -101,12 +118,6 @@
       var postbackAndParams = payload.split(",");
 
 
-      function QUICK_REPLIES_BUTTON_TEMPLATE(content_type, title, POSTBACK_PAYLOAD, image_url) {
-        this.content_type = content_type,//"text",location
-          this.title = title,
-          this.payload = POSTBACK_PAYLOAD,
-          this.image_url = image_url
-      }
 
       switch (postbackAndParams[0]) {
         case 'DELETE_ITEM_POSTBACK':
@@ -123,6 +134,7 @@
           }
 
           break;
+
         case 'EDIT_CART_ITEM_PAYLOAD':
           let quick_replies = [];
 
@@ -424,16 +436,23 @@
           try {
 
             var userImageInputQuickReplies = [
+
+              new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Similar Dresses", "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url),
+
+              new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Body Type", "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url),
+
               {
                 "content_type": "text",
                 "title": "Get Similar Dresses",
                 "payload": "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url
               },
+
               {
                 "content_type": "text",
                 "title": "Get Body Type",
                 "payload": "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url
               }
+
             ];
 
             facebookService.sendQuickReply(senderID, "How would you like to proceed?", userImageInputQuickReplies, null);
