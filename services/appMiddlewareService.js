@@ -435,25 +435,26 @@
         if (messageAttachments[0].type === "image") {
           try {
 
-            var userImageInputQuickReplies = [
 
-              new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Similar Dresses", "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url),
+            var getSimilarDresses = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Similar Dresses", "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
 
-              new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Body Type", "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url),
+            var getBodyType = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Body Type", "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
 
-              {
-                "content_type": "text",
-                "title": "Get Similar Dresses",
-                "payload": "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url
-              },
+            var userImageInputQuickReplies = [getSimilarDresses, getBodyType];
 
-              {
-                "content_type": "text",
-                "title": "Get Body Type",
-                "payload": "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url
-              }
 
-            ];
+            // {
+            //   "content_type": "text",
+            //   "title": "Get Similar Dresses",
+            //   "payload": "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url
+            // },
+
+            // {
+            //   "content_type": "text",
+            //   "title": "Get Body Type",
+            //   "payload": "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url
+            // }
+
 
             facebookService.sendQuickReply(senderID, "How would you like to proceed?", userImageInputQuickReplies, null);
 
