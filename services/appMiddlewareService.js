@@ -445,14 +445,14 @@
                 "content_type": "text",
                 "title": "Get Similar Dresses",
                 "payload": "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url,
-                "image_url": "http://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2017/11/06/Pictures/_7ecb6f8c-c2f4-11e7-94e0-d13ec9d58666.jpg"
+                "image_url": (messageAttachments[0].payload.url)
               },
 
               {
                 "content_type": "text",
                 "title": "Get Body Type",
                 "payload": "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url,
-                "image_url": "http://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2017/11/06/Pictures/_7ecb6f8c-c2f4-11e7-94e0-d13ec9d58666.jpg"
+                "image_url": (messageAttachments[0].payload.url)
 
               }
 
