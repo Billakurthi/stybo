@@ -440,22 +440,24 @@
 
             var getBodyType = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Body Type", "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
 
-            var userImageInputQuickReplies = [getSimilarDresses, getBodyType];
+            var userImageInputQuickReplies = [
 
-
-            // {
-            //   "content_type": "text",
-            //   "title": "Get Similar Dresses",
-            //   "payload": "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url
-            // },
-
-            // {
-            //   "content_type": "text",
-            //   "title": "Get Body Type",
-            //   "payload": "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url
-            // }
-
-
+              
+              
+              {
+                  "content_type": "text",
+                  "title": "Get Similar Dresses",
+                  "payload": "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url
+                },
+                
+                {
+                    "content_type": "text",
+                    "title": "Get Body Type",
+                    "payload": "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url
+                  }
+                  
+                ];
+                  
             facebookService.sendQuickReply(senderID, "How would you like to proceed?", userImageInputQuickReplies, null);
 
             // clarifiaiFunctions(messageAttachments[0].payload.url);
