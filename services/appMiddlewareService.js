@@ -461,6 +461,8 @@
 
             ];
 
+            console.log(userImageInputQuickReplies);
+
             facebookService.sendQuickReply(senderID, "How would you like to proceed?", userImageInputQuickReplies, null);
 
             // clarifiaiFunctions(messageAttachments[0].payload.url);
