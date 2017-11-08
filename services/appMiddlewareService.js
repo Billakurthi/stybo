@@ -506,27 +506,25 @@
 
           facebookService.sendTextMessage(senderID, reply);
 
-        } catch (error) {
-
-          console.log(error);
-
-        }
-        var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID);
-
-        apiaiReply
-          .then(function (reply) {
+          (apiaiService.apiaiTextRequest(reply, senderID)).then(function (reply) {
 
             facebookService.sendTextMessage(senderID, reply);
 
           })
-          .catch(function (reason) {
+            .catch(function (reason) {
 
-            facebookService.sendTextMessage(senderID, JSON.stringify(reason));
+              facebookService.sendTextMessage(senderID, JSON.stringify(reason));
 
-          });
+            });
 
-        if (reply != '#Rejected') {
-          facebookService.sendTrendingGenericMessage(senderID, reply);
+          if (reply != '#Rejected') {
+            facebookService.sendTextMessage(senderID, "Unable to help with your request, Insead please check for TRENDING");
+            facebookService.sendTrendingGenericMessage(senderID, reply);
+          }
+        } catch (error) {
+
+          console.log(error);
+
         }
       }
     );
