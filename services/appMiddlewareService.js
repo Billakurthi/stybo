@@ -597,7 +597,7 @@
 
         var ADD_TO_CART_BUTTON = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", reply);
 
-        var GET_SIMILAR_DRESSES_BUTTON = new BUTTON_TEMPLATE("postback", "Show more Like This", "GET_SIMILAR_DRESSES_POSTBACK", reply);
+        var GET_SIMILAR_DRESSES_BUTTON = new BUTTON_TEMPLATE("postback", "Show more Like This", "GET_SIMILAR_DRESSES_PAYLOAD", reply);
 
         var buttons = [];
 
