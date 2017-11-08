@@ -525,18 +525,17 @@
           } else {
 
 
-            
+
             let apiaiReply = (apiaiService.apiaiTextRequest(reply, senderID));
-            
+
             apiaiReply.then(function (data) {
-              
-              console.log("(apiaiService.apiaiTextRequest(reply, senderID))");
-              
-              facebookService.sendTextMessage(senderID, reply);
-              
-              
-              facebookService.sendTextMessage(senderID, data);
-              
+
+              console.loglog("(apiaiService.apiaiTextRequest(reply, senderID))");
+
+              facebookService.sendTextMessage(senderID, "you have " + reply + " body structure");
+
+              handleApiAiResponse(senderID, data);
+
               facebookService.sendTrendingGenericMessage(senderID, reply);
 
             })
