@@ -532,7 +532,7 @@
 
               console.log("(apiaiService.apiaiTextRequest(reply, senderID))");
 
-              facebookService.sendTextMessage(senderID, "you have #" + reply + "# body structure");
+              facebookService.sendTextMessage(senderID, "you have " + reply + "# body structure");
               try {
 
                 handleApiAiResponse(senderID, data);
@@ -783,7 +783,7 @@
                 //finalResult += data + "\n";
                 
                 //send body type from calculator service
-                facebookService.sendTextMessage(senderID, "you have #"+reply+" body structure");
+                facebookService.sendTextMessage(senderID, "you have "+reply+"# body structure");
                 //finalResult += reply + "\n";
 
                 handleApiAiResponse(senderID, data);
