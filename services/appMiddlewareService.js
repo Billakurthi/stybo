@@ -532,7 +532,7 @@
 
               console.log("(apiaiService.apiaiTextRequest(reply, senderID))");
 
-              facebookService.sendTextMessage(senderID, "you have " + reply + " body structure");
+              facebookService.sendTextMessage(senderID, "you have #" + reply + "# body structure");
               try {
 
                 handleApiAiResponse(senderID, data);
@@ -554,7 +554,7 @@
           
           
           facebookService.sendTrendingGenericMessage(senderID, reply);
-          
+
         } catch (error) {
 
           console.log(error);
@@ -773,24 +773,26 @@
 
               //resolve(reply);
 
-              //send body type from calculator service
-              facebookService.sendTextMessage(senderID, reply);
-              //finalResult += reply + "\n";
-
-              //send generic message
-              facebookService.sendTrendingGenericMessage(senderID, reply);
-
+              
               var bodyParams = apiaiService.apiaiTextRequest(reply, senderID);
-
-
+              
+              
               bodyParams.then(function (data) {
+
                 console.log(JSON.stringify(data, null, 2));
                 //finalResult += data + "\n";
+                
+                //send body type from calculator service
+                facebookService.sendTextMessage(senderID, "you have #"+reply+" body structure");
+                //finalResult += reply + "\n";
 
                 handleApiAiResponse(senderID, data);
                 // console.log("finalResult +=" + finalResult);
                 //facebookService.sendTextMessage(senderID, finalResult);
-
+  
+                //send generic message
+                facebookService.sendTrendingGenericMessage(senderID, reply);
+                
 
               }).catch(function (reason) {
                 console.log("catch(function (reason) {" + JSON.stringify(reason, null, 2));
