@@ -487,7 +487,13 @@
     //endregion if we get a text message
   };
 
-  function clarifiaiFunctions(userImage) {
+
+  /**
+   * 
+   * @param {imageURL:URL} userImage 
+   * @param {facebookUserId: String} senderID 
+   */
+  function clarifiaiFunctions(userImage, senderID) {
 
     clarifaiService.generalModelSearch(userImage);
 
@@ -503,7 +509,7 @@
         } catch (error) {
 
           console.log(error);
-          
+
         }
         var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID);
 
@@ -582,7 +588,7 @@
       switch (postbackAndParams[0]) {
         case 'GET_BODY_TYPE_PAYLOAD':
 
-          clarifiaiFunctions(postbackAndParams[1]);
+          clarifiaiFunctions(postbackAndParams[1], senderID);
 
 
 
