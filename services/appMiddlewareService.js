@@ -445,14 +445,14 @@
                 "content_type": "text",
                 "title": "Get Similar Dresses",
                 "payload": "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url
-                
+
               },
 
               {
                 "content_type": "text",
                 "title": "Get Body Type",
                 "payload": "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url
-           
+
 
               }
 
@@ -494,7 +494,17 @@
     //call prediction for a updated image
     (clarifaiService.predict(userImage)).then(
       function (reply) {
-        facebookService.sendTextMessage(senderID, reply);
+
+        console.log("Predicted" + reply);
+        try {
+
+          facebookService.sendTextMessage(senderID, reply);
+
+        } catch (error) {
+
+          console.log(error);
+          
+        }
         var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID);
 
         apiaiReply
