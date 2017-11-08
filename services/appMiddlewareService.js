@@ -9,6 +9,7 @@
 
   var sessionIds = new Map();
   var usersMap = new Map();
+  var userContext = new Map();
   var userCart = {};
 
   //region setSessionAndUser
@@ -444,33 +445,36 @@
         if (messageAttachments[0].type === "image") {
           try {
 
-
-            // var GET_SIMILAR_DRESSES_BUTTON = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Similar Dresses", "GET_SIMILAR_DRESSES_POSTBACK," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
-
-            // var getBodyType = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Body Type", "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
-
-            var userImageInputQuickReplies = [
-              {
-                "content_type": "text",
-                "title": "Get Similar Dresses",
-                "payload": "GET_SIMILAR_DRESSES_POSTBACK," + messageAttachments[0].payload.url
-
-              },
-
-              {
-                "content_type": "text",
-                "title": "Get Body Type",
-                "payload": "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url
+            if (userContext.get(senderID) == "body-type.body-type-by-image-analysis") {
+              clarifiaiFunctions(messageAttachments[0].payload.url, senderID);
+              userContext.delete(senderID);
+            } else {
 
 
-              }
+              // var GET_SIMILAR_DRESSES_BUTTON = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Similar Dresses", "GET_SIMILAR_DRESSES_POSTBACK," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
 
-            ];
+              // var getBodyType = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Body Type", "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
 
-            console.log(userImageInputQuickReplies);
+              var userImageInputQuickReplies = [
+                {
+                  "content_type": "text",
+                  "title": "Get Similar Dresses",
+                  "payload": "GET_SIMILAR_DRESSES_POSTBACK," + messageAttachments[0].payload.url
 
-            facebookService.sendQuickReply(senderID, "How would you like to proceed?", userImageInputQuickReplies, null);
+                },
 
+                {
+                  "content_type": "text",
+                  "title": "Get Body Type",
+                  "payload": "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url
+                }
+
+              ];
+
+              console.log(userImageInputQuickReplies);
+
+              facebookService.sendQuickReply(senderID, "How would you like to proceed?", userImageInputQuickReplies, null);
+            }
             // clarifiaiFunctions(messageAttachments[0].payload.url);
 
             //current_users[senderID].imgUrl = messageAttachments[0].payload.url;
@@ -710,6 +714,14 @@
     let messages = fulfillment.messages;
 
     switch (action) {
+
+      case ("body-type.body-type-by-image-analysis"):
+
+        userContext.set(senderID, action);
+
+        facebookService.sendTextMessage(senderID, responseText);
+
+        break
 
       case ("MY_CART"):
 
