@@ -610,7 +610,7 @@
       }, this);
 
       console.log(generic_elements);
-      
+
       facebookService.sendGenericMessage(senderID, generic_elements);
 
     });
@@ -706,6 +706,9 @@
   //region handleApiAiAction
   function handleApiAiAction(senderID, action, responseText, contexts, responseParameters, fulfillment) {
     console.log("handleApiAiAction action" + action);
+
+    let messages = fulfillment.messages;
+
     switch (action) {
 
       case ("MY_CART"):
@@ -769,13 +772,33 @@
 
         break;
 
+      case ("dress-enquiry-for-body"):
 
+        messages.forEach(function (message) {
+
+          console.log(JSON.stringify(message, null, 2));
+          if (message.type == 0) {
+
+            facebookService.sendTextMessage(senderID, message.speech);
+
+          }
+          if (message.type == 4) {
+
+
+            facebookService.sendQuickReply(senderID, " ", message.payload.quick_replies, "");
+            
+          }
+
+        }, this);
+
+
+        break;
 
       case ("body-type-enquiry"):
 
         console.log(' in handleApiAiAction body-type-enquiry');
         try {
-          var messages = fulfillment.messages;
+
           console.log("fulfillment.messages;" + messages);
           console.log(typeof (messages));
 
