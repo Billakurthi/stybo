@@ -773,20 +773,19 @@
         break;
 
       case ("dress-enquiry-for-body"):
-
+        let msgText = "";
         messages.forEach(function (message) {
 
           console.log(JSON.stringify(message, null, 2));
           if (message.type == 0) {
 
-            facebookService.sendTextMessage(senderID, message.speech);
+            msgText = (message.speech) + "\n";
 
           }
           if (message.type == 4) {
 
-
-            facebookService.sendQuickReply(senderID, "", message.payload.quick_replies, "");
-
+            facebookService.sendQuickReply(senderID, msgText, message.payload.quick_replies, "");
+            msgText = "";
           }
 
         }, this);
