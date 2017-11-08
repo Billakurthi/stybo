@@ -170,6 +170,15 @@
 
           facebookService.sendTextMessage(senderID, "added 1 item to cart, \n you can type MY CART to get your cart items");
           break;
+
+        case 'GET_SIMILAR_DRESSES_PAYLOAD':
+
+          getSimilarDresses(senderID, postbackAndParams[1]);
+
+
+          break;
+
+
         default:
           //unindentified payload					
           //facebookService.sendVideo(senderID);
@@ -436,9 +445,9 @@
           try {
 
 
-            var getSimilarDresses = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Similar Dresses", "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
+            // var GET_SIMILAR_DRESSES_BUTTON = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Similar Dresses", "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
 
-            var getBodyType = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Body Type", "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
+            // var getBodyType = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Body Type", "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
 
             var userImageInputQuickReplies = [
               {
@@ -569,7 +578,43 @@
       this.item_url = item_url,
       this.image_url = image_url,
       this.buttons = buttons
-  }
+  };
+
+
+
+  function getSimilarDresses(senderID, imageURL) {
+
+    let generic_elements = [];
+    console.log("inside getSimilarDress");
+
+    clarifaiService.getSimilarDress(postbackAndParams[1]).then(function (replies) {
+
+      replies.forEach(function (reply) {
+
+
+
+        var BUY_NOW_BUTTON = new BUTTON_TEMPLATE("postback", "Buy Now", "BUY_NOW_POSTBACK", reply);
+
+        var ADD_TO_CART_BUTTON = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", reply);
+
+        var GET_SIMILAR_DRESSES_BUTTON = new BUTTON_TEMPLATE("postback", "Show more Like This", "GET_SIMILAR_DRESSES_POSTBACK", reply);
+
+        var buttons = [];
+
+        buttons.push(ADD_TO_CART_BUTTON, BUY_NOW_BUTTON, GET_SIMILAR_DRESSES_BUTTON);
+
+        var newElement = new ELEMENT_TEMPLATE("title", "Subtitle \n Price: $22.20 ", reply, reply, buttons);
+
+        generic_elements.push(newElement);
+
+      }, this);
+
+      console.log(generic_elements);
+      facebookService.sendGenericMessage(senderID, generic_elements);
+
+    });
+
+  };
 
   //region handleQuickReply
   function handleQuickReply(senderID, quickReply, messageId) {
@@ -597,35 +642,7 @@
 
         case 'GET_SIMILAR_DRESSES_PAYLOAD':
 
-          let generic_elements = [];
-          console.log("inside getSimilarDress");
-
-          clarifaiService.getSimilarDress(postbackAndParams[1]).then(function (replies) {
-
-            replies.forEach(function (reply) {
-
-
-
-              var BUY_NOW_BUTTON = new BUTTON_TEMPLATE("postback", "Buy Now", "BUY_NOW_POSTBACK", reply);
-
-              var ADD_TO_CART_BUTTON = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", reply);
-
-              var GET_SIMILAR_DRESSES_BUTTON = new BUTTON_TEMPLATE("postback", "Show more Like This", "GET_SIMILAR_DRESSES_POSTBACK", reply);
-
-              var buttons = [];
-
-              buttons.push(ADD_TO_CART_BUTTON, BUY_NOW_BUTTON, GET_SIMILAR_DRESSES_BUTTON);
-
-              var newElement = new ELEMENT_TEMPLATE("title", "Subtitle \n Price: $22.20 ", reply, reply, buttons);
-
-              generic_elements.push(newElement);
-
-            }, this);
-
-            console.log(generic_elements);
-            facebookService.sendGenericMessage(senderID, generic_elements);
-
-          });
+          getSimilarDresses(senderID, postbackAndParams[1]);
 
 
           break;
