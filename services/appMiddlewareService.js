@@ -525,16 +525,19 @@
           } else {
 
 
-            facebookService.sendTextMessage(senderID, reply);
-
+            
             let apiaiReply = (apiaiService.apiaiTextRequest(reply, senderID));
-
+            
             apiaiReply.then(function (data) {
-
+              
+              facebookService.sendTextMessage(senderID, reply);
+              
               console.log("(apiaiService.apiaiTextRequest(reply, senderID))");
-
+              
               facebookService.sendTextMessage(senderID, data);
-
+              
+              facebookService.sendTrendingGenericMessage(senderID, reply);
+              
             })
               .catch(function (reason) {
 
@@ -542,7 +545,6 @@
 
               });
 
-            facebookService.sendTrendingGenericMessage(senderID, reply);
           }
         } catch (error) {
 
