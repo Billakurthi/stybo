@@ -168,7 +168,7 @@
 
           console.log("added to cart" + JSON.stringify(userCart[senderID], null, 2));
 
-          facebookService.sendTextMessage(senderID, "added " + postbackAndParams[1] + " to cart");
+          facebookService.sendTextMessage(senderID, "added 1 item to cart, \n you can type MY CART to get your cart items");
           break;
         default:
           //unindentified payload					
