@@ -512,29 +512,37 @@
 
     //call prediction for a updated image
     (clarifaiService.predict(userImage)).then(
+
       function (reply) {
 
         console.log("Predicted" + reply);
         try {
 
-          facebookService.sendTextMessage(senderID, reply);
+          if (reply == '#Rejected') {
 
-          (apiaiService.apiaiTextRequest(reply, senderID)).then(function (reply) {
+            facebookService.sendTextMessage(senderID, "Unable to help with your request, Insead please check for TRENDING");
+
+          } else {
+
 
             facebookService.sendTextMessage(senderID, reply);
 
-          })
-            .catch(function (reason) {
+            let apiaiReply = (apiaiService.apiaiTextRequest(reply, senderID));
 
-              console.log("reason for apiai text request error \n" + reason);
+            apiaiReply.then(function (data) {
 
-            });
+              console.log("(apiaiService.apiaiTextRequest(reply, senderID))");
 
-          if (reply != '#Rejected') {
+              facebookService.sendTextMessage(senderID, data);
 
-            facebookService.sendTextMessage(senderID, "Unable to help with your request, Insead please check for TRENDING");
+            })
+              .catch(function (reason) {
+
+                console.log("reason for apiai text request error \n" + reason);
+
+              });
+
             facebookService.sendTrendingGenericMessage(senderID, reply);
-
           }
         } catch (error) {
 
@@ -544,7 +552,7 @@
       }
     );
 
-    clarifaiService.create(userImage);
+    // clarifaiService.create(userImage);
 
   };
 
