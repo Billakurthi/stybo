@@ -779,7 +779,7 @@
           console.log(JSON.stringify(message, null, 2));
           if (message.type == 0) {
 
-            msgText = (message.speech) + "\n";
+            msgText +=  (message.speech) + "\n";
 
           }
           if (message.type == 4) {
