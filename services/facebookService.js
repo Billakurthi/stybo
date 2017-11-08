@@ -199,7 +199,7 @@
 
             buttons.push(ADD_TO_CART, BUY_BUTTON);
 
-            var newElement = new ELEMENT_TEMPLATE("title", "Subtitle", (costumes[reply])[key], (costumes[reply])[key], buttons);
+            var newElement = new ELEMENT_TEMPLATE("title", "Subtitle \n Price: $22.20", (costumes[reply])[key], (costumes[reply])[key], buttons);
 
             generic_elements.push(newElement);
         }

@@ -608,11 +608,13 @@
 
               var ADD_TO_CART = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", reply);
 
+              var SHOW_MORE_POSTBACK = new BUTTON_TEMPLATE("postback", "Show more Like This", "SHOW_MORE_POSTBACK", reply);
+
               var buttons = [];
 
               buttons.push(ADD_TO_CART, BUY_BUTTON);
 
-              var newElement = new ELEMENT_TEMPLATE("title", "Subtitle", reply, reply, buttons);
+              var newElement = new ELEMENT_TEMPLATE("title", "Subtitle \n Price: $22.20 ", reply, reply, buttons);
 
               generic_elements.push(newElement);
 
