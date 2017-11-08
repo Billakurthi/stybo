@@ -530,14 +530,15 @@
             
             apiaiReply.then(function (data) {
               
+              console.log("(apiaiService.apiaiTextRequest(reply, senderID))");
+              
               facebookService.sendTextMessage(senderID, reply);
               
-              console.log("(apiaiService.apiaiTextRequest(reply, senderID))");
               
               facebookService.sendTextMessage(senderID, data);
               
               facebookService.sendTrendingGenericMessage(senderID, reply);
-              
+
             })
               .catch(function (reason) {
 
