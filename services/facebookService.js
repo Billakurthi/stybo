@@ -195,9 +195,11 @@
 
             var ADD_TO_CART = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", (costumes[reply])[key]);
 
+            var GET_SIMILAR_DRESSES_BUTTON = new BUTTON_TEMPLATE("postback", "Show more Like This", "GET_SIMILAR_DRESSES_POSTBACK", (costumes[reply])[key]);
+
             var buttons = [];
 
-            buttons.push(ADD_TO_CART, BUY_BUTTON);
+            buttons.push(ADD_TO_CART, BUY_BUTTON, GET_SIMILAR_DRESSES_BUTTON);
 
             var newElement = new ELEMENT_TEMPLATE("title", "Subtitle \n Price: $22.20", (costumes[reply])[key], (costumes[reply])[key], buttons);
 

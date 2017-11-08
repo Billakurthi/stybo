@@ -518,8 +518,10 @@
             });
 
           if (reply != '#Rejected') {
+
             facebookService.sendTextMessage(senderID, "Unable to help with your request, Insead please check for TRENDING");
             facebookService.sendTrendingGenericMessage(senderID, reply);
+
           }
         } catch (error) {
 
@@ -604,15 +606,15 @@
 
 
 
-              var BUY_BUTTON = new BUTTON_TEMPLATE("postback", "Buy Now", "BUY_NOW_POSTBACK", reply);
+              var BUY_NOW_BUTTON = new BUTTON_TEMPLATE("postback", "Buy Now", "BUY_NOW_POSTBACK", reply);
 
-              var ADD_TO_CART = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", reply);
+              var ADD_TO_CART_BUTTON = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", reply);
 
-              var SHOW_MORE_POSTBACK = new BUTTON_TEMPLATE("postback", "Show more Like This", "SHOW_MORE_POSTBACK", reply);
+              var GET_SIMILAR_DRESSES_BUTTON = new BUTTON_TEMPLATE("postback", "Show more Like This", "GET_SIMILAR_DRESSES_POSTBACK", reply);
 
               var buttons = [];
 
-              buttons.push(ADD_TO_CART, BUY_BUTTON);
+              buttons.push(ADD_TO_CART_BUTTON, BUY_NOW_BUTTON, GET_SIMILAR_DRESSES_BUTTON);
 
               var newElement = new ELEMENT_TEMPLATE("title", "Subtitle \n Price: $22.20 ", reply, reply, buttons);
 
