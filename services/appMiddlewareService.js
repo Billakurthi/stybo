@@ -171,7 +171,7 @@
           facebookService.sendTextMessage(senderID, "added 1 item to cart, \n you can type MY CART to get your cart items");
           break;
 
-        case 'GET_SIMILAR_DRESSES_PAYLOAD':
+        case 'GET_SIMILAR_DRESSES_POSTBACK':
 
           getSimilarDresses(senderID, postbackAndParams[1]);
 
@@ -445,7 +445,7 @@
           try {
 
 
-            // var GET_SIMILAR_DRESSES_BUTTON = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Similar Dresses", "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
+            // var GET_SIMILAR_DRESSES_BUTTON = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Similar Dresses", "GET_SIMILAR_DRESSES_POSTBACK," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
 
             // var getBodyType = new QUICK_REPLIES_BUTTON_TEMPLATE("text", "Get Body Type", "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url, messageAttachments[0].payload.url);
 
@@ -453,7 +453,7 @@
               {
                 "content_type": "text",
                 "title": "Get Similar Dresses",
-                "payload": "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url
+                "payload": "GET_SIMILAR_DRESSES_POSTBACK," + messageAttachments[0].payload.url
 
               },
 
@@ -587,7 +587,7 @@
     let generic_elements = [];
     console.log("inside getSimilarDress");
 
-    clarifaiService.getSimilarDress(postbackAndParams[1]).then(function (replies) {
+    clarifaiService.getSimilarDress(imageURL).then(function (replies) {
 
       replies.forEach(function (reply) {
 
@@ -597,7 +597,7 @@
 
         var ADD_TO_CART_BUTTON = new BUTTON_TEMPLATE("postback", "Add To cart", "ADD_TO_CART_POSTBACK", reply);
 
-        var GET_SIMILAR_DRESSES_BUTTON = new BUTTON_TEMPLATE("postback", "Show more Like This", "GET_SIMILAR_DRESSES_PAYLOAD", reply);
+        var GET_SIMILAR_DRESSES_BUTTON = new BUTTON_TEMPLATE("postback", "Show more Like This", "GET_SIMILAR_DRESSES_POSTBACK", reply);
 
         var buttons = [];
 
@@ -610,6 +610,7 @@
       }, this);
 
       console.log(generic_elements);
+      
       facebookService.sendGenericMessage(senderID, generic_elements);
 
     });
@@ -640,7 +641,7 @@
 
           break;
 
-        case 'GET_SIMILAR_DRESSES_PAYLOAD':
+        case 'GET_SIMILAR_DRESSES_POSTBACK':
 
           getSimilarDresses(senderID, postbackAndParams[1]);
 
