@@ -252,6 +252,24 @@
   };
 
 
+  //creating new postback button object
+  function POSTBACK_BUTTON_TEMPLATE(type, title, functionName, payload) {
+    this.type = type;
+    this.title = title;
+    //check if url payload is available and else attach only function name
+    this.payload = payload ? functionName + ',' + payload : functionName;
+  };
+
+
+
+  
+  //WebView url Button template
+
+  function WEB_URL_BUTTON_TEMPLATE(type, url, title) {
+    this.type = type,
+      this.url = url,
+      this.title = title
+  }
 
   //region get all cart items
   function getCartItems(senderID) {
@@ -264,13 +282,7 @@
 
     } else {
 
-      //creating new button object
-      function BUTTON_TEMPLATE(type, title, functionName, payload) {
-        this.type = type;
-        this.title = title;
-        //check if url payload is available and else attach only function name
-        this.payload = payload ? functionName + ',' + payload : functionName;
-      };
+
 
       //creating default action template
       function DEFAULT_ACTION_TEMPLATE(url, webview_height) {
@@ -312,7 +324,7 @@
 
       for (item in cartItems) {
 
-        var edit_item_button = new BUTTON_TEMPLATE("postback", "Edit item", "EDIT_CART_ITEM_PAYLOAD", item);
+        var edit_item_button = new POSTBACK_BUTTON_TEMPLATE("postback", "Edit item", "EDIT_CART_ITEM_PAYLOAD", item);
 
         var image_view_default_action = new DEFAULT_ACTION_TEMPLATE(item, "TALL");
 
@@ -350,7 +362,7 @@
         console.log(listElement);
 
         listElements.push(listElement);
-        facebookService.sendListMessage(senderID, 'compact', listElements, new BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD"));
+        facebookService.sendListMessage(senderID, 'compact', listElements, new POSTBACK_BUTTON_TEMPLATE("postback", "BUY NOW", "BUY_NOW_PAYLOAD"));
 
       }
 
@@ -542,17 +554,17 @@
                 console.log(error);
               }
 
-              
+
             })
-            .catch(function (reason) {
-              
-              console.log("reason for apiai text request error \n" + reason);
-              
-            });
-            
+              .catch(function (reason) {
+
+                console.log("reason for apiai text request error \n" + reason);
+
+              });
+
           }
-          
-          
+
+
           facebookService.sendTrendingGenericMessage(senderID, reply);
 
         } catch (error) {
@@ -571,7 +583,7 @@
 
 
   /**
-   * creating new generic button item object
+   * creating new generic item button item object
    * @param {string} type 
    * @param {sting} title 
    * @param {Name of the function} functionName 
@@ -773,26 +785,26 @@
 
               //resolve(reply);
 
-              
+
               var bodyParams = apiaiService.apiaiTextRequest(reply, senderID);
-              
-              
+
+
               bodyParams.then(function (data) {
 
                 console.log(JSON.stringify(data, null, 2));
                 //finalResult += data + "\n";
-                
+
                 //send body type from calculator service
-                facebookService.sendTextMessage(senderID, "you have "+reply+"# body structure");
+                facebookService.sendTextMessage(senderID, "you have " + reply + "# body structure");
                 //finalResult += reply + "\n";
 
                 handleApiAiResponse(senderID, data);
                 // console.log("finalResult +=" + finalResult);
                 //facebookService.sendTextMessage(senderID, finalResult);
-  
+
                 //send generic message
                 facebookService.sendTrendingGenericMessage(senderID, reply);
-                
+
 
               }).catch(function (reason) {
                 console.log("catch(function (reason) {" + JSON.stringify(reason, null, 2));
