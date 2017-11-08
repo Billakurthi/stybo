@@ -772,26 +772,6 @@
 
         break;
 
-      case ("dress-enquiry-for-body"):
-        let msgText = "";
-        messages.forEach(function (message) {
-
-          console.log(JSON.stringify(message, null, 2));
-          if (message.type == 0) {
-
-            msgText +=  (message.speech) + "\n";
-
-          }
-          if (message.type == 4) {
-
-            facebookService.sendQuickReply(senderID, msgText, message.payload.quick_replies, "");
-            msgText = "";
-          }
-
-        }, this);
-
-
-        break;
 
       case ("body-type-enquiry"):
 
@@ -801,24 +781,24 @@
           console.log("fulfillment.messages;" + messages);
           console.log(typeof (messages));
 
-          // var quickReplyTitle = messages[0].speech,
-          //     quickReplyOptions = messages[1].payload.quick_replies;
-
+          let msgText = "";
           messages.forEach(function (message) {
 
             console.log(JSON.stringify(message, null, 2));
             if (message.type == 0) {
 
-              quickReplyTitle = message.speech;
+              msgText += (message.speech) + "\n\n";
 
             }
             if (message.type == 4) {
 
-              quickReplyOptions = message.payload.quick_replies;
-
+              facebookService.sendQuickReply(senderID, msgText, message.payload.quick_replies, "");
+              msgText = "";
             }
 
           }, this);
+
+
 
 
           console.log(
@@ -828,7 +808,7 @@
           );
 
 
-          facebookService.sendQuickReply(senderID, quickReplyTitle, quickReplyOptions, "");
+
 
         } catch (error) {
 
