@@ -785,8 +785,8 @@
           if (message.type == 4) {
 
 
-            facebookService.sendQuickReply(senderID, " ", message.payload.quick_replies, "");
-            
+            facebookService.sendQuickReply(senderID, "", message.payload.quick_replies, "");
+
           }
 
         }, this);
