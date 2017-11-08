@@ -72,6 +72,7 @@
     const appClarifaiImageSearch = new Clarifai.App({
         apiKey: clarifyConfig.CLARIFY_IMAGE_SEARCH_API_KEY
     });
+    
     function getSimilarDress(imageURL) {
 
         var imageResults = [];

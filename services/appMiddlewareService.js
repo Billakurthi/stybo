@@ -168,7 +168,7 @@
 
           console.log("added to cart" + JSON.stringify(userCart[senderID], null, 2));
 
-          facebookService.sendTextMessage(senderID, "added " + postbackAndParams[1] + " to cart");
+          facebookService.sendTextMessage(senderID, "added 1 item to cart, \n you can type MY CART to get your cart items");
           break;
         default:
           //unindentified payload					
@@ -445,14 +445,14 @@
                 "content_type": "text",
                 "title": "Get Similar Dresses",
                 "payload": "GET_SIMILAR_DRESSES_PAYLOAD," + messageAttachments[0].payload.url
-                
+
               },
 
               {
                 "content_type": "text",
                 "title": "Get Body Type",
                 "payload": "GET_BODY_TYPE_PAYLOAD," + messageAttachments[0].payload.url
-           
+
 
               }
 
@@ -487,30 +487,44 @@
     //endregion if we get a text message
   };
 
-  function clarifiaiFunctions(userImage) {
+
+  /**
+   * 
+   * @param {imageURL:URL} userImage 
+   * @param {facebookUserId: String} senderID 
+   */
+  function clarifiaiFunctions(userImage, senderID) {
 
     clarifaiService.generalModelSearch(userImage);
 
     //call prediction for a updated image
     (clarifaiService.predict(userImage)).then(
       function (reply) {
-        facebookService.sendTextMessage(senderID, reply);
-        var apiaiReply = apiaiService.apiaiTextRequest(reply, senderID);
 
-        apiaiReply
-          .then(function (reply) {
+        console.log("Predicted" + reply);
+        try {
+
+          facebookService.sendTextMessage(senderID, reply);
+
+          (apiaiService.apiaiTextRequest(reply, senderID)).then(function (reply) {
 
             facebookService.sendTextMessage(senderID, reply);
 
           })
-          .catch(function (reason) {
+            .catch(function (reason) {
 
-            facebookService.sendTextMessage(senderID, JSON.stringify(reason));
+              facebookService.sendTextMessage(senderID, JSON.stringify(reason));
 
-          });
+            });
 
-        if (reply != '#Rejected') {
-          facebookService.sendTrendingGenericMessage(senderID, reply);
+          if (reply != '#Rejected') {
+            facebookService.sendTextMessage(senderID, "Unable to help with your request, Insead please check for TRENDING");
+            facebookService.sendTrendingGenericMessage(senderID, reply);
+          }
+        } catch (error) {
+
+          console.log(error);
+
         }
       }
     );
@@ -572,7 +586,7 @@
       switch (postbackAndParams[0]) {
         case 'GET_BODY_TYPE_PAYLOAD':
 
-          clarifiaiFunctions(postbackAndParams[1]);
+          clarifiaiFunctions(postbackAndParams[1], senderID);
 
 
 
