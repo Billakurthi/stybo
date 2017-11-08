@@ -13,6 +13,8 @@ var appMiddlewareService = require('./services/appMiddlewareService').appMiddlew
 //parse text using body parser
 app.use(bodyParser.json());
 
+app.use(express.static('public'))
+
 app.get('/', function (req, res) {
 	res.sendFile(path.join(__dirname + '/index.html'))
 })

@@ -598,7 +598,7 @@
 
               buttons.push(ADD_TO_CART, BUY_BUTTON);
 
-              var newElement = new ELEMENT_TEMPLATE("title", "Subtitle", reply, reply, buttons);
+              var newElement = new ELEMENT_TEMPLATE("title", "Subtitle \n Price: $22.20 ", reply, reply, buttons);
 
               generic_elements.push(newElement);
 
