@@ -513,7 +513,7 @@
           })
             .catch(function (reason) {
 
-              facebookService.sendTextMessage(senderID, JSON.stringify(reason));
+              console.log("reason for apiai text request error \n" + reason);
 
             });
 
