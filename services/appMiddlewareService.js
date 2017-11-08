@@ -542,16 +542,19 @@
                 console.log(error);
               }
 
-              facebookService.sendTrendingGenericMessage(senderID, reply);
-
+              
             })
-              .catch(function (reason) {
-
-                console.log("reason for apiai text request error \n" + reason);
-
-              });
-
+            .catch(function (reason) {
+              
+              console.log("reason for apiai text request error \n" + reason);
+              
+            });
+            
           }
+          
+          
+          facebookService.sendTrendingGenericMessage(senderID, reply);
+          
         } catch (error) {
 
           console.log(error);
