@@ -533,8 +533,14 @@
               console.loglog("(apiaiService.apiaiTextRequest(reply, senderID))");
 
               facebookService.sendTextMessage(senderID, "you have " + reply + " body structure");
+              try {
 
-              handleApiAiResponse(senderID, data);
+                handleApiAiResponse(senderID, data);
+
+              } catch (error) {
+                
+                console.log(error);
+              }
 
               facebookService.sendTrendingGenericMessage(senderID, reply);
 
