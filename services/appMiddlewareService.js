@@ -913,7 +913,7 @@
 
     }
     else {
-      facebookService.sendTextMessage(senderID, "no entities trained");
+      facebookService.sendTextMessage(senderID, "sorry I am unable to match with your intelligence");
     }
 
 
