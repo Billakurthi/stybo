@@ -376,7 +376,7 @@
     let user = usersMap.get(userId);
     while (user !== undefined) {
       facebookService.sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
-        'I am stybo your personal style advisor, lets get started with best dress for you ' +
+        'I am stybo your personal style advisor,' +
         'you can upload your full length image to get the suggestions');
 
       return;
