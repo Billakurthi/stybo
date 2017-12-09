@@ -29,11 +29,11 @@
             "url5": "http://ecx.images-amazon.com/images/I/51Wp-nwOhHL._UL1500_.jpg"
         },
         "#Apple": {
-            "url1": "http://ecx.images-amazon.com/images/I/71YQM7ewIfL._UL1500_.jpg",
-            "url2": "http://ecx.images-amazon.com/images/I/81ivCFgPyFL._UL1500_.jpg",
-            "url3": "http://ecx.images-amazon.com/images/I/913d1hmo5dL._UL1500_.jpg",
-            "url4": "http://ecx.images-amazon.com/images/I/61GUm8nCI3L._UL1500_.jpg",
-            "url5": "http://ecx.images-amazon.com/images/I/71DsbnF1TdL._UL1500_.jpg"
+            "url1": "http://nafdress.com/assests/images/city-chic-marrakech-beach-dress-womens-plus-size-fashion-5016822.jpg",
+            "url2": "http://www.kzdress.com/wp-content/uploads/2016/06/Plus-Size-Summer-Dresses-For-Women-1466260861-2016.jpg",
+            "url3": "http://all-womens-dresses.com/wp-content/uploads/parser/cute-plus-size-party-dresses-1.jpg",
+            "url4": "http://www.kzdress.com/wp-content/uploads/2016/06/Evening-Dresses-For-Plus-Size-Women-1466262409-2016.jpg",
+            "url5": "https://i.pinimg.com/736x/84/d6/77/84d6773fea1b6bcb003ac9afe6da4c87--semi-formal-dresses-formal-wear.jpg"
         },
         "#Rectangle": {
             "url1": "http://ecx.images-amazon.com/images/I/61RDxIghPrL._UL1500_.jpg",
